@@ -104,7 +104,6 @@ export default function NewResource() {
             onChange={changeClaimHrs}
           />
         </div>
-
         <button className="newUserButton" type="submit">
           Submit
         </button>
