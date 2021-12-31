@@ -44,6 +44,12 @@ export default function Sidebar() {
                 Leaves
               </li>
             </Link>
+            <Link to="/calendar" className="link">
+              <li className="sidebarListItem">
+                <Storefront className="sidebarIcon" />
+                Calendar
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports

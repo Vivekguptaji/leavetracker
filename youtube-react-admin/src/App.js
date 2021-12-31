@@ -10,6 +10,8 @@ import Leaves from "./pages/leaves/Leaves";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import LeaveForm from "./pages/leaveForm/LeaveForm";
+import EventCalendar from './pages/Calendar/EventCalendar';
+
 
 function App() {
   return (
@@ -38,6 +40,9 @@ function App() {
           </Route>
           <Route path="/leaveForm">
             <LeaveForm />
+          </Route>
+          <Route path="/Calendar">
+            <EventCalendar />
           </Route>
           <Route path="/newproduct">
             <NewProduct />
