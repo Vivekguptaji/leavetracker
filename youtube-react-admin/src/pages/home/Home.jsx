@@ -10,15 +10,13 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
-export default function Home() {
-  const [dashboardData, setDashboardData] = useState();
+export default function Home() { 
   useEffect(() => { 
-    axios.get(`${config.apiURL}/getDashobardData`).then(result => { 
-      debugger;
-      if (result.status === 200) { 
-        setDashboardData(result.data);
+    axios.get(`${config.apiURL}/getDashobardData`).then(result => {
+      if (result.status === 200) {  
         const encryptedString = cryptr.encrypt(JSON.stringify(result.data));
-        localStorage.setItem('user', encryptedString);
+        sessionStorage.clear();
+        sessionStorage.setItem('user', encryptedString);
       }
     }).catch(err => { debugger })
   });
