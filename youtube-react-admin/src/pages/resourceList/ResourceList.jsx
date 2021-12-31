@@ -15,11 +15,17 @@ export default function ResourceList() {
   const handleClickRow = (event, data) => {
     debugger;
   }
+  const callResourceData = (data) => {
+    history.push({
+      pathname: `/resource/${data._id}`,
+      state: data
+    });
+  };
   return (
     <div class="userList">
       <div className="userTitleContainer">
         <h1 className="userTitle">Resources List</h1>
-        <Link to="/newResource">
+        <Link to="/resource">
           <button className="userAddButton">Create Resource</button>
         </Link>
       </div>
@@ -37,6 +43,7 @@ export default function ResourceList() {
           },
           { title: 'End date', field: 'endDate', type: 'date' },
           { title: 'Role', field: 'role' },
+          { title: 'Hrs', field: 'claimHrs' },
           { title: 'Status', field: 'isActive', render: rowData => (rowData.isActive ? "Active" : "Disabled") }
         ]}
         data={resourceData}
@@ -45,12 +52,13 @@ export default function ResourceList() {
             icon: "edit",
             iconProps: { fontSize: "small", color: "primary" },
             tooltip: "Edit Resource",
-            onClick: (event, rowData) => history.push(`/resource/${rowData._id}`)
+            onClick: (event, rowData) => { callResourceData(rowData) }
           }
         ]}
         options={{
           sorting: true,
-          actionsColumnIndex: -1
+          actionsColumnIndex: -1,
+          grouping: true
         }}
       />
     </div>

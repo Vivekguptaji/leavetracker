@@ -25,7 +25,7 @@
 
 .newUserItem > input {
   height: 20px;
-  padding: 15px;
+  padding: 17px;
   border: 1px solid gray;
   border-radius: 5px;
 }
@@ -33,7 +33,14 @@
 .newUserGender > input {
   margin-top: 15px;
 }
-
+select {
+  padding: 6px;
+  border-radius: 6px;
+}
+select >option { 
+  font-size: 15px;
+  color: #555;
+}
 .newUserGender>label{
     margin: 10px;
     font-size: 18px;
