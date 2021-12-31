@@ -4,8 +4,24 @@ import "./home.css";
 import { userData } from "../../assests/data/dummyData";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
-
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { config } from "../../util/config"; 
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotalySecretKey');
 export default function Home() {
+  const [dashboardData, setDashboardData] = useState();
+  useEffect(() => { 
+    axios.get(`${config.apiURL}/getDashobardData`).then(result => { 
+      debugger;
+      if (result.status === 200) { 
+        setDashboardData(result.data);
+        const encryptedString = cryptr.encrypt(JSON.stringify(result.data));
+        localStorage.setItem('user', encryptedString);
+      }
+    }).catch(err => { debugger })
+  });
   return (
     <div className="home">
       <FeaturedInfo />
