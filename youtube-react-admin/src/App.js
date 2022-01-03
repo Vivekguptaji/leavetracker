@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import NewResource from "./pages/Resource/Resource";
+import NewResource from "./pages/resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
