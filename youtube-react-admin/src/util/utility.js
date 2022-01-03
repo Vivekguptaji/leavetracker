@@ -27,27 +27,59 @@ const getWeekendArray = (start, end) => {
         if (currentMonthName.length > 0 && moment(columns[i]).format('MMMM') !== currentMonthName) {
           if (!updatedColumns.includes(currentMonthName)) {
             updatedColumns.push(currentMonthName)
-          }
-          currentMonthName = moment(columns[i]).format('MMMM');
+          } 
         }
-        else {
-          currentMonthName = moment(columns[i]).format('MMMM');
-        }
+        currentMonthName = moment(columns[i]).format('MMMM');
         updatedColumns.push(columns[i])
       };
-      
       //console.log(currentMonthName, columns[columns.length-1]);
       updatedColumns.push(moment(columns[columns.length - 1]).format('MMMM'))
       return updatedColumns;
+} 
+const getAppliedLeave = (resource,endDate) => {
+  let count = 0;
+  let startDate = moment(endDate, "DD-MM-YYYY").add(4, 'days');
+  // days
+
+  return count;
+}
+const getHolidayCount = (resource, endDate) => {
+  let count = 0;
+  let startDate = moment(endDate, "DD-MM-YYYY").add(4, 'days');
+  // days
+
+  return count;
+ }
+const prepareReport = (resourceList, columnList) => {
+  let reportData = [];
+  for (let i = 0; i < resourceList.length; i++) { 
+    let resource = resourceList[i];
+    let reportObj = {};
+    for (let j = 0; j < columnList.length; j++) { 
+      let column = columnList[j];
+      if (column === 'resourceName') {
+        reportObj.resrouceName = resource['name'];
+        reportObj.resourceData = resource;
+      }
+      else { 
+        reportObj[column] = 5 * resource['claimHrs'] - resource['claimHrs'] * getAppliedLeave( resource, column) - resource['claimHrs'] * getHolidayCount(resource, column);
+      }
     }
-  
-    const getReportData = (startDate, endDate) => {  
-      let reportWeekends = getWeekendArray(startDate, endDate);
-      let columns = getColumns(reportWeekends); 
-      let updatedColumns = updateMonthName(columns); 
-      console.log(updatedColumns);
-      const sessionData = sessionStorage.getItem('user');
-      let data = JSON.parse(sessionData);  
+    reportData.push(reportObj);
+  }
+  return reportData;
+}
+const getReportData = (startDate, endDate) => {
+  let reportWeekends = getWeekendArray(startDate, endDate);
+  let updatedColumns = getColumns(reportWeekends);
+  //let updatedColumns = updateMonthName(columns);
+  updatedColumns.splice(0, 0, 'resourceName');
+  console.clear();
+  console.log(updatedColumns);
+  const sessionData = sessionStorage.getItem('user');
+  let data = JSON.parse(sessionData);
+  let reportData = prepareReport(data.resources, updatedColumns);
+  console.log(reportData);
 }
     
 export default getReportData;

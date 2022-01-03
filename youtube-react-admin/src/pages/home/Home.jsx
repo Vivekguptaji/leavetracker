@@ -9,18 +9,16 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 import getReportData from '../../util/utility';
 import moment from "moment";
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
-export default function Home() { 
- 
-
+// const Cryptr = require('cryptr');
+// const cryptr = new Cryptr('myTotalySecretKey');
+export default function Home() {  
   useEffect(() => {
     axios.get(`${config.apiURL}/getDashobardData`).then(result => {
       if (result.status === 200) {
        // const encryptedString = cryptr.encrypt(JSON.stringify(result.data));
         sessionStorage.clear();
         sessionStorage.setItem('user', JSON.stringify(result.data));
-        getReportData('01-01-2022', moment('30-06-2022', "DD-MM-YYYY").add(1, 'days'));
+        getReportData('01-01-2022', moment('28-02-2022', "DD-MM-YYYY").add(1, 'days'));
       }
     }).catch(err => { 
       console.log('err',err)
