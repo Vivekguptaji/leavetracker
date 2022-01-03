@@ -5,50 +5,50 @@ import axios from 'axios';
 import "./EventCalendar.css";
 // import './EventCalendar.css';
 
-function EventCalendar(){
-  const[eventData,setEventData] = useState([]);
-useEffect(()=>{
- axios.get('https://anftracker.herokuapp.com/getLeaves')
-    .then(res=>{
-      let leaveData = res.data.map(item=>{
-        let color = item.leaveType=='PL'? ' #ff9900' : item.leaveType=='CL' ? '#00ccff' : '#009933';
-        item.title= item.name +'('+item.leaveType+')';
-        item.start= item.startDate;
-        item.end= item.endDate;
-        item.editable = true;
-        item.backgroundColor = color;
-        return item;
+function EventCalendar() {
+  const [eventData, setEventData] = useState([]);
+  useEffect(() => {
+    axios.get('https://anftracker.herokuapp.com/getLeaves')
+      .then(res => {
+        let leaveData = res.data.map(item => {
+          let color = item.leaveType === 'PL' ? ' #ff9900' : item.leaveType === 'CL' ? '#00ccff' : '#009933';
+          item.title = item.name + '(' + item.leaveType + ')';
+          item.start = item.startDate;
+          item.end = item.endDate;
+          item.editable = true;
+          item.backgroundColor = color;
+          return item;
+        })
+        setEventData(leaveData);
       })
-      setEventData(leaveData);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  },[]);
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
 
     
   
-//   let eventsData = 
-//   [ { title: 'PrivilegeLeave', start: '2021-12-27T13:13:55.008', end: '2021-12-19T13:14:55.008',name:'vivek gupta',textColor:'black'}, 
-//   { title: 'CasualLeave', start: '2021-12-17T13:13:55.008', end: '2021-12-19T13:13:55.008',name:'Farah',color:'Pink',textColor:'black'}, 
-//   { title: 'SickLeave', start: '2021-12-24T13:13:55.008', end: '2021-12-19T13:13:55.008',name:'Deepika',color:'Red',textColor:'black'}, 
-//  ]
-// [{
-//   url: 'https://anftracker.herokuapp.com/getLeaves', // use the `url` property
-//   color: 'yellow',   
-//   textColor: 'black'
-// }]
-    return (
-        <div className ="event">
-        <FullCalendar
-      plugins={[ dayGridPlugin ]}
-      initialView="dayGridMonth"
-      weekends={true}
-      events = {eventData}
-    />
-        </div>
+  //   let eventsData = 
+  //   [ { title: 'PrivilegeLeave', start: '2021-12-27T13:13:55.008', end: '2021-12-19T13:14:55.008',name:'vivek gupta',textColor:'black'}, 
+  //   { title: 'CasualLeave', start: '2021-12-17T13:13:55.008', end: '2021-12-19T13:13:55.008',name:'Farah',color:'Pink',textColor:'black'}, 
+  //   { title: 'SickLeave', start: '2021-12-24T13:13:55.008', end: '2021-12-19T13:13:55.008',name:'Deepika',color:'Red',textColor:'black'}, 
+  //  ]
+  // [{
+  //   url: 'https://anftracker.herokuapp.com/getLeaves', // use the `url` property
+  //   color: 'yellow',   
+  //   textColor: 'black'
+  // }]
+  return (
+    <div className="event">
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        weekends={true}
+        events={eventData}
+      />
+    </div>
     
-      )
+  )
 }
 
 export default EventCalendar
