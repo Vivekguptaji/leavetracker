@@ -119,7 +119,7 @@ const prepareReport = (resourceList, columnList, leaves) => {
       else {
         let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];  
         let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedLeaves);
-        console.log(`Applied ${leaveCount} b/w ${column}`)
+        //console.log(`Applied ${leaveCount} b/w ${column}`)
         let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column)
         reportObj[column] = 5 * resource['claimHrs'] - leaveCount - holidayCount;
       }

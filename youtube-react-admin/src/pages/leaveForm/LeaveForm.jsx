@@ -34,7 +34,6 @@ export default function LeaveForm(props) {
     }
     else {
       let data = JSON.parse(sessionData);
-      data.leaveTypes.push({ leaveTypeValue: 'N/A', leaveTypeName: 'N/A' });
       leaveTypeOptions = data.leaveTypes.map(item => <option key={item.leaveTypeValue} value={item.leaveTypeValue}>{item.leaveTypeName}</option>);
 
       if (loadData) {

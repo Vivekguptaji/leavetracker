@@ -1,4 +1,4 @@
-import "./resource.css";
+import "./Resource.css";
 import axios from "axios";
 import { config } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
@@ -19,9 +19,7 @@ export default function Resource(props) {
 
   const [name, setName] = useState(loadData && loadData.name);
   const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState(
-    new Date(loadData && loadData.endDate)
-  );
+  const [endDate, setEndDate] = useState();
   const [location, setLocation] = useState();
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
@@ -35,11 +33,6 @@ export default function Resource(props) {
       history.push("/");
     } else {
       let data = JSON.parse((sessionData));
-      data.locations.push({ locationNameValue: "N/A", locationName: "N/A" });
-      data.developerRoles.push({
-        developerRolesValue: "N/A",
-        developerRoleName: "N/A",
-      });
       locationOptions = data.locations.map((item) => (
         <option key={item.locationValue} value={item.locationValue}>
           {item.locationName}
@@ -55,11 +48,11 @@ export default function Resource(props) {
         setRole(loadData.role);
         setStartDate(
           loadData.startDate &&
-            new Date(loadData.startDate).toISOString().substr(0, 10)
+          new Date(loadData.startDate).toISOString().substr(0, 10)
         );
         setEndDate(
           loadData.endDate &&
-            new Date(loadData.endDate).toISOString().substr(0, 10)
+          new Date(loadData.endDate).toISOString().substr(0, 10)
         );
       }
       setShowForm(true);
@@ -110,7 +103,7 @@ export default function Resource(props) {
           });
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const clearState = () => {
@@ -127,6 +120,9 @@ export default function Resource(props) {
       </div>
     );
   }
+  debugger;
+  let btnDisable = name && startDate && endDate;
+  btnDisable = !btnDisable ? true : false;
   return (
     <div className="newUser">
       <h1 className="newUserTitle">{title}</h1>
@@ -173,18 +169,15 @@ export default function Resource(props) {
         </div>
         <div className="newUserItem">
           <label>Claim Hours</label>
-          <input
-            type="number"
-            placeholder="8 | 9"
-            value={claimHrs}
-            onChange={changeClaimHrs}
-            required
-          />
+          <select onChange={changeClaimHrs}>
+            <option>8</option>
+            <option>9</option>
+          </select>
         </div>
         <button
           className="newUserButton"
           type="submit"
-          disabled={!name || !startDate || !endDate}
+          disabled={btnDisable}
         >
           Submit
         </button>

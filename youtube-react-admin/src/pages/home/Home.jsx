@@ -29,7 +29,7 @@ export default function Home() {
       <FeaturedInfo />
       <Chart data={userData} title="User Analytics" grid dataKey="Active User"/>
       <div className="homeWidgets">
-        <WidgetSm/>
+        <WidgetSm data/>
         <WidgetLg/>
       </div>
     </div>
