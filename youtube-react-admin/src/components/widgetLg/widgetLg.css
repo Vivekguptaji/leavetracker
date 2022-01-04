@@ -35,6 +35,12 @@
 
 .widgetLgDate,.widgetLgAmount{
   font-weight: 300;
+
+}
+.widgetLgStatus{
+  font-weight: 500;
+  color: #2a7ade;
+  
 }
 
 .widgetLgButton {

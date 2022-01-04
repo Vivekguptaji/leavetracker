@@ -1,86 +1,44 @@
 import "./widgetSm.css";
 import { Visibility } from "@material-ui/icons";
+import "reactjs-popup/dist/index.css";
+import Popup from "reactjs-popup";
 
-export default function WidgetSm() {
+export default function WidgetSm(props) {
+  // console.log(props.data.resources[0].name);
+  // const listItems = props.data.resources.map((link) => <li>{link.name}</li>);
+
   return (
     <div className="widgetSm">
-      <span className="widgetSmTitle">New Join Members</span>
+      <span className="widgetSmTitle">Members</span>
       <ul className="widgetSmList">
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
+        {props.data.resources.map((link) => (
+          <li className="widgetSmListItem">
+            <div className="widgetSmUser">
+              <span className="widgetSmUsername">{link.name}</span>
+              <span className="widgetSmUserTitle">{link.role}</span>
+            </div>
+            <Popup
+              trigger={
+                <button className="widgetSmButton">
+                  <Visibility className="widgetSmIcon" />
+                  Display
+                </button>
+              }
+              position="right center"
+            >
+              <div className="card">
+                <ul className="cardul">
+                  <li> NAME: {link.name} </li>
+                  <li> ROLE: {link.role}</li>
+                  <li> LOCATION:{link.location}</li>
+                  <li> START DATE: {link.startDate}</li>
+                  <li> END DATE: {link.endDate}</li>
+                  <li> CLAIM HRS:{link.claimHrs}</li>
+                </ul>
+              </div>
+            </Popup>
+          </li>
+        ))}
       </ul>
     </div>
   );

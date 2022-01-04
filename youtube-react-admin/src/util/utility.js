@@ -4,7 +4,8 @@ import axios from "axios";
 import { config } from "./config"; 
 const sessionData = sessionStorage.getItem('user');
   let data = JSON.parse(sessionData);
-const getWeekendArray = (start, end) => {
+  
+  const getWeekendArray = (start, end) => {
     var weekendArr = new Array();
     var dt = new Date(start);
     while (dt <= new Date(end)) { 
