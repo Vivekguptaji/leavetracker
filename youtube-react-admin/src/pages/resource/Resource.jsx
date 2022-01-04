@@ -26,17 +26,11 @@ export default function NewResource(props) {
   const [role, setRole] = useState();
   const [showForm, setShowForm] = useState(false);
   const params = useParams();
-<<<<<<< HEAD
   const title = params ? "Edit Resource" : "New Resource";
   console.log("state", loadData);
-=======
-  const title = loadData && loadData.name ? 'Edit Resource' : 'New Resource';
-  console.log('state', loadData)
->>>>>>> f6d2f8a0431de4d69052681f4f0af4b51b7ef0c7
   useEffect(() => {
     const sessionData = sessionStorage.getItem("user");
     if (!sessionData) {
-<<<<<<< HEAD
       history.push("/");
     } else {
       let data = JSON.parse(cryptr.decrypt(sessionData));
@@ -55,16 +49,6 @@ export default function NewResource(props) {
           {item.developerRoleName}
         </option>
       ));
-=======
-      history.push('/');
-    }
-    else {
-      let data = JSON.parse(sessionData);
-      data.locations.push({ locationNameValue: 'N/A', locationName: 'N/A' });
-      data.developerRoles.push({ developerRolesValue: 'N/A', developerRoleName: 'N/A' })
-      locationOptions = data.locations.map(item => <option key={item.locationValue} value={item.locationValue}>{item.locationName}</option>);
-      roleOptions = data.developerRoles.map(item => <option key={item.developerRolesValue} value={item.developerRolesValue}>{item.developerRoleName}</option>);
->>>>>>> f6d2f8a0431de4d69052681f4f0af4b51b7ef0c7
       if (loadData) {
         setLocation(loadData.location);
         setRole(loadData.role);
