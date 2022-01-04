@@ -19,7 +19,7 @@ export default function LeavesList() {
   }
   const callLeavesData = (data) => {
     history.push({
-      pathname: `/leaveForm/${data._id}`,
+      pathname: `/leaveForm/${data.resourceId}`,
       state: data
     });
   };

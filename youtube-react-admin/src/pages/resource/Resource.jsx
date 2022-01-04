@@ -5,7 +5,8 @@ import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+import { getSortOrder } from "../../util/utility";
 // const Cryptr = require("cryptr");
 // const cryptr = new Cryptr("myTotalySecretKey");
 let locationOptions;
@@ -33,11 +34,13 @@ export default function Resource(props) {
       history.push("/");
     } else {
       let data = JSON.parse(sessionData);
-      data.locations.push({ locationNameValue: "N/A", locationName: "N/A" });
+      data.locations.push({ locationNameValue: "0", locationName: "" });
       data.developerRoles.push({
-        developerRolesValue: "N/A",
-        developerRoleName: "N/A",
+        developerRolesValue: "0",
+        developerRoleName: "",
       });
+      data.locations.sort(getSortOrder('locationName'));
+      data.developerRoles.sort(getSortOrder('developerRoleName')); 
       locationOptions = data.locations.map((item) => (
         <option key={item.locationValue} value={item.locationValue}>
           {item.locationName}
@@ -174,8 +177,9 @@ export default function Resource(props) {
         <div className="newUserItem">
           <label>Claim Hours</label>
           <select value={claimHrs} onChange={changeClaimHrs}>
-            <option>8</option>
-            <option>9</option>
+          <option value="0"></option>
+            <option value="8">8</option>
+            <option value="9">9</option>
           </select>
         </div>
         <button

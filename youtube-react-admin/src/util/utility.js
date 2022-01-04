@@ -146,4 +146,14 @@ const getReportData = (startDate, endDate) => {
   return axios.get(url).then((json) => generateReport(startDate, endDate, json.data));
 }
     
-export default getReportData;
+export const getSortOrder = (prop) => { 
+  return function(a, b) {    
+      if (a[prop] > b[prop]) {    
+          return 1;    
+      } else if (a[prop] < b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+}    
+export default {getReportData};
