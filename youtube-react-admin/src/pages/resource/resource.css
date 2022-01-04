@@ -84,4 +84,5 @@ select >option {
 .newUserButton:disabled{
   background-color: #555;
   cursor: not-allowed;
+  color: #fff;
 }

@@ -1,4 +1,4 @@
-import "./Resource.css";
+import "./resource.css";
 import axios from "axios";
 import { config } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
