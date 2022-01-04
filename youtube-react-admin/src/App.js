@@ -6,11 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import Resource from "./pages/Resource/Resource";
+import Resource from "./pages/resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
-import NewProduct from "./pages/newProduct/NewProduct";
 import LeaveForm from "./pages/leaveForm/LeaveForm";
 import EventCalendar from './pages/Calendar/EventCalendar';
+import HolidayList from "./pages/holidayList/HolidayList";
+
+
 
 
 function App() {
@@ -41,8 +43,8 @@ function App() {
           <Route path="/Calendar">
             <EventCalendar />
           </Route>
-          <Route path="/newproduct">
-            <NewProduct />
+          <Route path="/holidayList">
+            <HolidayList />
           </Route>
         </Switch>
       </div>

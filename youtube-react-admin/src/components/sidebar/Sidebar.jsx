@@ -1,16 +1,19 @@
 import "./sidebar.css";
 import {
-  LineStyle,
   Timeline,
   PermIdentity,
-  Storefront,
   BarChart,
-  MailOutline,
   DynamicFeed,
-  ChatBubbleOutline,
   WorkOutline,
   Report,
 } from "@material-ui/icons";
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -21,12 +24,12 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/" className="link">
-            <li className="sidebarListItem">
-              <LineStyle className="sidebarIcon" />
-              Home
-            </li>
+              <li className="sidebarListItem">
+                <DashboardIcon className="sidebarIcon" />
+                Home
+              </li>
             </Link>
-            
+
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -40,13 +43,13 @@ export default function Sidebar() {
             </Link>
             <Link to="/leaves" className="link">
               <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
+                <ExitToAppIcon className="sidebarIcon" />
                 Leaves
               </li>
             </Link>
             <Link to="/calendar" className="link">
               <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
+                <DateRangeIcon className="sidebarIcon" />
                 Calendar
               </li>
             </Link>
@@ -57,20 +60,32 @@ export default function Sidebar() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
+          <h3 className="sidebarTitle">Admin Dashboard</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              Mail
-            </li>
-            <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li className="sidebarListItem">
-              <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
+            <Link to="/roles" className="link">
+              <li className="sidebarListItem">
+                <AssignmentIndIcon className="sidebarIcon" />
+                Roles
+              </li>
+            </Link>
+            <Link to="/typesLeave                                                                                                                                                           " className="link">
+              <li className="sidebarListItem">
+                <DynamicFeed className="sidebarIcon" />
+                Leave Types
+              </li>
+            </Link>
+            <Link to="/locations" className="link">
+              <li className="sidebarListItem">
+                <PersonPinCircleIcon className="sidebarIcon" />
+                Locations
+              </li>
+            </Link>
+            <Link to="/holidayList" className="link">
+              <li className="sidebarListItem">
+                <ListAltIcon className="sidebarIcon" />
+                Holiday List
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
