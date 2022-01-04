@@ -1,5 +1,7 @@
  
 import moment from "moment";
+import axios from "axios"; 
+import { config } from "./config"; 
 const sessionData = sessionStorage.getItem('user');
   let data = JSON.parse(sessionData);
 const getWeekendArray = (start, end) => {
@@ -38,14 +40,47 @@ const getWeekendArray = (start, end) => {
       updatedColumns.push(moment(columns[columns.length - 1]).format('MMMM'))
       return updatedColumns;
 } 
-const getAppliedLeave = (resource, endDate) => {
+const getDaysBetweenDates = (startDate, endDate) => {
+  const dateArray = [];
+  let currentDate = new Date(startDate); 
+  while (currentDate <= new Date(endDate)) {
+    dateArray.push(new Date(currentDate)); 
+    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  }
+  return dateArray;
+};
+const checkforHoliday = (date) => {
+  let isHoliday = false;
+  let holidays = data.holidays; 
+  for (let i = 0; i < holidays.length; i++) {
+    let holidayData = holidays[i];
+    let holidayDate = new Date(holidayData['startDate']).setHours(0, 0, 0, 0);
+    if (holidayDate === date) {
+      isHoliday = true;
+    }
+  }
+  return isHoliday;
+}
+const getAppliedLeave = (resource, endDate, appliedLeaves) => {
   let count = 0;
+  if (!appliedLeaves) { 
+    return count;
+  }
   endDate = new Date(endDate);
   endDate.setHours(0, 0, 0, 0);
   let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0);
-  let holidays = data.holidays;
+ 
   // days
-
+  var dateList = getDaysBetweenDates(appliedLeaves['startDate'], appliedLeaves['endDate']); 
+  for (let i = 0; i < dateList.length; i++) {
+    let leaveDate = dateList[i];
+    leaveDate = new Date(leaveDate).setHours(0, 0, 0, 0);
+    const isHoliday = checkforHoliday(leaveDate);
+    if (!isHoliday && leaveDate >= startDate && leaveDate <= endDate) {
+      console.log('leaveDay', new Date(leaveDate))
+      count++;
+    }
+  }
   return count;
 }
 const getHolidayCount = (resource, endDate) => {
@@ -64,37 +99,44 @@ const getHolidayCount = (resource, endDate) => {
   }
   return count;
 }
-const prepareReport = (resourceList, columnList) => {
+const prepareReport = (resourceList, columnList, leaves) => {
   let reportData = [];
-  for (let i = 0; i < resourceList.length; i++) { 
+  for (let i = 0; i < resourceList.length; i++) {
     let resource = resourceList[i];
     let reportObj = {};
-    for (let j = 0; j < columnList.length; j++) { 
+    for (let j = 0; j < columnList.length; j++) {
       let column = columnList[j];
       if (column === 'resourceName') {
         reportObj.resrouceName = resource['name'];
         reportObj.resourceId = resource._id;
       }
-      else { 
-        let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column);
+      else {
+        let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];  
+        let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedLeaves);
+        console.log(`Applied ${leaveCount} b/w ${column}`)
         let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column)
-        reportObj[column] = 5 * resource['claimHrs'] - leaveCount  - holidayCount;
+        reportObj[column] = 5 * resource['claimHrs'] - leaveCount - holidayCount;
       }
     }
     reportData.push(reportObj);
   }
   return reportData;
 }
-const getReportData = (startDate, endDate) => {
+const generateReport = (startDate, endDate, leaves) => {
+  
   let reportWeekends = getWeekendArray(startDate, endDate);
   let updatedColumns = getColumns(reportWeekends);
   //let updatedColumns = updateMonthName(columns);
   updatedColumns.splice(0, 0, 'resourceName');
-  let reportData = prepareReport(data.resources, updatedColumns); 
-  console.clear();
+  let reportData = prepareReport(data.resources, updatedColumns ,leaves); 
+  //console.clear();
   console.log(updatedColumns);
   console.log(reportData);
   return reportData;
+ }
+const getReportData = (startDate, endDate) => {
+  const url = `${config.apiURL}/getLeaves`;
+  return axios.get(url).then((json) => generateReport(startDate, endDate, json.data));
 }
     
 export default getReportData;
