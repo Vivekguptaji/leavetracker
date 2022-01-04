@@ -1,44 +1,44 @@
-import "./locations.css"; 
+import "./typesLeave.css"; 
 import React, { useState, useEffect } from "react";
 import axios from "axios"; 
 import { config } from "../../util/config"; 
 import MaterialTable from "material-table";
 import { Link, useHistory  } from "react-router-dom";
 
-export default function Locations() {
-  const url = `${config.apiURL}/getLocations`;
+export default function TypesLeave() {
+  const url = `${config.apiURL}/getLeaveTypes`;
   const history = useHistory();
 
-  const [locationsData, setlocationsData] = useState([]);
+  const [typesLeaveData, settypesLeaveData] = useState([]);
   
   useEffect(() => {
-    axios.get(url).then((json) => setlocationsData(json.data));
+    axios.get(url).then((json) => settypesLeaveData(json.data));
   }, []);
   const handleClickRow = (event, data) => {
     debugger;
   }
-  const calllocationsData = (data) => {
+  const calltypesLeaveData = (data) => {
     history.push({
-      pathname: `/locations/${data._id}`,
+      pathname: `/typesLeave/${data._id}`,
       state: data
     });
   };
   return (
     <div class="userList">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Locations List</h1>
-        <Link to="/locations">
-          <button className="userAddButton" disabled> Create New</button>
+        <h1 className="userTitle">Leave Type List</h1>
+        <Link to="/typesLeave">
+          <button className="userAddButton"> Create New</button>
         </Link>
       </div>
       <br />
 
       <MaterialTable
-        title="Locations"
+        title="Leave Types"
         columns={[
-          { title: 'Name', field: 'locationName' }
+          { title: 'Name', field: 'leaveTypeName' },
         ]}
-          data={locationsData}
+        data={typesLeaveData}
         options={{
           sorting: true,
           actionsColumnIndex: -1,

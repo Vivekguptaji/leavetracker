@@ -68,7 +68,7 @@ export default function Sidebar() {
                 Roles
               </li>
             </Link>
-            <Link to="/typesLeave                                                                                                                                                           " className="link">
+            <Link to="/typesLeave" className="link">
               <li className="sidebarListItem">
                 <DynamicFeed className="sidebarIcon" />
                 Leave Types

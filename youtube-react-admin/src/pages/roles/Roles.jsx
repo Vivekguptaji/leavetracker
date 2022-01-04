@@ -28,7 +28,7 @@ export default function Roles() {
       <div className="userTitleContainer">
         <h1 className="userTitle">Roles List</h1>
         <Link to="/roles">
-          <button className="userAddButton"> Create Roles</button>
+          <button className="userAddButton"> Create New</button>
         </Link>
       </div>
       <br />

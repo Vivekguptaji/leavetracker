@@ -13,9 +13,7 @@ import EventCalendar from './pages/Calendar/EventCalendar';
 import HolidayList from "./pages/holidayList/HolidayList";
 import Roles from "./pages/roles/Roles";
 import Locations from "./pages/locations/Locations";
-
-
-
+import TypesLeave from "./pages/typesLeave/TypesLeave";
 
 function App() {
   return (
@@ -53,6 +51,9 @@ function App() {
           </Route>
           <Route path="/locations">
             <Locations />
+          </Route>
+          <Route path="/typesLeave">
+            <TypesLeave />
           </Route>
         </Switch>
       </div>
