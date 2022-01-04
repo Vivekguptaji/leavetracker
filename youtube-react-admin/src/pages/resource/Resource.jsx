@@ -1,4 +1,4 @@
-import "./Resource.css";
+import "./resource.css";
 import axios from "axios";
 import { config } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
@@ -16,6 +16,7 @@ export default function Resource(props) {
   const history = useHistory();
   const historyLocation = useLocation();
   const loadData = historyLocation.state;
+
   const [name, setName] = useState(loadData && loadData.name);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(

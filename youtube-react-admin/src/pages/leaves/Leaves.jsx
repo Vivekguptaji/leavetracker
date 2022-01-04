@@ -1,69 +1,69 @@
-import "./leaves.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../assests/data/dummyData";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import "./leaves.css"; 
+import React, { useState, useEffect } from "react";
+import axios from "axios"; 
+import { config } from "../../util/config"; 
+import MaterialTable from "material-table";
+import { Link, useHistory  } from "react-router-dom";
 
-export default function Leaves() {
-  const [data, setData] = useState(productRows);
+export default function LeavesList() {
+  const url = `${config.apiURL}/getLeaves`;
+  const history = useHistory();
+  const [leavesData, setLeavesData] = useState([]);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  useEffect(() => {
+    axios.get(url).then((json) => setLeavesData(json.data));
+  }, []);
+
+  const handleClickRow = (event, data) => {
+    //debugger;
+  }
+  const callLeavesData = (data) => {
+    history.push({
+      pathname: `/leaveForm/${data._id}`,
+      state: data
+    });
   };
-
-  const columns = [
-    { field: "id", width: 50 },
-    {
-      field: "Start Date",
-      headerName: "Start Date",
-      width: 160
-    },
-    {
-      field: "End Date",
-      headerName: "End Date",
-      width: 160
-    },
-    {
-      field: "Comment",
-      headerName: "Comment",
-      width: 200,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/product/" + params.row.id}>
-              <button className="leavesEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="leavesDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
-    }
-  ];
-
   return (
-    <div className="leaves">
-      <div className="leavesContainer">
-        <h1 className="leavesTitle">Leave Summary</h1>
+    <div class="userList">
+      <div className="userTitleContainer">
+        <h1 className="userTitle">Leave Summary</h1>
         <Link to="/leaveForm">
-          <button className="leavesButton">Create</button>
+        <button className="userAddButton">Create Leave</button>
         </Link>
       </div>
       <br />
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={10}
+
+      <MaterialTable
+        title="Leave Summary"
+        columns={[
+          { title: 'Name', field: 'name' },
+          {
+            title: 'Start date', field: 'startDate', type: 'date', dateSetting: {
+              format: 'dd/mm/yyyy'
+            }
+          },
+          { title: 'End date', field: 'endDate', type: 'date' },
+          { title: 'Leave Type', field: 'leaveType' },
+          //{ title: 'Status', field: 'isActive', render: rowData => (rowData.isActive ? "Active" : "Disabled") }
+        ]}
+        data={leavesData}
+        actions={[
+          {
+            icon: "edit",
+            iconProps: { fontSize: "small", color: "primary" },
+            tooltip: "Edit Resource",
+            onClick: (event, rowData) => { callLeavesData(rowData) }
+          }
+        ]}
+        options={{
+          sorting: true,
+          actionsColumnIndex: -1,
+          grouping: true
+        }}
       />
     </div>
   );
 }
+
+
+

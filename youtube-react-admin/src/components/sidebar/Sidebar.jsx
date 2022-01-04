@@ -38,7 +38,7 @@ export default function Sidebar() {
                 Resources
               </li>
             </Link>
-            <Link to="/products" className="link">
+            <Link to="/leaves" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Leaves

@@ -1,70 +1,140 @@
 import "./leaveForm.css";
-import { useState } from "react";
-import {Cities} from "../../../src/assests/data/resourceData";
+import axios from "axios";
+import { config } from "../../util/config";
+import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotalySecretKey');
 
-export default function LeaveForm() {
-    const change = () => {
-        const value="N/A";
-        return value;
+let leaveTypeOptions;
+
+export default function LeaveForm(props) {
+
+  const history = useHistory();
+  const historyLocation = useLocation();
+  const loadData = historyLocation.state;
+
+  const [name, setName] = useState(loadData && loadData.name);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState(new Date(loadData && loadData.endDate));
+  const [leaveType, setLeaveType] = useState();
+
+  const [showForm, setShowForm] = useState(false);
+
+  const params = useParams();
+  const title = loadData && loadData.name ?'Edit Leave' : 'New Leave';
+  console.log('state', loadData)
+
+  useEffect(() => {
+    const sessionData = sessionStorage.getItem('user');
+    if (!sessionData) {
+      history.push('/');
+    }
+    else {
+      let data = JSON.parse(sessionData);
+      data.leaveTypes.push({ leaveTypeValue: 'N/A', leaveTypeName: 'N/A' });
+      leaveTypeOptions = data.leaveTypes.map(item => <option key={item.leaveTypeValue} value={item.leaveTypeValue}>{item.leaveTypeName}</option>);
+
+      if (loadData) {
+        setLeaveType(loadData.leaveType);
+        setStartDate(loadData.startDate && new Date(loadData.startDate).toISOString().substr(0, 10));
+        setEndDate(loadData.endDate && new Date(loadData.endDate).toISOString().substr(0, 10))
       }
-    const [value,setValue] = useState(change);
+      setShowForm(true);
+    }
+  }, []);
 
-   
-    function handleChange(e){
-        setValue(e.target.value);
+  const changeName = (e) => {
+    setName(e.target.value);
+  };
+  const changeStartDate = (e) => {
+    setStartDate(e.target.value);
+  };
+  const changeEndDate = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  const changeSetleaveType = (e) => {
+    setLeaveType(e.target.value);
+  };
+
+  const onSubmitRequest = (e) => {
+    e.preventDefault();
+    const reqData = {
+      name: name,
+      startDate: startDate,
+      endDate: endDate,
+      leaveType: leaveType,
     };
-    
-    let selectOptions=Cities.cities.map(item => <option value="{item.Key}">{item.Value}</option>) 
-  return (
-    <div className="newLeave">
-      <h1 className="leaveFormTitle">Apply Leave</h1>
-      <form className="leaveFormForm">
-        <div className="leaveFormItem">
-          <label>Name</label>
-            <select defaultValue={value} onChange={handleChange}>
-                {selectOptions}
-            </select>
-            {/*<select onChange={(e) => this.handleCities(e)}>
-              {Cities.cities && Cities.cities.map((e, key) => {
-              return 
-                <option key={key} value={e.Key}>{e.Value}</option>; })}
-            </select>*/}  
-        </div>
-        <div className="leaveFormItem">
-          <label>Start Date</label>
-          <input type="date" />
-        </div>
-        <div className="leaveFormItem">
-          <label>End Date</label>
-          <input type="date" />
-        </div>
-        <div className="leaveFormItem">
-          <label>Type</label>
-            <select defaultValue={value} onChange={handleChange}>
-                <option value="N/A">N/A</option>
-                <option value="leave type 1">leave type 1</option>
-                <option value="leave type 2">leave type 2</option>
-                <option value="leave type 3">leave type 3</option>
-                <option value="leave type 4">leave type 4</option>
-            </select>
-                     
-        </div>
-        <div className="leaveFormItem">
-          <label>Day</label>
-          <div className="dayType">
-            <input type="radio" name="day" id="halfDay" value="0.5" />
-            <label for="0.5">0.5</label>
-            <input type="radio" name="day" id="fullDay" value="1" />
-            <label for="1">1</label>
-          </div>
-        </div>
-        <button className="leaveFormButton">Create</button>
-        <div>
-          
- </div>
-        
-      </form>
-    </div>
+
+    const url =  loadData && loadData._id ?`/updateLeave/${loadData._id}`: `/applyLeave`;
+    //const url = `/applyLeave`;
+    axios
+      .post(`${config.apiURL}${url}`, reqData)
+      .then((result) => {
+        if (result.status === 202 || result.status === 200) {
+          clearState();
+          history.push("/leaves");
+        }
+      })
+      .catch((err) => {
+        //debugger;
+      });
+  };
+
+  const clearState = () => {
+    setName("");
+    setStartDate("");
+    setEndDate("");
+    setLeaveType("");
+  };
+  if (!showForm) {
+    return <div className="newUser loaderClass">
+      <Spinner animation="grow" />
+    </div >;
+  }
+  return(
+  <div className="newUser">
+    <h1 className="newUserTitle">{title}</h1>
+    <form className="newUserForm" onSubmit={onSubmitRequest}>
+      <div className="newUserItem">
+        <label>Full Name</label>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={changeName}
+        />
+      </div>
+      <div className="newUserItem">
+        <label>Start Date</label>
+        <input type="date" value={startDate} onChange={changeStartDate} />
+      </div>
+      <div className="newUserItem">
+        <label>End Date</label>
+        <input type="date" value={endDate} onChange={changeEndDate} />
+      </div>
+      <div className="newUserItem">
+        <label>Leave Type</label>
+        <select onChange={changeSetleaveType} value={leaveType}>
+          {leaveTypeOptions}
+        </select>
+      </div>
+      <button className="newUserButton" type="submit">
+        Submit
+      </button>
+      <button
+        className="cancelButton"
+        type="cancel"
+        onClick={() => {
+          history.push("/leaves");
+        }}
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
   );
 }
