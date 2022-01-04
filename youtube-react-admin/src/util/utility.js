@@ -1,5 +1,7 @@
  
 import moment from "moment";
+const sessionData = sessionStorage.getItem('user');
+  let data = JSON.parse(sessionData);
 const getWeekendArray = (start, end) => {
     var weekendArr = new Array();
     var dt = new Date(start);
@@ -45,11 +47,19 @@ const getAppliedLeave = (resource,endDate) => {
 }
 const getHolidayCount = (resource, endDate) => {
   let count = 0;
-  let startDate = moment(endDate, "DD-MM-YYYY").add(4, 'days');
-  // days
-
+  endDate = new Date(endDate);
+  endDate.setHours(0, 0, 0, 0);
+  let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0); 
+  let holidays = data.holidays; 
+  endDate.setHours(0, 0, 0, 0);
+  for (let i = 0; i < holidays.length; i++) {
+    let holidayDate = new Date(holidays[i]['startDate']).setHours(0, 0, 0, 0);  
+    if (holidayDate >= startDate && holidayDate <= endDate) {
+      count++;
+    }
+  }
   return count;
- }
+}
 const prepareReport = (resourceList, columnList) => {
   let reportData = [];
   for (let i = 0; i < resourceList.length; i++) { 
@@ -59,10 +69,12 @@ const prepareReport = (resourceList, columnList) => {
       let column = columnList[j];
       if (column === 'resourceName') {
         reportObj.resrouceName = resource['name'];
-        reportObj.resourceData = resource;
+        reportObj.resourceId = resource._id;
       }
       else { 
-        reportObj[column] = 5 * resource['claimHrs'] - resource['claimHrs'] * getAppliedLeave( resource, column) - resource['claimHrs'] * getHolidayCount(resource, column);
+        let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column);
+        let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column)
+        reportObj[column] = 5 * resource['claimHrs'] - leaveCount  - holidayCount;
       }
     }
     reportData.push(reportObj);
@@ -76,8 +88,7 @@ const getReportData = (startDate, endDate) => {
   updatedColumns.splice(0, 0, 'resourceName');
   console.clear();
   console.log(updatedColumns);
-  const sessionData = sessionStorage.getItem('user');
-  let data = JSON.parse(sessionData);
+  
   let reportData = prepareReport(data.resources, updatedColumns);
   console.log(reportData);
 }
