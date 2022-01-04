@@ -32,7 +32,12 @@ export default function Resource(props) {
     if (!sessionData) {
       history.push("/");
     } else {
-      let data = JSON.parse((sessionData));
+      let data = JSON.parse(sessionData);
+      data.locations.push({ locationNameValue: "N/A", locationName: "N/A" });
+      data.developerRoles.push({
+        developerRolesValue: "N/A",
+        developerRoleName: "N/A",
+      });
       locationOptions = data.locations.map((item) => (
         <option key={item.locationValue} value={item.locationValue}>
           {item.locationName}
@@ -119,8 +124,7 @@ export default function Resource(props) {
         <Spinner animation="grow" />
       </div>
     );
-  }
-  debugger;
+  } 
   let btnDisable = name && startDate && endDate;
   btnDisable = !btnDisable ? true : false;
   return (
@@ -169,7 +173,7 @@ export default function Resource(props) {
         </div>
         <div className="newUserItem">
           <label>Claim Hours</label>
-          <select onChange={changeClaimHrs}>
+          <select value={claimHrs} onChange={changeClaimHrs}>
             <option>8</option>
             <option>9</option>
           </select>
