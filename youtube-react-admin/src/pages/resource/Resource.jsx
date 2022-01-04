@@ -105,7 +105,7 @@ export default function Resource(props) {
           history.push("/resourceList");
           toast.success("Successfully submitted!", {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
+            autoClose: 1000,
           });
         }
       })
