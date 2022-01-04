@@ -38,9 +38,12 @@ const getWeekendArray = (start, end) => {
       updatedColumns.push(moment(columns[columns.length - 1]).format('MMMM'))
       return updatedColumns;
 } 
-const getAppliedLeave = (resource,endDate) => {
+const getAppliedLeave = (resource, endDate) => {
   let count = 0;
-  let startDate = moment(endDate, "DD-MM-YYYY").add(4, 'days');
+  endDate = new Date(endDate);
+  endDate.setHours(0, 0, 0, 0);
+  let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0);
+  let holidays = data.holidays;
   // days
 
   return count;
@@ -49,12 +52,13 @@ const getHolidayCount = (resource, endDate) => {
   let count = 0;
   endDate = new Date(endDate);
   endDate.setHours(0, 0, 0, 0);
-  let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0); 
-  let holidays = data.holidays; 
+  let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0);
+  let holidays = data.holidays;
   endDate.setHours(0, 0, 0, 0);
   for (let i = 0; i < holidays.length; i++) {
-    let holidayDate = new Date(holidays[i]['startDate']).setHours(0, 0, 0, 0);  
-    if (holidayDate >= startDate && holidayDate <= endDate) {
+    let holidayData = holidays[i];
+    let holidayDate = new Date(holidayData['startDate']).setHours(0, 0, 0, 0);
+    if (holidayDate >= startDate && holidayDate <= endDate && resource.location === holidayData.location) {
       count++;
     }
   }
@@ -86,11 +90,11 @@ const getReportData = (startDate, endDate) => {
   let updatedColumns = getColumns(reportWeekends);
   //let updatedColumns = updateMonthName(columns);
   updatedColumns.splice(0, 0, 'resourceName');
+  let reportData = prepareReport(data.resources, updatedColumns); 
   console.clear();
   console.log(updatedColumns);
-  
-  let reportData = prepareReport(data.resources, updatedColumns);
   console.log(reportData);
+  return reportData;
 }
     
 export default getReportData;
