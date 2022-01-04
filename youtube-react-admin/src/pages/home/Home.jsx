@@ -18,7 +18,7 @@ export default function Home() {
        // const encryptedString = cryptr.encrypt(JSON.stringify(result.data));
         sessionStorage.clear();
         sessionStorage.setItem('user', JSON.stringify(result.data));
-        getReportData('01-01-2022', moment('28-02-2022', "DD-MM-YYYY").add(1, 'days'));
+        getReportData('01-01-2022', moment('31-03-2022', "DD-MM-YYYY").add(1, 'days'));
       }
     }).catch(err => { 
       console.log('err',err)

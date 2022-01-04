@@ -109,6 +109,12 @@ const prepareReport = (resourceList, columnList, leaves) => {
       if (column === 'resourceName') {
         reportObj.resrouceName = resource['name'];
         reportObj.resourceId = resource._id;
+        reportObj.location = resource.location;
+        reportObj.role = resource.role;
+        reportObj.startDate = resource.startDate;
+        reportObj.endDate = resource.endDate;
+        reportObj.claimHrs = resource.claimHrs;
+        reportObj.isActive = resource.isActive;
       }
       else {
         let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];  
@@ -129,7 +135,7 @@ const generateReport = (startDate, endDate, leaves) => {
   //let updatedColumns = updateMonthName(columns);
   updatedColumns.splice(0, 0, 'resourceName');
   let reportData = prepareReport(data.resources, updatedColumns ,leaves); 
-  //console.clear();
+  console.clear();
   console.log(updatedColumns);
   console.log(reportData);
   return reportData;
