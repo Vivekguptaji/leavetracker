@@ -1,4 +1,4 @@
-import "./resource.css";
+import "./Resource.css";
 import axios from "axios";
 import { config } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const Cryptr = require("cryptr");
-const cryptr = new Cryptr("myTotalySecretKey");
+// const Cryptr = require("cryptr");
+// const cryptr = new Cryptr("myTotalySecretKey");
 let locationOptions;
 let roleOptions;
 
 toast.configure();
-export default function NewResource(props) {
+export default function Resource(props) {
   const history = useHistory();
   const historyLocation = useLocation();
   const loadData = historyLocation.state;
@@ -33,7 +33,7 @@ export default function NewResource(props) {
     if (!sessionData) {
       history.push("/");
     } else {
-      let data = JSON.parse(cryptr.decrypt(sessionData));
+      let data = JSON.parse((sessionData));
       data.locations.push({ locationNameValue: "N/A", locationName: "N/A" });
       data.developerRoles.push({
         developerRolesValue: "N/A",

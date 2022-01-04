@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import NewResource from "./pages/resource/Resource";
+import Resource from "./pages/Resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
@@ -28,10 +28,10 @@ function App() {
             <ResourceList />
           </Route> 
           <Route path="/resource/:_id">
-            <NewResource />
+            <Resource />
           </Route>
           <Route path="/resource">
-            <NewResource />
+            <Resource />
           </Route>
           <Route path="/products">
             <Leaves />
