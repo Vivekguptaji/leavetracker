@@ -27,8 +27,8 @@ export default function HolidayList() {
     <div class="userList">
       <div className="userTitleContainer">
         <h1 className="userTitle">Holiday List</h1>
-        <Link to="/holiday">
-          <button className="userAddButton"> Create Holiday</button>
+        <Link to="/holidayList">
+          <button className="userAddButton" disabled> Create Holiday</button>
         </Link>
       </div>
       <br />
