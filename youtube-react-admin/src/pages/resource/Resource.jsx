@@ -1,50 +1,66 @@
 import "./resource.css";
 import axios from "axios";
 import { config } from "../../util/config";
-import { useHistory,useParams, useLocation } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// const Cryptr = require("cryptr");
+// const cryptr = new Cryptr("myTotalySecretKey");
 let locationOptions;
 let roleOptions;
 
-export default function NewResource(props) {
+toast.configure();
+export default function Resource(props) {
   const history = useHistory();
   const historyLocation = useLocation();
-  const loadData  = historyLocation.state; 
+  const loadData = historyLocation.state;
 
   const [name, setName] = useState(loadData && loadData.name);
   const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState(new Date(loadData && loadData.endDate));
+  const [endDate, setEndDate] = useState(
+    new Date(loadData && loadData.endDate)
+  );
   const [location, setLocation] = useState();
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
-
-  const [showForm, setShowForm] = useState(false);  
-  
+  const [showForm, setShowForm] = useState(false);
   const params = useParams();
-  const title = loadData && loadData.name ? 'Edit Resource' : 'New Resource';
-  console.log('state', loadData)
+  const title = params ? "Edit Resource" : "New Resource";
+  console.log("state", loadData);
   useEffect(() => {
-    const sessionData = sessionStorage.getItem('user');
+    const sessionData = sessionStorage.getItem("user");
     if (!sessionData) {
-      history.push('/');
-    }
-    else {
-      let data = JSON.parse(sessionData);
-      data.locations.push({ locationNameValue: 'N/A', locationName: 'N/A' });
-      data.developerRoles.push({ developerRolesValue: 'N/A', developerRoleName: 'N/A' })
-      locationOptions = data.locations.map(item => <option key={item.locationValue} value={item.locationValue}>{item.locationName}</option>);
-      roleOptions = data.developerRoles.map(item => <option key={item.developerRolesValue} value={item.developerRolesValue}>{item.developerRoleName}</option>);
-      
+      history.push("/");
+    } else {
+      let data = JSON.parse((sessionData));
+      data.locations.push({ locationNameValue: "N/A", locationName: "N/A" });
+      data.developerRoles.push({
+        developerRolesValue: "N/A",
+        developerRoleName: "N/A",
+      });
+      locationOptions = data.locations.map((item) => (
+        <option key={item.locationValue} value={item.locationValue}>
+          {item.locationName}
+        </option>
+      ));
+      roleOptions = data.developerRoles.map((item) => (
+        <option key={item.developerRolesValue} value={item.developerRolesValue}>
+          {item.developerRoleName}
+        </option>
+      ));
       if (loadData) {
         setLocation(loadData.location);
         setRole(loadData.role);
-        setStartDate(loadData.startDate && new Date(loadData.startDate).toISOString().substr(0, 10));
-        setEndDate(loadData.endDate && new Date(loadData.endDate).toISOString().substr(0, 10))
+        setStartDate(
+          loadData.startDate &&
+            new Date(loadData.startDate).toISOString().substr(0, 10)
+        );
+        setEndDate(
+          loadData.endDate &&
+            new Date(loadData.endDate).toISOString().substr(0, 10)
+        );
       }
       setShowForm(true);
     }
@@ -61,12 +77,12 @@ export default function NewResource(props) {
   const changeSetLocation = (e) => {
     setLocation(e.target.value);
   };
-  const changeSetRole = (e) => { 
+  const changeSetRole = (e) => {
     setRole(e.target.value);
-  }
+  };
   const changeClaimHrs = (e) => {
     setClaimHrs(e.target.value);
-  }; 
+  };
 
   const onSubmitRequest = (e) => {
     e.preventDefault();
@@ -76,20 +92,25 @@ export default function NewResource(props) {
       endDate: endDate,
       location: location,
       claimHrs: claimHrs,
-      role: role
+      role: role,
     };
-    const url =  loadData && loadData._id ?`/updateResource/${loadData._id}`: `/createResource`;
+    const url =
+      loadData && loadData._id
+        ? `/updateResource/${loadData._id}`
+        : `/createResource`;
     axios
       .post(`${config.apiURL}${url}`, reqData)
-      .then((result) => { 
+      .then((result) => {
         if (result.status === 202 || result.status === 200) {
           clearState();
           history.push("/resourceList");
+          toast.success("Successfully submitted!", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1000,
+          });
         }
       })
-      .catch((err) => {
-        debugger;
-      }); 
+      .catch((err) => {});
   };
 
   const clearState = () => {
@@ -98,11 +119,13 @@ export default function NewResource(props) {
     setEndDate("");
     setLocation("");
     setClaimHrs("");
-  }; 
+  };
   if (!showForm) {
-    return <div className="newUser loaderClass">
-      <Spinner animation="grow" />
-    </div >;
+    return (
+      <div className="newUser loaderClass">
+        <Spinner animation="grow" />
+      </div>
+    );
   }
   return (
     <div className="newUser">
@@ -115,27 +138,38 @@ export default function NewResource(props) {
             placeholder="John Smith"
             value={name}
             onChange={changeName}
+            required
           />
         </div>
         <div className="newUserItem">
           <label>Start Date</label>
-          <input type="date" value={startDate} onChange={changeStartDate} />
+          <input
+            type="date"
+            value={startDate}
+            onChange={changeStartDate}
+            required
+          />
         </div>
         <div className="newUserItem">
           <label>End Date</label>
-          <input type="date" value={endDate} onChange={changeEndDate} />
-        </div> 
+          <input
+            type="date"
+            value={endDate}
+            onChange={changeEndDate}
+            required
+          />
+        </div>
         <div className="newUserItem">
           <label>Location</label>
-            <select onChange={changeSetLocation} value={location}> 
+          <select onChange={changeSetLocation} value={location}>
             {locationOptions}
-            </select> 
+          </select>
         </div>
         <div className="newUserItem">
           <label>Role</label>
           <select onChange={changeSetRole} value={role}>
-             {roleOptions}
-            </select>
+            {roleOptions}
+          </select>
         </div>
         <div className="newUserItem">
           <label>Claim Hours</label>
@@ -144,9 +178,14 @@ export default function NewResource(props) {
             placeholder="8 | 9"
             value={claimHrs}
             onChange={changeClaimHrs}
+            required
           />
         </div>
-        <button className="newUserButton" type="submit">
+        <button
+          className="newUserButton"
+          type="submit"
+          disabled={!name || !startDate || !endDate}
+        >
           Submit
         </button>
         <button
