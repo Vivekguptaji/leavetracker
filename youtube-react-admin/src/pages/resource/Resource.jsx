@@ -1,24 +1,30 @@
-import "./Resource.css";
+import "./resource.css";
 import axios from "axios";
 import { config } from "../../util/config";
 import { useHistory,useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
+
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
+
 let locationOptions;
 let roleOptions;
+
 export default function NewResource(props) {
   const history = useHistory();
   const historyLocation = useLocation();
   const loadData  = historyLocation.state; 
+
   const [name, setName] = useState(loadData && loadData.name);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(new Date(loadData && loadData.endDate));
   const [location, setLocation] = useState();
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
+
   const [showForm, setShowForm] = useState(false);  
+  
   const params = useParams();
   const title = loadData && loadData.name ? 'Edit Resource' : 'New Resource';
   console.log('state', loadData)
@@ -33,6 +39,7 @@ export default function NewResource(props) {
       data.developerRoles.push({ developerRolesValue: 'N/A', developerRoleName: 'N/A' })
       locationOptions = data.locations.map(item => <option key={item.locationValue} value={item.locationValue}>{item.locationName}</option>);
       roleOptions = data.developerRoles.map(item => <option key={item.developerRolesValue} value={item.developerRolesValue}>{item.developerRoleName}</option>);
+      
       if (loadData) {
         setLocation(loadData.location);
         setRole(loadData.role);
