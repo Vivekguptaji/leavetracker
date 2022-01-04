@@ -81,3 +81,8 @@ select >option {
   margin-top: 30px;
   cursor: pointer;
 }
+.newUserButton:disabled{
+  background-color: #555;
+  cursor: not-allowed;
+  color: #fff;
+}

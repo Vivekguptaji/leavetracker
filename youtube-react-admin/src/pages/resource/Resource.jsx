@@ -19,9 +19,7 @@ export default function Resource(props) {
 
   const [name, setName] = useState(loadData && loadData.name);
   const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState(
-    new Date(loadData && loadData.endDate)
-  );
+  const [endDate, setEndDate] = useState();
   const [location, setLocation] = useState();
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
@@ -55,11 +53,11 @@ export default function Resource(props) {
         setRole(loadData.role);
         setStartDate(
           loadData.startDate &&
-            new Date(loadData.startDate).toISOString().substr(0, 10)
+          new Date(loadData.startDate).toISOString().substr(0, 10)
         );
         setEndDate(
           loadData.endDate &&
-            new Date(loadData.endDate).toISOString().substr(0, 10)
+          new Date(loadData.endDate).toISOString().substr(0, 10)
         );
       }
       setShowForm(true);
@@ -110,7 +108,7 @@ export default function Resource(props) {
           });
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const clearState = () => {
@@ -126,7 +124,9 @@ export default function Resource(props) {
         <Spinner animation="grow" />
       </div>
     );
-  }
+  } 
+  let btnDisable = name && startDate && endDate;
+  btnDisable = !btnDisable ? true : false;
   return (
     <div className="newUser">
       <h1 className="newUserTitle">{title}</h1>
@@ -181,7 +181,7 @@ export default function Resource(props) {
         <button
           className="newUserButton"
           type="submit"
-          disabled={!name || !startDate || !endDate}
+          disabled={btnDisable}
         >
           Submit
         </button>
