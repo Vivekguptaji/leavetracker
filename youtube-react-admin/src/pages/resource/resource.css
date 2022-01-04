@@ -63,6 +63,12 @@ select >option {
     margin-top: 30px;
     cursor: pointer;
 }
+.newUserButton:disabled{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .cancelButton{
   width: 100px;
   border: none;

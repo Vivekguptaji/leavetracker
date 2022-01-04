@@ -34,7 +34,7 @@ export default function Resource(props) {
     if (!sessionData) {
       history.push("/");
     } else {
-      let data = JSON.parse((sessionData));
+      let data = JSON.parse(sessionData);
       data.locations.push({ locationNameValue: "N/A", locationName: "N/A" });
       data.developerRoles.push({
         developerRolesValue: "N/A",
@@ -173,13 +173,10 @@ export default function Resource(props) {
         </div>
         <div className="newUserItem">
           <label>Claim Hours</label>
-          <input
-            type="number"
-            placeholder="8 | 9"
-            value={claimHrs}
-            onChange={changeClaimHrs}
-            required
-          />
+          <select value={claimHrs} onChange={changeClaimHrs}>
+            <option>8</option>
+            <option>9</option>
+          </select>
         </div>
         <button
           className="newUserButton"
