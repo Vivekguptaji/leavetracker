@@ -55,10 +55,10 @@ select >option {
 .newUserButton{
     width: 85px;
     border: none;
-    background-color: rgb(29, 104, 0);
+    background-color: rgb(53, 134, 20);
     color: white;
     padding: 7px 10px;
-    font-weight: 600;
+    font-weight: 400;
     border-radius: 10px;
     margin-top: 30px;
     cursor: pointer;
@@ -73,10 +73,10 @@ select >option {
   width: 85px;
   border: none;
   margin-left: 10px;
-  background-color: rgb(139, 32, 0);
+  background-color: rgb(179, 42, 0);
   color: white;
   padding: 7px 10px;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 10px;
   margin-top: 30px;
   cursor: pointer;
