@@ -187,8 +187,8 @@ export default function Resource(props) {
         <div className="newUserItem">
           <label>Status</label>
           <select value={status} disabled="true"> 
-            <option value="Active">Active</option>
-            <option value="Disabled">Disabled</option>
+            <option value="true">Active</option>
+            <option value="false">Disabled</option>
           </select>
         </div>
         <div className="footer">
