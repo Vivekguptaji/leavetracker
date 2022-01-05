@@ -3,12 +3,12 @@ import MaterialTable from "material-table";
 import getReportData from "../../util/utility";
 import moment from "moment";
 function ForecastReport() {
-    const [reportData, setReportData] = useState();
+    const [reportData, setReportData] = useState([]);
     const [columns, setColumns] = useState();
     useEffect(() => {
         getReportData(
             "01-01-2022",
-            moment("30-10-2022", "DD-MM-YYYY").add(1, "days")
+            moment("31-03-2022", "DD-MM-YYYY").add(1, "days")
         ).then(result => {
             let comingColumns = result.updatedColumns;
             comingColumns = comingColumns.map(item => {

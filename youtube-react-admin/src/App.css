@@ -39,3 +39,11 @@ a{
     padding-left: 149px;
     color: #000 !important;
 }
+@media (min-width: 1200px){
+    .h1, h1 {
+        font-size: 2rem !important;
+    }
+}
+tbody, td, tfoot, th, thead, tr { 
+    border: 1px solid #d8d8d8 !important;
+}
