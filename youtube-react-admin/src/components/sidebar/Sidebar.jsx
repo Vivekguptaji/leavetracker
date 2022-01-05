@@ -60,7 +60,7 @@ export default function Sidebar(props) {
             <Link to="/forecastReport" className="link">
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
-              Reports
+             Forecast Report
               </li>
               </Link>
           </ul>

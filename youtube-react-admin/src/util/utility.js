@@ -108,7 +108,8 @@ const prepareReport = (resourceList, columnList, leaves) => {
     for (let j = 0; j < columnList.length; j++) {
       let column = columnList[j];
       if (column === 'resourceName') {
-        reportObj.resrouceName = resource['name'];
+        debugger;
+        reportObj.resourceName = resource['name'];
         reportObj.resourceId = resource._id;
         reportObj.location = resource.location;
         reportObj.role = resource.role;
@@ -134,7 +135,8 @@ const generateReport = (startDate, endDate, leaves) => {
   let reportWeekends = getWeekendArray(startDate, endDate);
   let updatedColumns = getColumns(reportWeekends);
   //let updatedColumns = updateMonthName(columns);
-  updatedColumns.splice(0, 0, 'resourceName');
+  updatedColumns.splice(0, 0, 'resourceName'); 
+  debugger;
   let reportData = prepareReport(data.resources, updatedColumns, leaves);   
   console.log(updatedColumns);
   console.log(reportData);
