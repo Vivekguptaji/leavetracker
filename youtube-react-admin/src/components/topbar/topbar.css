@@ -27,11 +27,9 @@
   margin: 6px 0;
   transition: 0.4s;
 }
-.logo {
-  font-weight: bold;
+.logo { 
   font-size: 20px;
-  color: #fff;
-  cursor: pointer;
+  color: #fff; 
    
 }
 .span{

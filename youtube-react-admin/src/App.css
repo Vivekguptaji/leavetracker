@@ -22,3 +22,11 @@ a{
     text-decoration: none !important;
     color: #000 !important;
 }
+.footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 13px; 
+    display: flex;
+    justify-content: center;
+} 

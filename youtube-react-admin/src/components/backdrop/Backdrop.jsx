@@ -1,8 +1,7 @@
 import React from 'react'
 import './Backdrop.css'
 export default class Backdrop extends React.Component {
-    render() {
-        debugger;
+    render() { 
     return(
       <div
         className="backdrop"

@@ -11,7 +11,7 @@ function EventCalendar() {
     axios.get('https://anftracker.herokuapp.com/getLeaves')
       .then(res => {
         let leaveData = res.data.map(item => {
-          let color = item.leaveType === 'PL' ? ' #ff9900' : item.leaveType === 'CL' ? '#00ccff' : '#009933';
+          let color = item.leaveType === 'PL' ? ' #6783ad' : item.leaveType === 'CL' ? '#91550b' : '#009933';
           item.title = item.name + '(' + item.leaveType + ')';
           item.start = item.startDate;
           item.end = item.endDate;

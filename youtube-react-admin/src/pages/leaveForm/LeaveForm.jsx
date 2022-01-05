@@ -126,8 +126,9 @@ export default function LeaveForm(props) {
         <select onChange={changeSetleaveType} value={leaveType}>
           {leaveTypeOptions}
         </select>
-      </div>
-      <button className="newUserButton" type="submit">
+        </div>
+        <div className="footer">
+        <button className="newUserButton" type="submit">
         Submit
       </button>
       <button
@@ -139,6 +140,8 @@ export default function LeaveForm(props) {
       >
         Cancel
       </button>
+        </div>
+      
     </form>
   </div>
   );

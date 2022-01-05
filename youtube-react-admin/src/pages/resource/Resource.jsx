@@ -182,6 +182,7 @@ export default function Resource(props) {
             <option value="9">9</option>
           </select>
         </div>
+        <div className="footer">
         <button
           className="newUserButton"
           type="submit"
@@ -198,6 +199,8 @@ export default function Resource(props) {
         >
           Cancel
         </button>
+        </div>
+        
       </form>
     </div>
   );
