@@ -25,6 +25,7 @@ export default function Resource(props) {
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
   const [showForm, setShowForm] = useState(false);
+  const [status, setStatus] = useState();
   const params = useParams();
   const title = params ? "Edit Resource" : "New Resource";
   console.log("state", loadData);
@@ -51,9 +52,10 @@ export default function Resource(props) {
           {item.developerRoleName}
         </option>
       ));
-      if (loadData) {
+      if (loadData) { 
         setLocation(loadData.location);
         setRole(loadData.role);
+        setStatus(loadData.isActive)
         setStartDate(
           loadData.startDate &&
           new Date(loadData.startDate).toISOString().substr(0, 10)
@@ -180,6 +182,13 @@ export default function Resource(props) {
           <option value="0"></option>
             <option value="8">8</option>
             <option value="9">9</option>
+          </select>
+        </div>
+        <div className="newUserItem">
+          <label>Status</label>
+          <select value={status} disabled="true"> 
+            <option value="Active">Active</option>
+            <option value="Disabled">Disabled</option>
           </select>
         </div>
         <div className="footer">
