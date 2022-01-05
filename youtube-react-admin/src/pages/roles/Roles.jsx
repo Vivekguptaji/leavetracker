@@ -4,7 +4,8 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 import MaterialTable from "material-table";
 import { Link, useHistory  } from "react-router-dom";
-
+import { toast } from "react-toastify";
+toast.configure();
 export default function Roles() {
   const url = `${config.apiURL}/getDeveloperRoles`;
   const history = useHistory();
@@ -18,9 +19,13 @@ export default function Roles() {
     debugger;
   }
   const callrolesData = (data) => {
-    history.push({
-      pathname: `/roles/${data._id}`,
-      state: data
+    // history.push({
+    //   pathname: `/roles/${data._id}`,
+    //   state: data
+    // });
+    toast.success("Feature not implemented yet!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
     });
   };
   return (
@@ -28,7 +33,7 @@ export default function Roles() {
       <div className="userTitleContainer">
         <h1 className="userTitle">Roles List</h1>
         <Link to="/roles">
-          <button className="userAddButton"> Create New</button>
+          <button className="userAddButton" onClick={callrolesData}>Create Role</button>
         </Link>
       </div>
       <br />

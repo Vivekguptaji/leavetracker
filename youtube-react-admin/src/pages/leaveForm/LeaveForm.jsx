@@ -19,7 +19,7 @@ export default function LeaveForm(props) {
 
   const [resourceId, setResourceId] = useState(loadData && loadData.name);
   const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState(new Date(loadData && loadData.endDate));
+  const [endDate, setEndDate] = useState();
   const [leaveType, setLeaveType] = useState();
 
   const [showForm, setShowForm] = useState(false);
@@ -98,6 +98,8 @@ export default function LeaveForm(props) {
     setEndDate("");
     setLeaveType("");
   };
+  let btnDisable = resourceId && resourceId !== '0' && startDate && endDate && leaveType && leaveType !== '0';
+  btnDisable = !btnDisable ? true : false; 
   if (!showForm) {
     return <div className="newUser loaderClass">
       <Spinner animation="grow" />
@@ -108,27 +110,27 @@ export default function LeaveForm(props) {
     <h1 className="newUserTitle">{title}</h1>
     <form className="newUserForm" onSubmit={onSubmitRequest}>
       <div className="newUserItem">
-        <label>Full Name</label>
+        <label className="required">Full Name</label>
            <select onChange={changeResource} value={resourceId}>
           {resourceOptions}
         </select>
       </div>
       <div className="newUserItem">
-        <label>Start Date</label>
+        <label className="required">Start Date</label>
         <input type="date" value={startDate} onChange={changeStartDate} />
       </div>
       <div className="newUserItem">
-        <label>End Date</label>
+        <label className="required">End Date</label>
         <input type="date" value={endDate} onChange={changeEndDate} />
       </div>
       <div className="newUserItem">
-        <label>Leave Type</label>
+        <label className="required">Leave Type</label>
         <select onChange={changeSetleaveType} value={leaveType}>
           {leaveTypeOptions}
         </select>
         </div>
         <div className="footer">
-        <button className="newUserButton" type="submit">
+          <button className="newUserButton" type="submit" disabled={btnDisable}>
         Submit
       </button>
       <button

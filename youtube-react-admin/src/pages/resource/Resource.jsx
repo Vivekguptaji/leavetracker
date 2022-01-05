@@ -4,7 +4,7 @@ import { config } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 import { getSortOrder } from "../../util/utility";
 // const Cryptr = require("cryptr");
@@ -135,7 +135,7 @@ export default function Resource(props) {
       <h1 className="newUserTitle">{title}</h1>
       <form className="newUserForm" onSubmit={onSubmitRequest}>
         <div className="newUserItem">
-          <label>Full Name</label>
+          <label className="required">Full Name</label>
           <input
             type="text"
             placeholder="John Smith"
@@ -145,7 +145,7 @@ export default function Resource(props) {
           />
         </div>
         <div className="newUserItem">
-          <label>Start Date</label>
+          <label className="required">Start Date</label>
           <input
             type="date"
             value={startDate}
@@ -163,19 +163,19 @@ export default function Resource(props) {
           />
         </div>
         <div className="newUserItem">
-          <label>Location</label>
+          <label className="required">Location</label>
           <select onChange={changeSetLocation} value={location}>
             {locationOptions}
           </select>
         </div>
         <div className="newUserItem">
-          <label>Role</label>
+          <label className="required">Role</label>
           <select onChange={changeSetRole} value={role}>
             {roleOptions}
           </select>
         </div>
         <div className="newUserItem">
-          <label>Claim Hours</label>
+          <label className="required">Claim Hours</label>
           <select value={claimHrs} onChange={changeClaimHrs}>
           <option value="0"></option>
             <option value="8">8</option>
