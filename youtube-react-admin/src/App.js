@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import Resource from "./pages/resource/Resource";
+import Resource from "./pages/Resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
 import LeaveForm from "./pages/leaveForm/LeaveForm";
 import EventCalendar from './pages/Calendar/EventCalendar';
@@ -16,7 +16,8 @@ import Locations from "./pages/locations/Locations";
 import TypesLeave from "./pages/typesLeave/TypesLeave";
 import { useState } from "react";
 import Backdrop from "./components/backdrop/Backdrop";
-import ForecastReport from "./pages/forecastReport/ForecastReport";
+import ForecastReport from "./pages/forecastReport/ForecastReport"; 
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);

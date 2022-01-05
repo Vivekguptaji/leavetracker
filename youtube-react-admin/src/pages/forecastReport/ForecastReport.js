@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"; 
 import MaterialTable from "material-table";
 import getReportData from "../../util/utility";
-import moment from "moment";
+import moment from "moment"; 
+import DatePicker from "react-datepicker";
+
 const columnsTitle = {
     resourceName: 'Resource',
     startDate: 'Start Date',
@@ -11,6 +13,8 @@ const columnsTitle = {
 function ForecastReport() {
     const [reportData, setReportData] = useState([]);
     const [columns, setColumns] = useState();
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     useEffect(() => {
         getReportData(
             "01-01-2022",
@@ -27,7 +31,9 @@ function ForecastReport() {
     return (
         <div class="userList">
             <div className="userTitleContainer">
-                <h1 className="userTitle">Forecast</h1>
+                <h1 className="userTitle">Forecast</h1> 
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} ></DatePicker>
+                <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} ></DatePicker>
             </div> 
             <MaterialTable
                 title="Forecast Report"
