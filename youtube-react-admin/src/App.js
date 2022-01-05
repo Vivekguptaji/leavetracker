@@ -14,13 +14,24 @@ import HolidayList from "./pages/holidayList/HolidayList";
 import Roles from "./pages/roles/Roles";
 import Locations from "./pages/locations/Locations";
 import TypesLeave from "./pages/typesLeave/TypesLeave";
+import { useState } from "react";
+import Backdrop from "./components/backdrop/Backdrop";
 
 function App() {
+  const [showMenu, setShowMenu] = useState(false);
+  const menuClickHandler = () => {
+    setShowMenu(!showMenu);
+  }
+  let backdrop;
+  if(showMenu){
+    backdrop = <Backdrop showMenuHandler={ menuClickHandler}/>;
+   }
   return (
     <Router>
-      <Topbar />
+      <Topbar showMenuHandler={ menuClickHandler} />
       <div className="container">
-        <Sidebar />
+        <Sidebar show={showMenu}  showMenuHandler={ menuClickHandler} />
+        { backdrop}
         <Switch>
           <Route exact path="/">
             <Home />

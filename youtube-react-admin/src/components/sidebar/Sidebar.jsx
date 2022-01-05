@@ -16,9 +16,13 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+  let drawerClasses = 'sidebar side-drawer'
+  if (props.show) {
+    drawerClasses = 'sidebar side-drawer open'
+  }
   return (
-    <div className="sidebar">
+    <div className={drawerClasses} onClick={props.showMenuHandler}>
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
