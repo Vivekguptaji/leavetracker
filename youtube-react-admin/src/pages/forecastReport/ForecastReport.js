@@ -22,9 +22,7 @@ function ForecastReport() {
         <div class="userList">
             <div className="userTitleContainer">
                 <h1 className="userTitle">Forecast</h1>
-            </div>
-            <br />
-  
+            </div> 
             <MaterialTable
                 title="Forecast Report"
                 columns={columns}
