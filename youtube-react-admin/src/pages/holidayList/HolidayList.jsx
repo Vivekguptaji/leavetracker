@@ -57,9 +57,7 @@ export default function HolidayList() {
         options={{
           sorting: true,
           actionsColumnIndex: -1,
-          grouping: true,
-          pageSize:10,
-          pageSizeOptions:[10,20,30]
+          grouping: true 
         }}
       />
     </div>

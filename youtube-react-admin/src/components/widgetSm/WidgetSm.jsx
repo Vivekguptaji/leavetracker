@@ -28,12 +28,12 @@ export default function WidgetSm(props) {
             >
               <div className="card">
                 <ul className="cardul">
-                  <li> NAME: {link.name} </li>
-                  <li> ROLE: {link.role}</li>
-                  <li> LOCATION:{link.location}</li>
-                  <li> START DATE: {link.startDate}</li>
-                  <li> END DATE: {link.endDate}</li>
-                  <li> CLAIM HRS:{link.claimHrs}</li>
+                  <li> Name: {link.name} </li>
+                  <li> Role: {link.role}</li>
+                  <li> Location:{link.location}</li>
+                  <li> Start Date: {link.startDate}</li>
+                  <li> End Date: {link.endDate}</li>
+                  <li> Claim Hrs:{link.claimHrs}</li>
                 </ul>
               </div>
             </Popup>

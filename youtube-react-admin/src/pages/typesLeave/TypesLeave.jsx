@@ -40,10 +40,9 @@ export default function TypesLeave() {
         ]}
         data={typesLeaveData}
         options={{
-          sorting: true,
+          sorting: true, 
           actionsColumnIndex: -1,
-          pageSize:10,
-          pageSizeOptions:[10,20,30]
+          grouping: true 
         }}
       />
     </div>

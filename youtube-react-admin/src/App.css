@@ -6,10 +6,19 @@
 
 .link{
     text-decoration: none;
-    color: inherit;
+    color: #fff !important;
 }
 .loaderClass{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+    padding: 0px !important;
+    margin: 0.5px 0px 0px 0px !important;
+    max-width: 99% !important;
+}
+a{
+    text-decoration: none !important;
+    color: #000 !important;
 }

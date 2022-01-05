@@ -41,9 +41,7 @@ export default function Locations() {
           data={locationsData}
         options={{
           sorting: true,
-          actionsColumnIndex: -1,
-          pageSize:10,
-          pageSizeOptions:[10,20,30]
+          actionsColumnIndex: -1 
         }}
       />
     </div>
