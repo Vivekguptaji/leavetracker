@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import getReportData from "../../util/utility";
 import moment from "moment";
+const columnsTitle = {
+    resourceName: 'Resource',
+    startDate: 'Start Date',
+    endDate: 'End Date',
+    location:'Location'
+}
 function ForecastReport() {
     const [reportData, setReportData] = useState([]);
     const [columns, setColumns] = useState();
@@ -12,7 +18,7 @@ function ForecastReport() {
         ).then(result => {
             let comingColumns = result.updatedColumns;
             comingColumns = comingColumns.map(item => {
-                return { title: item === 'resourceName' ? 'Resource' : item, item, field: item };
+                return { title:  columnsTitle[item] ? columnsTitle[item]: item, item, field: item };
             });
             setColumns(comingColumns);
             setReportData(result.reportData);
