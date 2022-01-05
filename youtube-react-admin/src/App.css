@@ -34,3 +34,8 @@ a{
     content: '*';
     color: red;
 }
+.MTableToolbar-actions-8{
+    position: absolute;
+    padding-left: 149px;
+    color: #000 !important;
+}
