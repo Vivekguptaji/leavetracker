@@ -44,8 +44,8 @@ export default function LeaveForm(props) {
       if (loadData) {
         setLeaveType(loadData.leaveType);
         setResourceId(loadData.resourceId);
-        setStartDate(loadData.startDate && new Date(loadData.startDate).toISOString().substr(0, 10));
-        setEndDate(loadData.endDate && new Date(loadData.endDate).toISOString().substr(0, 10))
+        setStartDate(loadData.startDate && moment(new Date(loadData.startDate)).format('YYYY-MM-DD'));
+        setEndDate(loadData.endDate && moment(new Date(loadData.endDate)).format('YYYY-MM-DD'));
       }
       setShowForm(true);
     }
