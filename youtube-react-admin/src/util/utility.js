@@ -135,13 +135,12 @@ const generateReport = (startDate, endDate, leaves) => {
   let updatedColumns = getColumns(reportWeekends);
   //let updatedColumns = updateMonthName(columns);
   updatedColumns.splice(0, 0, 'resourceName');
-  let reportData = prepareReport(data.resources, updatedColumns ,leaves); 
-  console.clear();
+  let reportData = prepareReport(data.resources, updatedColumns, leaves);   
   console.log(updatedColumns);
   console.log(reportData);
   return reportData;
  }
-const getReportData = (startDate, endDate) => {
+const getReportData = (startDate, endDate) => { 
   const url = `${config.apiURL}/getLeaves`;
   return axios.get(url).then((json) => generateReport(startDate, endDate, json.data));
 }
@@ -156,4 +155,4 @@ export const getSortOrder = (prop) => {
       return 0;    
   }    
 }    
-export default {getReportData};
+export default getReportData;

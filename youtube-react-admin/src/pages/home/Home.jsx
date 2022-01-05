@@ -11,13 +11,16 @@ import getReportData from "../../util/utility";
 import moment from "moment";
 // const Cryptr = require('cryptr');
 // const cryptr = new Cryptr('myTotalySecretKey');
-
+getReportData(
+  "01-01-2022",
+  moment("31-03-2022", "DD-MM-YYYY").add(1, "days")
+);
 export default function Home() {
   // const sessionData = sessionStorage.getItem("user");
   // let data = JSON.parse(sessionData);
    
-  const [reportData, setReportData] = useState(); 
-  useEffect(() => { 
+  const [reportData, setReportData] = useState();
+  useEffect(() => {
     axios
       .get(`${config.apiURL}/getDashobardData`)
       .then((result) => {
@@ -26,16 +29,12 @@ export default function Home() {
           sessionStorage.clear();
           sessionStorage.setItem("user", JSON.stringify(result.data));
           setReportData(result.data);
-          getReportData(
-            "01-01-2022",
-            moment("31-03-2022", "DD-MM-YYYY").add(1, "days")
-          );
         }
       })
       .catch((err) => {
         console.log("err", err);
       });
-  });
+  },[]);
   return (
     <div className="home">
       <FeaturedInfo />
@@ -47,10 +46,10 @@ export default function Home() {
       />
       <div className="homeWidgets">
         {
-          reportData && <WidgetSm data={ reportData} /> 
+          reportData && <WidgetSm data={reportData} />
         }
-           {
-          reportData && <WidgetLg data={ reportData} /> 
+        {
+          reportData && <WidgetLg data={reportData} />
         }
         
       </div>
