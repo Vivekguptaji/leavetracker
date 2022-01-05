@@ -4,8 +4,11 @@ import { config } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
+import moment from "moment";
 
+// import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from "react-datepicker";
 import { getSortOrder } from "../../util/utility";
 // const Cryptr = require("cryptr");
 // const cryptr = new Cryptr("myTotalySecretKey");
@@ -40,8 +43,8 @@ export default function Resource(props) {
         developerRolesValue: "0",
         developerRoleName: "",
       });
-      data.locations.sort(getSortOrder('locationName'));
-      data.developerRoles.sort(getSortOrder('developerRoleName')); 
+      data.locations.sort(getSortOrder("locationName"));
+      data.developerRoles.sort(getSortOrder("developerRoleName"));
       locationOptions = data.locations.map((item) => (
         <option key={item.locationValue} value={item.locationValue}>
           {item.locationName}
@@ -52,17 +55,17 @@ export default function Resource(props) {
           {item.developerRoleName}
         </option>
       ));
-      if (loadData) { 
+      if (loadData) {
         setLocation(loadData.location);
         setRole(loadData.role);
-        setStatus(loadData.isActive)
+        setStatus(loadData.isActive);
         setStartDate(
           loadData.startDate &&
-          new Date(loadData.startDate).toISOString().substr(0, 10)
+            new Date(loadData.startDate).toISOString().substr(0, 10)
         );
         setEndDate(
           loadData.endDate &&
-          new Date(loadData.endDate).toISOString().substr(0, 10)
+            new Date(loadData.endDate).toISOString().substr(0, 10)
         );
       }
       setShowForm(true);
@@ -113,7 +116,7 @@ export default function Resource(props) {
           });
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const clearState = () => {
@@ -129,8 +132,17 @@ export default function Resource(props) {
         <Spinner animation="grow" />
       </div>
     );
-  } 
-  let btnDisable = name && startDate && endDate;
+  }
+  let today = new Date().toISOString().split("T")[0];
+  let btnDisable =
+    name &&
+    startDate &&
+    location &&
+    location != 0 &&
+    role &&
+    role != 0 &&
+    claimHrs &&
+    claimHrs != 0;
   btnDisable = !btnDisable ? true : false;
   return (
     <div className="newUser">
@@ -152,6 +164,7 @@ export default function Resource(props) {
             type="date"
             value={startDate}
             onChange={changeStartDate}
+            min={today}
             required
           />
         </div>
@@ -161,6 +174,7 @@ export default function Resource(props) {
             type="date"
             value={endDate}
             onChange={changeEndDate}
+            min={startDate}
             required
           />
         </div>
@@ -179,37 +193,32 @@ export default function Resource(props) {
         <div className="newUserItem">
           <label className="required">Claim Hours</label>
           <select value={claimHrs} onChange={changeClaimHrs}>
-          <option value="0"></option>
+            <option value="0"></option>
             <option value="8">8</option>
             <option value="9">9</option>
           </select>
         </div>
         <div className="newUserItem">
           <label>Status</label>
-          <select value={status} disabled="true"> 
+          <select value={status} disabled="true">
             <option value="true">Active</option>
             <option value="false">Disabled</option>
           </select>
         </div>
         <div className="footer">
-        <button
-          className="newUserButton"
-          type="submit"
-          disabled={btnDisable}
-        >
-          Submit
-        </button>
-        <button
-          className="cancelButton"
-          type="cancel"
-          onClick={() => {
-            history.push("/resourceList");
-          }}
-        >
-          Cancel
-        </button>
+          <button className="newUserButton" type="submit" disabled={btnDisable}>
+            Submit
+          </button>
+          <button
+            className="cancelButton"
+            type="cancel"
+            onClick={() => {
+              history.push("/resourceList");
+            }}
+          >
+            Cancel
+          </button>
         </div>
-        
       </form>
     </div>
   );
