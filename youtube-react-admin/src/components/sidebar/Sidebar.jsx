@@ -57,10 +57,12 @@ export default function Sidebar(props) {
                 Calendar
               </li>
             </Link>
+            <Link to="/forecastReport" className="link">
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports
-            </li>
+              </li>
+              </Link>
           </ul>
         </div>
         <div className="sidebarMenu">

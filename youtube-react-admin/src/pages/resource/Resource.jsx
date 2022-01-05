@@ -28,7 +28,7 @@ export default function Resource(props) {
   const [status, setStatus] = useState();
   const params = useParams();
   const title = params ? "Edit Resource" : "New Resource";
-  console.log("state", loadData);
+  //console.log("state", loadData);
   useEffect(() => {
     const sessionData = sessionStorage.getItem("user");
     if (!sessionData) {

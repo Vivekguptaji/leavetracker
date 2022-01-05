@@ -7,14 +7,10 @@ import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { config } from "../../util/config";
-import getReportData from "../../util/utility";
-import moment from "moment";
+
 // const Cryptr = require('cryptr');
 // const cryptr = new Cryptr('myTotalySecretKey');
-getReportData(
-  "01-01-2022",
-  moment("31-03-2022", "DD-MM-YYYY").add(1, "days")
-);
+
 export default function Home() {
   // const sessionData = sessionStorage.getItem("user");
   // let data = JSON.parse(sessionData);
@@ -29,6 +25,7 @@ export default function Home() {
           sessionStorage.clear();
           sessionStorage.setItem("user", JSON.stringify(result.data));
           setReportData(result.data);
+         
         }
       })
       .catch((err) => {

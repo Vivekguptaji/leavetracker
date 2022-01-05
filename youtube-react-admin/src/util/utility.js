@@ -138,7 +138,10 @@ const generateReport = (startDate, endDate, leaves) => {
   let reportData = prepareReport(data.resources, updatedColumns, leaves);   
   console.log(updatedColumns);
   console.log(reportData);
-  return reportData;
+  return {
+    reportData,
+    updatedColumns
+  };
  }
 const getReportData = (startDate, endDate) => { 
   const url = `${config.apiURL}/getLeaves`;

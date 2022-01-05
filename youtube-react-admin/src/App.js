@@ -16,6 +16,7 @@ import Locations from "./pages/locations/Locations";
 import TypesLeave from "./pages/typesLeave/TypesLeave";
 import { useState } from "react";
 import Backdrop from "./components/backdrop/Backdrop";
+import ForecastReport from "./pages/forecastReport/ForecastReport";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -59,6 +60,9 @@ function App() {
           </Route>
           <Route path="/roles">
             <Roles />
+          </Route>
+          <Route path="/forecastReport">
+            <ForecastReport></ForecastReport>
           </Route>
           <Route path="/locations">
             <Locations />
