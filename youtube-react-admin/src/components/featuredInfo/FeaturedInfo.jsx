@@ -1,6 +1,12 @@
 import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-
+import {
+  faUsers,
+  faLaptop,
+  faPhone,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
+import { library, FontAwesomeIcon } from "@fortawesome/fontawesome-svg-core";
 export default function FeaturedInfo() {
   return (
     <div className="featured">
@@ -18,8 +24,7 @@ export default function FeaturedInfo() {
       </div>
       <div className="featuredItem">
 
-        <div className="featuredIcons">
-          <FontAwesomeIcon icon={"home"} />
+        <div className="featuredIcons"> 
         </div>
         <div>
           <span className="featuredTitle-leave">Leave</span>
