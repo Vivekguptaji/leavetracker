@@ -17,7 +17,7 @@ function ForecastReport() {
     useEffect(() => {
         getReportData(
             "01-01-2022",
-            moment("31-12-2022", "DD-MM-YYYY").add(1, "days")
+            moment("30-10-2022", "DD-MM-YYYY").add(1, "days")
         ).then(result => {
             let comingColumns = result.updatedColumns;
             comingColumns = comingColumns.map(item => {
