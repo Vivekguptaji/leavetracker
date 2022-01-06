@@ -5,7 +5,7 @@ import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { getSortOrder } from "../../util/utility";
-
+import moment from "moment";
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr("myTotalySecretKey");
 
@@ -17,7 +17,9 @@ export default function LeaveForm(props) {
   const loadData = historyLocation.state;
 
   const [resourceId, setResourceId] = useState(loadData && loadData.name);
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState(
+    new Date().toISOString().substr(0, 10)
+  );
   const [endDate, setEndDate] = useState();
   const [leaveType, setLeaveType] = useState();
 
@@ -52,11 +54,11 @@ export default function LeaveForm(props) {
         setResourceId(loadData.resourceId);
         setStartDate(
           loadData.startDate &&
-            new Date(loadData.startDate).toISOString().substr(0, 10)
+            moment(new Date(loadData.startDate)).format("YYYY-MM-DD")
         );
         setEndDate(
           loadData.endDate &&
-            new Date(loadData.endDate).toISOString().substr(0, 10)
+            moment(new Date(loadData.endDate)).format("YYYY-MM-DD")
         );
       }
       setShowForm(true);
@@ -113,8 +115,6 @@ export default function LeaveForm(props) {
     setEndDate("");
     setLeaveType("");
   };
-  let today = new Date().toISOString().split("T")[0];
-
   let btnDisable =
     resourceId &&
     resourceId !== "0" &&
@@ -145,8 +145,8 @@ export default function LeaveForm(props) {
           <input
             type="date"
             value={startDate}
+            min={moment(new Date()).format("YYYY-MM-DD")}
             onChange={changeStartDate}
-            min={today}
           />
         </div>
         <div className="newUserItem">
@@ -154,8 +154,8 @@ export default function LeaveForm(props) {
           <input
             type="date"
             value={endDate}
+            min={moment(startDate).format("YYYY-MM-DD")}
             onChange={changeEndDate}
-            min={startDate}
           />
         </div>
         <div className="newUserItem">

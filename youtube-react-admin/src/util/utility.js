@@ -109,13 +109,20 @@ const prepareReport = (resourceList, columnList, leaves) => {
       let column = columnList[j];
       if (column === 'resourceName') {
         reportObj.resourceName = resource['name'];
-        reportObj.resourceId = resource._id;
-        reportObj.location = resource.location;
-        reportObj.role = resource.role;
+        reportObj.resourceId = resource._id; 
+        reportObj.role = resource.role; 
+        reportObj.claimHrs = resource.claimHrs; 
+      } else if (column === 'startDate') { 
         reportObj.startDate = resource.startDate;
+      }
+      else if (column === 'endDate') { 
         reportObj.endDate = resource.endDate;
-        reportObj.claimHrs = resource.claimHrs;
+      }
+      else if (column === 'isActive') { 
         reportObj.isActive = resource.isActive;
+      }
+      else if (column === 'location') { 
+        reportObj.location = resource.location;
       }
       else {
         let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];  
@@ -133,8 +140,11 @@ const generateReport = (startDate, endDate, leaves) => {
   
   let reportWeekends = getWeekendArray(startDate, endDate);
   let updatedColumns = getColumns(reportWeekends);
-  //let updatedColumns = updateMonthName(columns);
-  updatedColumns.splice(0, 0, 'resourceName');  
+  //let updatedColumns = updateMonthName(columns); 
+  updatedColumns.splice(0, 0, 'resourceName');
+  updatedColumns.splice(1, 0, 'startDate');
+  updatedColumns.splice(2, 0, 'endDate');
+  updatedColumns.splice(3, 0, 'location');
   let reportData = prepareReport(data.resources, updatedColumns, leaves);   
   console.log(updatedColumns);
   console.log(reportData);

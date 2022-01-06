@@ -47,3 +47,10 @@ a{
 tbody, td, tfoot, th, thead, tr { 
     border: 1px solid #d8d8d8 !important;
 }
+.react-datepicker-popper[data-placement^=bottom]{
+    z-index: 99;
+    padding-top: 2px !important;
+}
+.react-datepicker-wrapper{
+    padding-left: 9px !important;
+}
