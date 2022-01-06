@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import Resource from "./pages/resource/Resource";
+import Resource from "./pages/Resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
 import LeaveForm from "./pages/leaveForm/LeaveForm";
 import EventCalendar from './pages/Calendar/EventCalendar';
