@@ -7,6 +7,7 @@
 }
 
 .widgetLgTitle {
+  
   font-size: 22px;
   font-weight: 600;
 }
@@ -14,11 +15,15 @@
 .widgetLgTable{
   width: 100%;
   border-spacing: 20px;
+
 }
 
 .widgetLgTh{
+  text-align: left;
   background-color:#d3dafd;
+
 }
+
 .widgetLgUser{
   display: flex;
   align-items: center;

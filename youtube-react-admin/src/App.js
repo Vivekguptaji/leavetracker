@@ -1,3 +1,4 @@
+
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
@@ -49,7 +50,7 @@ function App() {
             {!isLogged && <Login setLoginUser={setLoginUser} putter={true} />}
             {isLogged && <Redirect to='/' />}
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             {!isLogged && <Login setLoginUser={setLoginUser} putter={true} />}
            
             {isLogged && <Home />}
