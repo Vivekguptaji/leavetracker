@@ -52,7 +52,7 @@ export default function FeaturedInfo() {
           <FontAwesomeIcon icon={"home"} />
         </div>
         <div>
-          <span className="featuredTitle">Leave</span>
+          <span className="featuredTitle-leave">Leave</span>
           <div className="featuredMoneyContainer">
             <span className="featuredMoney">2</span>
           </div>
