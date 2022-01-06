@@ -6,6 +6,7 @@
 }
 
 .widgetLgTitle {
+  
   font-size: 22px;
   font-weight: 600;
 }
@@ -13,10 +14,12 @@
 .widgetLgTable{
   width: 100%;
   border-spacing: 20px;
+
 }
 
 .widgetLgTh{
   text-align: left;
+  background-color:#b0befa;
 }
 
 .widgetLgUser{
