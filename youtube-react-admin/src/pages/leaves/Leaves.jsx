@@ -49,20 +49,24 @@ export default function LeavesList() {
       <MaterialTable
         title="Leave Summary"
         columns={[
-          { title: 'Name', field: 'name' },
+          { title: 'Name', field: 'name', cellStyle: { width: 200 } },
           {
-            title: 'From', field: 'startDate', type: 'date',width: "10%", render: rowData => {
+            title: 'From', field: 'startDate', type: 'date',cellStyle: { width: 150 }, render: rowData => {
               return moment(new Date(rowData.startDate)).format('DD MMM YYYY')
             }
           },
           {
-            title: 'To', field: 'endDate', type: 'date', width: "10%", render: rowData => {
+            title: 'To', field: 'endDate', type: 'date',cellStyle: { width: 150 }, render: rowData => {
               return moment(new Date(rowData.endDate)).format('DD MMM YYYY')
             }
           },
-          { title: '# Days', field: 'daysDiff', width: "5%" },
           {
-            title: 'Leave Type', field: 'leaveType', width: "10%" ,
+            title: '# Days', field: 'daysDiff', cellStyle: {
+              width: 10
+            }
+          },
+          {
+            title: 'Leave Type', field: 'leaveType', cellStyle: { width: 20 },
             render: rowData => {
              
               return (
@@ -89,7 +93,7 @@ export default function LeavesList() {
           headerStyle: {
             backgroundColor: 'rgb(39 37 37 / 95%)',
             color: '#fff',
-             whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap'
           },
         }}
       />
