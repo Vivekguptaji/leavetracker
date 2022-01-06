@@ -152,10 +152,10 @@ const prepareReport = (resourceList, columnList, leaves) => {
         reportObj.role = resource.role;
         reportObj.claimHrs = resource.claimHrs;
       } else if (column === 'startDate') {
-        reportObj.startDate = resource.startDate;
+        reportObj.startDate = moment(new Date(resource.startDate)).format('DD MMM YY');
       }
       else if (column === 'endDate') {
-        reportObj.endDate = resource.endDate;
+        reportObj.endDate = moment(new Date(resource.endDate)).format('DD MMM YY');
       }
       else if (column === 'isActive') {
         reportObj.isActive = resource.isActive;
