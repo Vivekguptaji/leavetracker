@@ -5,19 +5,9 @@
 
 .homeWidgets{
     display: flex;
-    flex-direction: row;
     margin: 20px;
+    flex:auto;
     width: 100%;
+    display: flex;
     justify-content: space-between;
-}
-.welcomeUser{
-    margin-left: 20px;
-    font-size: 30px;
-    color:#667eea;
-
-}
-.dashboard{
-font-size: 20px;
- color:#667eea;
-
 }
