@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import Resource from "./pages/Resource/Resource";
+import Resource from "./pages/resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
 import LeaveForm from "./pages/leaveForm/LeaveForm";
 import EventCalendar from './pages/Calendar/EventCalendar';
@@ -19,6 +19,7 @@ import Backdrop from "./components/backdrop/Backdrop";
 import ForecastReport from "./pages/forecastReport/ForecastReport"; 
 import "react-datepicker/dist/react-datepicker.css";
 import LocationChart from "./components/locationChart/LocationChart"
+import Login from "./pages/login/Login";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -74,6 +75,9 @@ function App() {
           </Route>
           <Route path="/locationChart">
             <LocationChart />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
         </Switch>
       </div>
