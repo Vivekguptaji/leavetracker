@@ -97,10 +97,3 @@ tbody, td, tfoot, th, thead, tr {
     color: #fff !important;
     opacity: 1;
 }
-  input, optgroup, textarea { 
-    width: 100%; 
-    height: 20px;
-    padding: 17px;
-    border: 1px solid gray;
-    border-radius: 5px;
-} 

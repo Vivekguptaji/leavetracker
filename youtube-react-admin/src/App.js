@@ -19,7 +19,6 @@ import Backdrop from "./components/backdrop/Backdrop";
 import ForecastReport from "./pages/forecastReport/ForecastReport"; 
 import "react-datepicker/dist/react-datepicker.css";
 import LocationChart from "./components/locationChart/LocationChart"
-import Login from "./pages/login/Login";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -75,9 +74,6 @@ function App() {
           </Route>
           <Route path="/locationChart">
             <LocationChart />
-          </Route>
-          <Route path="/login">
-            <Login />
           </Route>
         </Switch>
       </div>

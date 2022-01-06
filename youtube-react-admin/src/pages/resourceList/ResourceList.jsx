@@ -45,7 +45,7 @@ export default function ResourceList() {
           {
             title: 'End date', field: 'endDate', type: 'date',
             render: rowData => {
-              return moment(new Date(rowData.endDate)).format('DD MMM YYYY')
+              return moment(new Date(rowData.startDate)).format('DD MMM YYYY')
             }
           },
           { title: 'Role', field: 'role' },
@@ -72,7 +72,7 @@ export default function ResourceList() {
           actionsColumnIndex: -1,
           grouping: true,
           exportAllData: true,
-          exportButton: true,
+         exportButton: true ,
           headerStyle: {
             backgroundColor: 'rgb(39 37 37 / 95%)',
             color: '#fff',
