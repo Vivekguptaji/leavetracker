@@ -1,9 +1,9 @@
-import "./resourceList.css"; 
+import "./resourceList.css";
 import React, { useState, useEffect } from "react";
-import axios from "axios"; 
-import { config } from "../../util/config"; 
+import axios from "axios";
+import { config } from "../../util/config";
 import MaterialTable from "material-table";
-import { Link, useHistory  } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 
 export default function ResourceList() {
@@ -15,11 +15,11 @@ export default function ResourceList() {
   }, []);
   const handleClickRow = (event, data) => {
     debugger;
-  }
+  };
   const callResourceData = (data) => {
     history.push({
       pathname: `/resource/${data._id}`,
-      state: data
+      state: data,
     });
   };
   return (
@@ -35,28 +35,37 @@ export default function ResourceList() {
       <MaterialTable
         title="Resource List"
         columns={[
-          { title: 'Name', field: 'name' },
-          { title: 'Location', field: 'location' },
+          { title: "Name", field: "name" },
+          { title: "Location", field: "location" },
           {
-            title: 'Start date', field: 'startDate', type: 'date', render: rowData => {
-              return moment(new Date(rowData.startDate)).format('DD MMM YYYY')
-            }
+            title: "Start date",
+            field: "startDate",
+            type: "date",
+            render: (rowData) => {
+              return moment(new Date(rowData.startDate)).format("DD MMM YYYY");
+            },
           },
           {
-            title: 'End date', field: 'endDate', type: 'date',
-            render: rowData => {
-              return moment(new Date(rowData.endDate)).format('DD MMM YYYY')
-            }
+            title: "End date",
+            field: "endDate",
+            type: "date",
+            render: (rowData) => {
+              return moment(new Date(rowData.endDate)).format("DD MMM YYYY");
+            },
           },
-          { title: 'Role', field: 'role' },
-          { title: 'Hrs', field: 'claimHrs', cellStyle: { width: 10 } },
+          { title: "Role", field: "role" },
+          { title: "Hrs", field: "claimHrs", cellStyle: { width: 10 } },
           {
-            title: 'Status', field: 'isActive',
-            render: rowData => {
+            title: "Status",
+            field: "isActive",
+            render: (rowData) => {
               return (
-                <div class={rowData.isActive ? 'isActive' : 'isDisabled'}><span>{rowData.isActive ? "Active" : "Disabled"}</span></div>)
-            }
-          }
+                <div class={rowData.isActive ? "isActive" : "isDisabled"}>
+                  <span>{rowData.isActive ? "Active" : "Disabled"}</span>
+                </div>
+              );
+            },
+          },
         ]}
         data={resourceData}
         actions={[
@@ -64,8 +73,10 @@ export default function ResourceList() {
             icon: "edit",
             iconProps: { fontSize: "small", color: "primary" },
             tooltip: "Edit Resource",
-            onClick: (event, rowData) => { callResourceData(rowData) }
-          }
+            onClick: (event, rowData) => {
+              callResourceData(rowData);
+            },
+          },
         ]}
         options={{
           sorting: true,
@@ -74,9 +85,9 @@ export default function ResourceList() {
           exportAllData: true,
           exportButton: true,
           headerStyle: {
-            backgroundColor: 'rgb(39 37 37 / 95%)',
-            color: '#fff',
-            whiteSpace: 'nowrap'
+            backgroundColor: "rgb(39 37 37 / 95%)",
+            color: "#fff",
+            whiteSpace: "nowrap",
           },
         }}
       />
