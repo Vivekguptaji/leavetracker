@@ -113,6 +113,31 @@ const getHolidayCount = (resource, endDate) => {
   }
   return count;
 }
+const checkDateExist = (startDate, endDate, workingWeek) => {
+  let isExist = false; 
+  if (startDate <= new Date(endDate) && new Date(endDate) <= new Date(workingWeek)) {
+    isExist = true;
+  } 
+  return isExist;
+}
+const getWorkingDays = (workingWeek, reportObj) => {
+  let workingdays = 5;
+  let endDate = reportObj['endDate'];  
+  if (endDate && new Date(endDate) > new Date(workingWeek)) {
+    let startDate = new Date(new Date(new Date(workingWeek).setDate(new Date(workingWeek).getDate() - 4)).setHours(0, 0, 0, 0));
+    workingdays = getDaysDifference(startDate, workingWeek)['difference'];
+    }   
+  else { 
+    let startDate = new Date(new Date(new Date(workingWeek).setDate(new Date(workingWeek).getDate() - 4)).setHours(0, 0, 0, 0));
+    if (checkDateExist(startDate, endDate, workingWeek)) { 
+      workingdays = getDaysDifference(startDate, endDate)['difference'];
+    }
+    else { 
+      workingdays = 0; 
+    } 
+  }
+  return workingdays; 
+};
 const prepareReport = (resourceList, columnList, leaves) => {
   let reportData = [];
   let currentMonthHrs = 0;
@@ -123,32 +148,33 @@ const prepareReport = (resourceList, columnList, leaves) => {
       let column = columnList[j];
       if (column === 'resourceName') {
         reportObj.resourceName = resource['name'];
-        reportObj.resourceId = resource._id; 
-        reportObj.role = resource.role; 
-        reportObj.claimHrs = resource.claimHrs; 
-      } else if (column === 'startDate') { 
-        reportObj.startDate = resource.startDate;
+        reportObj.resourceId = resource._id;
+        reportObj.role = resource.role;
+        reportObj.claimHrs = resource.claimHrs;
+      } else if (column === 'startDate') {
+        reportObj.startDate = moment(new Date(resource.startDate)).format('DD MMM YY');
       }
-      else if (column === 'endDate') { 
-        reportObj.endDate = resource.endDate;
+      else if (column === 'endDate') {
+        reportObj.endDate = moment(new Date(resource.endDate)).format('DD MMM YY');
       }
-      else if (column === 'isActive') { 
+      else if (column === 'isActive') {
         reportObj.isActive = resource.isActive;
       }
-      else if (column === 'location') { 
+      else if (column === 'location') {
         reportObj.location = resource.location;
       }
       else {
         if (monthNameObj[column]) {
           reportObj[column] = currentMonthHrs;
           currentMonthHrs = 0;
-         }
+        }
         else {
           let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];
           let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedLeaves);
           //console.log(`Applied ${leaveCount} b/w ${column}`)
           let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column);
-          let claimHrs = 5 * resource['claimHrs'] - leaveCount - holidayCount;
+          let workingHrs = getWorkingDays(column, reportObj) * resource['claimHrs'];
+          let claimHrs = workingHrs === 0 ? 0 : workingHrs - leaveCount - holidayCount;
           reportObj[column] = claimHrs;
           currentMonthHrs = currentMonthHrs + claimHrs;
         }
