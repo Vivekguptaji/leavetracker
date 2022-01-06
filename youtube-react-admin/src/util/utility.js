@@ -1,9 +1,8 @@
  
 import moment from "moment";
 import axios from "axios"; 
-import { config } from "./config"; 
-const sessionData = sessionStorage.getItem('user');
-let data = JSON.parse(sessionData);
+import { config } from "./config";  
+let data;
 const monthNameObj = {
   January: 'January',
   February: 'February',
@@ -159,8 +158,9 @@ const prepareReport = (resourceList, columnList, leaves) => {
   }
   return reportData;
 }
-const generateReport = (startDate, endDate, leaves) => {
-  
+const generateReport = (startDate, endDate, responseData) => { 
+  data = responseData;
+  let leaves = data.leaves;
   let reportWeekends = getWeekendArray(startDate, endDate);
   let updatedColumns = getColumns(reportWeekends);
    updatedColumns = updateMonthName(updatedColumns); 
@@ -177,7 +177,7 @@ const generateReport = (startDate, endDate, leaves) => {
   };
  }
 const getReportData = (startDate, endDate) => { 
-  const url = `${config.apiURL}/getLeaves`;
+  const url = `${config.apiURL}/getReportCollection`;
   return axios.get(url).then((json) => generateReport(startDate, endDate, json.data));
 }
     
@@ -191,4 +191,16 @@ export const getSortOrder = (prop) => {
       return 0;    
   }    
 }    
+export const getDaysDifference = (startDate, endDate) => {
+  const dateArray = [];
+  let currentDate = new Date(startDate);
+  while (currentDate <= new Date(endDate)) {
+    dateArray.push(new Date(currentDate));
+    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  }
+  return {
+    dateArray,
+    difference: dateArray.length
+  };
+};
 export default getReportData;

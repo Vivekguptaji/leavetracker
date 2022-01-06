@@ -45,7 +45,7 @@ a{
     }
 }
 tbody, td, tfoot, th, thead, tr { 
-    border: 1px solid #d8d8d8 !important;
+    border: .5px solid #d8d8d8 !important;
 }
 .react-datepicker-popper[data-placement^=bottom]{
     z-index: 99;
@@ -53,4 +53,47 @@ tbody, td, tfoot, th, thead, tr {
 }
 .react-datepicker-wrapper{
     padding-left: 9px !important;
+}
+
+.pl-leave{
+    border-radius: 5px;
+    border: 1px solid #6783ad;
+    text-align: center;
+    padding: 2px;  
+    width: 115px;
+}
+.cl-leave{
+    border-radius: 5px;
+    border: 1px solid #91550b;
+    text-align: center;
+    padding: 2px;  
+    width: 115px;
+}
+.sick-leave{
+    border-radius: 5px;
+    border: 1px solid #009933;
+    text-align: center;
+    padding: 2px;
+    width: 115px;  
+}
+.isActive{
+    border-radius: 5px;
+    border: 1px solid #009933;
+    text-align: center;
+    padding: 2px;
+    width: 115px;  
+}
+.isDisabled{
+    border-radius: 5px;
+    border: 1px solid red;
+    text-align: center;
+    padding: 2px;
+    width: 115px;  
+}
+.MuiTableSortLabel-root.MuiTableSortLabel-active {
+    color: #fff !important;
+}
+.MuiTableSortLabel-root.MuiTableSortLabel-active.MuiTableSortLabel-root.MuiTableSortLabel-active .MuiTableSortLabel-icon {
+    color: #fff !important;
+    opacity: 1;
 }

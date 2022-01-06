@@ -47,6 +47,11 @@ function ForecastReport() {
                     actionsColumnIndex: -1,
                     grouping: false,
                     paging: false,
+                    headerStyle: {
+                        backgroundColor: 'rgb(39 37 37 / 95%)',
+                        color: '#fff',
+                         whiteSpace: 'nowrap'
+                      },
                     exportFileName: "WGM9X Weeks Forecast",
                     exportButton: {
                         csv: true,

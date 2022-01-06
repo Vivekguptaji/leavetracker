@@ -65,6 +65,11 @@ export default function Roles() {
           sorting: true,
           actionsColumnIndex: -1,
           grouping: true,
+          headerStyle: {
+            backgroundColor: 'rgb(39 37 37 / 95%)',
+            color: '#fff',
+             whiteSpace: 'nowrap'
+          },
         }}
       />
     </div>

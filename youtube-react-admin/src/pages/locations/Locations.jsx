@@ -41,7 +41,12 @@ export default function Locations() {
           data={locationsData}
         options={{
           sorting: true,
-          actionsColumnIndex: -1 
+          actionsColumnIndex: -1,
+          headerStyle: {
+            backgroundColor: 'rgb(39 37 37 / 95%)',
+            color: '#fff',
+             whiteSpace: 'nowrap'
+          },
         }}
       />
     </div>

@@ -43,8 +43,12 @@ export default function ResourceList() {
           },
           { title: 'End date', field: 'endDate', type: 'date' },
           { title: 'Role', field: 'role' },
-          { title: 'Hrs', field: 'claimHrs' },
-          { title: 'Status', field: 'isActive', render: rowData => (rowData.isActive ? "Active" : "Disabled") }
+          { title: 'Hrs', field: 'claimHrs' , width:'5%'},
+          { title: 'Status', field: 'isActive',   width:'5%',
+            render: rowData => { 
+              return (
+                <div class={rowData.isActive ? 'isActive' : 'isDisabled'}><span>{rowData.isActive ? "Active" : "Disabled"}</span></div>)
+            }}
         ]}
         data={resourceData}
         actions={[
@@ -58,7 +62,12 @@ export default function ResourceList() {
         options={{
           sorting: true,
           actionsColumnIndex: -1,
-          grouping: true
+          grouping: true,
+          headerStyle: {
+            backgroundColor: 'rgb(39 37 37 / 95%)',
+            color: '#fff',
+             whiteSpace: 'nowrap'
+          },
         }}
       />
     </div>
