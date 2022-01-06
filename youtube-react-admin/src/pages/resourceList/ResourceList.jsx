@@ -71,6 +71,8 @@ export default function ResourceList() {
           sorting: true,
           actionsColumnIndex: -1,
           grouping: true,
+          exportAllData: true,
+         exportButton: true ,
           headerStyle: {
             backgroundColor: 'rgb(39 37 37 / 95%)',
             color: '#fff',
