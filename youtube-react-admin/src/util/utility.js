@@ -3,7 +3,21 @@ import moment from "moment";
 import axios from "axios"; 
 import { config } from "./config"; 
 const sessionData = sessionStorage.getItem('user');
-  let data = JSON.parse(sessionData);
+let data = JSON.parse(sessionData);
+const monthNameObj = {
+  January: 'January',
+  February: 'February',
+  March: 'March',
+  April: 'April',
+  May: 'May',
+  June: 'June',
+  July: 'July',
+  August: 'August',
+  September: 'September',
+  October: 'October',
+  November: 'November',
+  December: 'December'
+}
   
   const getWeekendArray = (start, end) => {
     var weekendArr = new Array();
@@ -102,6 +116,7 @@ const getHolidayCount = (resource, endDate) => {
 }
 const prepareReport = (resourceList, columnList, leaves) => {
   let reportData = [];
+  let currentMonthHrs = 0;
   for (let i = 0; i < resourceList.length; i++) {
     let resource = resourceList[i];
     let reportObj = {};
@@ -125,11 +140,19 @@ const prepareReport = (resourceList, columnList, leaves) => {
         reportObj.location = resource.location;
       }
       else {
-        let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];  
-        let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedLeaves);
-        //console.log(`Applied ${leaveCount} b/w ${column}`)
-        let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column)
-        reportObj[column] = 5 * resource['claimHrs'] - leaveCount - holidayCount;
+        if (monthNameObj[column]) {
+          reportObj[column] = currentMonthHrs;
+          currentMonthHrs = 0;
+         }
+        else {
+          let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];
+          let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedLeaves);
+          //console.log(`Applied ${leaveCount} b/w ${column}`)
+          let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column);
+          let claimHrs = 5 * resource['claimHrs'] - leaveCount - holidayCount;
+          reportObj[column] = claimHrs;
+          currentMonthHrs = currentMonthHrs + claimHrs;
+        }
       }
     }
     reportData.push(reportObj);
@@ -140,7 +163,7 @@ const generateReport = (startDate, endDate, leaves) => {
   
   let reportWeekends = getWeekendArray(startDate, endDate);
   let updatedColumns = getColumns(reportWeekends);
-  //let updatedColumns = updateMonthName(columns); 
+   updatedColumns = updateMonthName(updatedColumns); 
   updatedColumns.splice(0, 0, 'resourceName');
   updatedColumns.splice(1, 0, 'startDate');
   updatedColumns.splice(2, 0, 'endDate');

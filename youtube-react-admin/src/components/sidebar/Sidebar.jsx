@@ -58,11 +58,11 @@ export default function Sidebar(props) {
               </li>
             </Link>
             <Link to="/forecastReport" className="link">
-            <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
-             Forecast Report
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                Forecast Report
               </li>
-              </Link>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -97,10 +97,12 @@ export default function Sidebar(props) {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <WorkOutline className="sidebarIcon" />
-              Manage
-            </li>
+            <Link to="/locationChart" className="link">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Location Chart
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
