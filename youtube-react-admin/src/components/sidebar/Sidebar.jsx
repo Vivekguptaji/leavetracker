@@ -27,7 +27,7 @@ export default function Sidebar(props) {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
+            <Link to="/dashboard" className="link">
               <li className="sidebarListItem">
                 <DashboardIcon className="sidebarIcon" />
                 Home

@@ -23,7 +23,7 @@ export default function Home() {
       .then((result) => {
         if (result.status === 200) {
           // const encryptedString = cryptr.encrypt(JSON.stringify(result.data));
-          sessionStorage.clear();
+          //sessionStorage.clear();
           sessionStorage.setItem("user", JSON.stringify(result.data));
           setReportData(result.data);
 

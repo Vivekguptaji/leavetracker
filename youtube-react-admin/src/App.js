@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
-import Resource from "./pages/Resource/Resource";
+import Resource from "./pages/resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
 import LeaveForm from "./pages/leaveForm/LeaveForm";
 import EventCalendar from './pages/Calendar/EventCalendar';
@@ -14,7 +14,7 @@ import HolidayList from "./pages/holidayList/HolidayList";
 import Roles from "./pages/roles/Roles";
 import Locations from "./pages/locations/Locations";
 import TypesLeave from "./pages/typesLeave/TypesLeave";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Backdrop from "./components/backdrop/Backdrop";
 import ForecastReport from "./pages/forecastReport/ForecastReport"; 
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,21 +22,34 @@ import LocationChart from "./components/locationChart/LocationChart"
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const menuClickHandler = () => {
     setShowMenu(!showMenu);
   }
   let backdrop;
+  const setLoginUser = (value) => { 
+    setIsLogged(value);
+  }
+  useEffect(() => {
+    let isLoggedIn = sessionStorage.getItem('isLoggedIn'); 
+    debugger;
+    setIsLogged(isLoggedIn)
+  });
   if(showMenu){
     backdrop = <Backdrop showMenuHandler={ menuClickHandler}/>;
-   }
+  }
+  debugger;
   return (
     <Router>
-      <Topbar showMenuHandler={ menuClickHandler} />
+      {isLogged && <Topbar showMenuHandler={ menuClickHandler} />} 
       <div className="container">
         <Sidebar show={showMenu}  showMenuHandler={ menuClickHandler} />
         { backdrop}
         <Switch>
           <Route exact path="/">
+            <Login setLoginUser={setLoginUser} putter={true}  />
+          </Route>
+          <Route  path="/dashboard">
             <Home />
           </Route>
           <Route path="/resourceList">
