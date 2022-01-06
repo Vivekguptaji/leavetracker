@@ -7,6 +7,7 @@ import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { config } from "../../util/config";
+import LocationChart from "../../components/locationChart/LocationChart";
 
 // const Cryptr = require('cryptr');
 // const cryptr = new Cryptr('myTotalySecretKey');
@@ -14,7 +15,7 @@ import { config } from "../../util/config";
 export default function Home() {
   // const sessionData = sessionStorage.getItem("user");
   // let data = JSON.parse(sessionData);
-   
+
   const [reportData, setReportData] = useState();
   useEffect(() => {
     axios
@@ -25,22 +26,26 @@ export default function Home() {
           sessionStorage.clear();
           sessionStorage.setItem("user", JSON.stringify(result.data));
           setReportData(result.data);
-         
+
         }
       })
       .catch((err) => {
         console.log("err", err);
       });
-  },[]);
+  }, []);
   return (
     <div className="home">
       <FeaturedInfo />
-      <Chart
-        data={userData}
-        title="User Analytics"
-        grid
-        dataKey="Active User"
-      />
+      <div className="homeWidgets">
+        <Chart
+          data={userData}
+          title="User Analytics"
+          grid
+          dataKey="Active User"
+        />
+        <LocationChart />
+      </div>
+      
       <div className="homeWidgets">
         {
           reportData && <WidgetSm data={reportData} />
@@ -48,7 +53,7 @@ export default function Home() {
         {
           reportData && <WidgetLg data={reportData} />
         }
-        
+
       </div>
     </div>
   );

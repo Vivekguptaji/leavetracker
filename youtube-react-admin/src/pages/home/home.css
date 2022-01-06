@@ -6,4 +6,8 @@
 .homeWidgets{
     display: flex;
     margin: 20px;
+    flex:auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
