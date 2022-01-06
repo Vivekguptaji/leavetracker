@@ -4,7 +4,7 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Home from "./pages/home/Home";
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import ResourceList from "./pages/resourceList/ResourceList"; 
 import Resource from "./pages/resource/Resource";
 import Leaves from "./pages/leaves/Leaves";
@@ -28,34 +28,38 @@ function App() {
     setShowMenu(!showMenu);
   }
   let backdrop;
-  const setLoginUser = (value) => { 
+  const setLoginUser = (value) => {
     setIsLogged(value);
   }
   useEffect(() => {
-    let isLoggedIn = sessionStorage.getItem('isLoggedIn'); 
-    debugger;
+    let isLoggedIn = sessionStorage.getItem('isLoggedIn');
     setIsLogged(isLoggedIn)
   });
-  if(showMenu){
-    backdrop = <Backdrop showMenuHandler={ menuClickHandler}/>;
+  if (showMenu) {
+    backdrop = <Backdrop showMenuHandler={menuClickHandler} />;
   }
-  debugger;
   return (
     <Router>
-       <Topbar showMenuHandler={ menuClickHandler} />
+      {isLogged && <Topbar showMenuHandler={menuClickHandler} />}
       <div className="container">
-        <Sidebar show={showMenu}  showMenuHandler={ menuClickHandler} />
-        { backdrop}
+        <Sidebar show={showMenu} showMenuHandler={menuClickHandler} />
+        {backdrop}
         <Switch>
-          <Route exact path="/">
-            <Login setLoginUser={setLoginUser} putter={true}  />
+          <Route exact path="/login">
+            {!isLogged && <Login setLoginUser={setLoginUser} putter={true} />}
+            {isLogged && <Redirect to='/' />}
           </Route>
-          <Route  path="/dashboard">
+          <Route path="/">
+            {!isLogged && <Login setLoginUser={setLoginUser} putter={true} />}
+           
+            {isLogged && <Home />}
+          </Route>
+          <Route path="/dashboard">
             <Home />
           </Route>
           <Route path="/resourceList">
             <ResourceList />
-          </Route> 
+          </Route>
           <Route path="/resource/:_id">
             <Resource />
           </Route>
