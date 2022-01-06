@@ -17,9 +17,15 @@ export default function FeaturedInfo() {
         </div>
       </div>
       <div className="featuredItem">
-        <span className="featuredTitle">On Leave</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">3</span>
+
+        <div className="featuredIcons">
+          <FontAwesomeIcon icon={"home"} />
+        </div>
+        <div>
+          <span className="featuredTitle-leave">Leave</span>
+          <div className="featuredMoneyContainer">
+            <span className="featuredMoney">2</span>
+          </div>
         </div>
       </div>
     </div>
