@@ -9,9 +9,8 @@ toast.configure();
 function Login(props) {
     const history = useHistory();
     const [details, setDetails] = useState({ userId: "", password: "" }); 
-    const isLoggin = props.setIsLogged;
-    debugger
-    sessionStorage.clear();
+    const isLoggin = props.setIsLogged; 
+    //sessionStorage.clear();
     const submitHandler = e => {
         e.preventDefault();
         if (details.userId.trim().length === 0) {
@@ -32,10 +31,9 @@ function Login(props) {
             axios
                 .post(`${config.apiURL}/userlogin`, details)
                 .then((result) => { 
-                    if (result.status === 200) { 
-                        debugger;
+                    if (result.status === 200) {  
                         sessionStorage.setItem('isLoggedIn', true);
-                        isLoggin(true);
+                        props.setLoginUser(true);
                         history.replace("/dashboard");
                     }
                 })
