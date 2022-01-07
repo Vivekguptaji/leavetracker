@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./topbar.css";
 import {ChatBubbleOutline, NotificationsNone, Settings, } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover'
 import Button from 'react-bootstrap/Button';
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Topbar(props) {
   const [title, setTitle] = useState('');
+  const history = useHistory();
   useEffect(() => {
     let pageTitle = sessionStorage.getItem('title');
     setTitle(pageTitle ? pageTitle : 'Welcome');
@@ -86,11 +88,34 @@ export default function Topbar(props) {
                 <ChatBubbleOutline />
               </Button>
             </OverlayTrigger>
-
             <span className="topIconBadge">2</span>
           </div>
           <div className="topbarIconContainer">
-            <Settings />
+          <OverlayTrigger
+              placement="bottom"
+              trigger="focus"
+              
+              overlay={
+                <Popover>
+                  <Popover.Header as="h3">
+                    Action Items
+                  </Popover.Header>
+                  <Popover.Body>
+                    <div class="media-body">
+                      <Button variant="danger" onClick={() => {  
+                        sessionStorage.removeItem('isLoggedIn');
+                        sessionStorage.removeItem('isAdmin');
+                        window.location.reload();
+                      }}> Logout</Button>
+                    </div>
+                  </Popover.Body>
+                </Popover>
+              }>
+              <Button className="popoverbutton">
+                <Settings />
+              </Button>
+            </OverlayTrigger>
+            
           </div>
         </div>
       </div>
