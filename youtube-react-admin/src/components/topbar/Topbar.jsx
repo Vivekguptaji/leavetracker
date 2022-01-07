@@ -15,10 +15,9 @@ export default function Topbar(props) {
           <div className="bar1"></div>
           <div className="bar1"></div>
           <div className="bar1"></div>
-        </div>
-
+        </div> 
         <div className="topLeft">
-          <span className="logo">Resource Forecast Tracker</span>
+          <span className="logo">Resource Forecast Tracker [<span className="title">{title}</span>]</span>
         </div>
         <div className="topleft">
           <div className="topbarIconContainer">
