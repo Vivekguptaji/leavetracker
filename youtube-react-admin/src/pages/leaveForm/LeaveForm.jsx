@@ -126,13 +126,17 @@ export default function LeaveForm(props) {
     axios
       .post(`${config.apiURL}${url}`, reqData)
       .then((result) => {
-        if (result.status === 202 || result.status === 200) {
+        if (result.status === 202 || result.status === 200) { 
           clearState();
           history.push("/leaves");
         }
       })
       .catch((err) => {
-        //debugger;
+        toast.warn(`You have already applied for leave for that days.`, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000,
+        });
+        
       });
   };
 
