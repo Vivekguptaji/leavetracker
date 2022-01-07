@@ -28,10 +28,7 @@ function ForecastReport() {
         }).catch(err => console.log);
     }, []);
     return (
-        <div class="userList">
-            <div className="userTitleContainer">
-                <h1 className="userTitle">Forecast</h1>  
-            </div> 
+        <div class="userList"> 
             <MaterialTable
                 title="Forecast Report"
                 columns={columns}

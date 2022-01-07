@@ -33,10 +33,7 @@ export default function Home() {
       });
   }, []);
   return (
-    <div className="home">
-      <div className="welcomeUser">
-        Welcome Admin !<div className="dashboard">Dashboard</div>
-      </div>
+    <div className="home"> 
       <FeaturedInfo />
       <div className="homeWidgets">
         {/* <Chart

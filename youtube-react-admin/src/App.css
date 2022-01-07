@@ -104,3 +104,8 @@ input, optgroup, textarea {
     border: 1px solid gray;
     border-radius: 5px;
 }
+
+
+.active{ 
+    color: #4ce949 !important;
+  }

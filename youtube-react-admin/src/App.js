@@ -53,31 +53,31 @@ function App() {
          </PrivateRoute>
           <PrivateRoute restricted={true} exact path="/" component={Home} >  
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/dashboard" component={Home}> 
+          <PrivateRoute restricted={true} path="/dashboard" title="Dashboard" component={Home}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/resourceList" component={ResourceList}> 
+          <PrivateRoute restricted={true} path="/resourceList" title="Resoures" component={ResourceList}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/resource/:_id" component={Resource}> 
+          <PrivateRoute restricted={true} path="/resource/:_id" title="Resoures" component={Resource}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/resource" component={Resource} > 
+          <PrivateRoute restricted={true} path="/resource" title="Resoures" component={Resource} > 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/leaves" component={Leaves}> 
+          <PrivateRoute restricted={true} path="/leaves" title="Leaves" component={Leaves}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/leaveForm" component={LeaveForm}> 
+          <PrivateRoute restricted={true} path="/leaveForm" title="Leaves" component={LeaveForm}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/Calendar" component={EventCalendar}> 
+          <PrivateRoute restricted={true} path="/Calendar"  title="Calendar" component={EventCalendar}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/holidayList" component={HolidayList}> 
+          <PrivateRoute restricted={true} path="/holidayList"  title="Holidays" component={HolidayList}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/roles" component={Roles}> 
+          <PrivateRoute restricted={true} path="/roles" title="Roles" component={Roles}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/forecastReport" component={ForecastReport}> 
+          <PrivateRoute restricted={true} path="/forecastReport" title="Forecast Report" component={ForecastReport}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/locations" component={Locations}> 
+          <PrivateRoute restricted={true} path="/locations" title="Locations" component={Locations}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/typesLeave" component={TypesLeave}> 
+          <PrivateRoute restricted={true} path="/typesLeave" title="Leave Types" component={TypesLeave}> 
          </PrivateRoute>
-        <PrivateRoute restricted={true} path="/locationChart" component={LocationChart}> 
+        <PrivateRoute restricted={true} path="/locationChart" title="Location Chart" component={LocationChart}> 
           </PrivateRoute>
           <PrivateRoute restricted={true} path="*"><Redirect to='/'></Redirect> 
          </PrivateRoute>
