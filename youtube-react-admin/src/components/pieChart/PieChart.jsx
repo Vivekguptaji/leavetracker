@@ -5,13 +5,25 @@ class PieChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      series: [44, 55, 13, 43, 22],
+      series: [4, 0, 7, 8, 1, 2, 5, 0, 6, 10, 5, 6],
       options: {
         chart: {
           width: 380,
           type: "pie",
         },
-        labels: ["MON", "TUES", "WED", "THURS", "FRI"],
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"],
         responsive: [
           {
             breakpoint: 480,
@@ -37,7 +49,7 @@ class PieChart extends React.Component {
           type="pie"
           width={450}
         />
-        <div className="currentWeek"> Current Week</div>
+        <div className="currentWeek">Leaves Highlights</div>
       </div>
     );
   }

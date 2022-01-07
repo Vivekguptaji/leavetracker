@@ -183,7 +183,7 @@ const prepareReport = (resourceList, columnList, leaves) => {
           let workingHrs = getWorkingDays(column, reportObj) * resource['claimHrs'];
           let claimHrs = workingHrs === 0 ? 0 : workingHrs - leaveCount - holidayCount;
           reportObj[column] = claimHrs < 0 ? 0 : claimHrs;
-          currentMonthHrs = currentMonthHrs + claimHrs < 0 ? 0 : claimHrs;
+          currentMonthHrs = currentMonthHrs + claimHrs < 0 ? 0 : currentMonthHrs + claimHrs;
         }
       }
     }
