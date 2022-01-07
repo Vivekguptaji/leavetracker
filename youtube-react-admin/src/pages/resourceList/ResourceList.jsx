@@ -5,13 +5,14 @@ import { config } from "../../util/config";
 import MaterialTable from "material-table";
 import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
+import { getSortOrder } from "../../util/utility";
 
 export default function ResourceList() {
   const url = `${config.apiURL}/getResources`;
   const history = useHistory();
   const [resourceData, setResourceData] = useState([]);
   useEffect(() => {
-    axios.get(url).then((json) => setResourceData(json.data));
+    axios.get(url).then((json) => setResourceData(json.data.sort(getSortOrder('name'))));
   }, []);
   const handleClickRow = (event, data) => {
     debugger;

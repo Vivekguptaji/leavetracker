@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; 
 import MaterialTable from "material-table";
-import getReportData from "../../util/utility";
+import getReportData, { getSortOrder } from "../../util/utility";
 import moment from "moment";  
 
 const columnsTitle = {
@@ -24,7 +24,7 @@ function ForecastReport() {
                 return { title:  columnsTitle[item] ? columnsTitle[item]: item, item, field: item };
             });
             setColumns(comingColumns);
-            setReportData(result.reportData);
+            setReportData(result.reportData.sort(getSortOrder('resourceName')));
         }).catch(err => console.log);
     }, []);
     return (
