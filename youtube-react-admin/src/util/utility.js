@@ -121,14 +121,21 @@ const checkDateExist = (startDate, endDate, workingWeek) => {
   return isExist;
 }
 const getWorkingDays = (workingWeek, reportObj) => {
-  let workingdays = 5;
+  let workingdays = 5; let startDate;
   let endDate = reportObj['endDate'];  
+  let useStartDate = reportObj['startDate']; 
+  if (useStartDate && new Date(startDate) > new Date(workingWeek)) { 
+    return workingdays = 0;
+  }
   if (endDate && new Date(endDate) > new Date(workingWeek)) {
-    let startDate = new Date(new Date(new Date(workingWeek).setDate(new Date(workingWeek).getDate() - 4)).setHours(0, 0, 0, 0));
+      startDate = new Date(new Date(new Date(workingWeek).setDate(new Date(workingWeek).getDate() - 4)).setHours(0, 0, 0, 0));
+    if (new Date(useStartDate) > new Date(startDate)) {
+      startDate = new Date(useStartDate)
+    }
     workingdays = getDaysDifference(startDate, workingWeek)['difference'];
-    }   
+  }
   else { 
-    let startDate = new Date(new Date(new Date(workingWeek).setDate(new Date(workingWeek).getDate() - 4)).setHours(0, 0, 0, 0));
+      startDate = new Date(new Date(new Date(workingWeek).setDate(new Date(workingWeek).getDate() - 4)).setHours(0, 0, 0, 0));
     if (checkDateExist(startDate, endDate, workingWeek)) { 
       workingdays = getDaysDifference(startDate, endDate)['difference'];
     }
