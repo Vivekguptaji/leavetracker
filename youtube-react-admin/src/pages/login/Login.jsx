@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { config } from "../../util/config";
 import { useHistory } from "react-router-dom";
+import { 
+    BarChart 
+  } from "@material-ui/icons";
 toast.configure();
 function Login(props) {
   const history = useHistory();
@@ -46,7 +49,8 @@ function Login(props) {
   return (
     <div className="loginContainer">
       <form onSubmit={submitHandler} data-testid="form" className="loginForm">
-        <div className="form-inner">
+              <div className="form-inner">
+                  <BarChart className="sidebarIcon" style={{width:'2rem', height:'2rem'}} />
           <h2>Login</h2>
           <br />
           <div className="form-group">
@@ -78,7 +82,7 @@ function Login(props) {
             />
           </div>
           <div className="form-group">
-            <button className="userAddButton" style={{ marginTop: "15px" }}>
+            <button className="userAddButton" style={{ marginTop: "15px", width:'75px' }}>
               Login
             </button>
           </div>

@@ -22,7 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import LocationChart from "./components/locationChart/LocationChart"
 import Login from "./pages/login/Login";
 import PrivateRoute from "./util/Route/PrivateRoute";
-import PublicRoute from "./util/Route/PublicRoute";
+import PublicRoute from "./util/Route/PublicRoute"; 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [isLogged, setIsLogged] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 import "./topbar.css";
-
-export default function Topbar(props) {
+ 
+export default function Topbar(props) { 
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -9,6 +9,9 @@ export default function Topbar(props) {
           <div className="bar1"></div>
           <div className="bar1"></div>
           <div className="bar1"></div>
+        </div>
+        <div className="topLeft">
+          <span className="title">{props.title}</span>
         </div>
         <div className="topLeft">
           <span className="logo">Resource Forecast Tracker</span>

@@ -30,7 +30,7 @@ export default function Resource(props) {
   const [showForm, setShowForm] = useState(false);
   const [status, setStatus] = useState();
   const params = useParams();
-  const title = params ? "Edit Resource" : "New Resource";
+  const title = loadData && loadData.name ? "Edit Resource" : "New Resource";
   //console.log("state", loadData);
   useEffect(() => {
     const sessionData = sessionStorage.getItem("user");
