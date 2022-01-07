@@ -70,3 +70,18 @@
     font-size: 10px;
 }
 
+.popoverbutton{
+  border-color: transparent !important;
+  background-color: transparent !important;
+  outline-color: transparent !important;
+}
+.popoverbutton:hover{
+  background-color:black !important;
+  border-color: transparent !important;
+}
+.popoverbutton:focus:not(:focus-visible) {
+  outline: 0 !important;
+  box-shadow: none !important;
+  outline-color: transparent !important;
+  background-color:black !important;
+}

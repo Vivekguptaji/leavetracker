@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./topbar.css";
-import {ChatBubbleOutline, NotificationsNone, Language, Settings } from "@material-ui/icons";
+import {ChatBubbleOutline, NotificationsNone, Settings, } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover'
+import Button from 'react-bootstrap/Button';
 
 export default function Topbar(props) {
   const [title, setTitle] = useState('');
@@ -21,11 +26,46 @@ export default function Topbar(props) {
         </div>
         <div className="topleft">
           <div className="topbarIconContainer">
-            <NotificationsNone />
+          <OverlayTrigger
+                placement="bottom"
+                trigger="click"
+                overlay={
+                    <Popover>
+                        <Popover.Header as="h3">
+                           Notifications
+                        </Popover.Header>
+                        <Popover.Body>
+                            Hey
+                        </Popover.Body>
+                    </Popover>
+                }>
+                <Button className="popoverbutton">
+                  <NotificationsNone />
+                </Button>
+            </OverlayTrigger>
             <span className="topIconBadge">2</span>
           </div>
           <div className="topbarIconContainer">
-            <ChatBubbleOutline />
+          <OverlayTrigger
+                placement="bottom"
+                trigger="click"
+                overlay={
+                    <Popover>
+                        <Popover.Header as="h3">
+                           Notifications
+                        </Popover.Header>
+                        <Popover.Body>
+                            Hey
+                            Hi
+                            Hello
+                        </Popover.Body>
+                    </Popover>
+                }>
+                <Button className="popoverbutton">
+                  <ChatBubbleOutline />
+                </Button>
+            </OverlayTrigger>
+
             <span className="topIconBadge">2</span>
           </div>
           <div className="topbarIconContainer">
