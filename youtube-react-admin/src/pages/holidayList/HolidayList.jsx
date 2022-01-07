@@ -41,7 +41,7 @@ export default function HolidayList() {
           { title: 'Name', field: 'name' },
           { title: 'Location', field: 'location' },
           {
-            title: 'Date', field: 'startDate', type: 'date', render: rowData => {
+            title: 'Holiday On', field: 'startDate', type: 'date', render: rowData => {
               return moment(new Date(rowData.startDate)).format('DD MMM YYYY')
             }
           },

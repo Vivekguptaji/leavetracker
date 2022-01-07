@@ -85,3 +85,23 @@
   outline-color: transparent !important;
   background-color:black !important;
 }
+
+.media-body {
+  -ms-flex: 1;
+  flex: 1;
+}
+.noti-details {
+  color: #989c9e;
+  margin-bottom: 0;
+}
+.noti-title {
+  color: #333;
+}
+.noti-time {
+  margin: 0;
+}
+.notifications .notification-time {
+  font-size: 12px;
+  line-height: 1.35;
+  color: #bdbdbd;
+}
