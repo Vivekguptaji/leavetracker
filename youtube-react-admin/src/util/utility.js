@@ -159,10 +159,10 @@ const prepareReport = (resourceList, columnList, leaves) => {
         reportObj.role = resource.role;
         reportObj.claimHrs = resource.claimHrs;
       } else if (column === 'startDate') {
-        reportObj.startDate = moment(new Date(resource.startDate)).format('DD MMM YY');;
+        reportObj.startDate = moment(new Date(resource.startDate)).format('DD MMM YY');
       }
       else if (column === 'endDate') {
-        reportObj.endDate = moment(new Date(resource.endDate)).format('DD MMM YY');;
+        reportObj.endDate = moment(new Date(resource.endDate)).format('DD MMM YY');
       }
       else if (column === 'isActive') {
         reportObj.isActive = resource.isActive;
@@ -183,7 +183,7 @@ const prepareReport = (resourceList, columnList, leaves) => {
           let workingHrs = getWorkingDays(column, reportObj) * resource['claimHrs'];
           let claimHrs = workingHrs === 0 ? 0 : workingHrs - leaveCount - holidayCount;
           reportObj[column] = claimHrs < 0 ? 0 : claimHrs;
-          currentMonthHrs = currentMonthHrs + claimHrs < 0 ? 0 : claimHrs;
+          currentMonthHrs = currentMonthHrs + claimHrs < 0 ? 0 : currentMonthHrs + claimHrs;
         }
       }
     }
@@ -236,4 +236,21 @@ export const getDaysDifference = (startDate, endDate) => {
     difference: dateArray.length
   };
 };
+
+export const getHolidayCountValidation = (holidays, resource, startDate, endDate) => {
+  let isHoliday = false;
+  endDate = new Date(new Date(endDate).setHours(0, 0, 0, 0));
+  startDate = new Date(new Date(startDate).setHours(0, 0, 0, 0)); 
+  for (let i = 0; i < holidays.length; i++) {
+    let holidayData = holidays[i];
+    let holidayDate = new Date(holidayData['startDate']).setHours(0, 0, 0, 0);
+    if (holidayDate >= startDate && holidayDate <= endDate && resource.location === holidayData.location) {
+      return {
+        isHoliday: true,
+        holidayDetails: holidayData.name +' ('+ moment(new Date(holidayDate)).format('DD MMM YYYY')+')'
+      }
+    }
+  }
+  return isHoliday;
+}
 export default getReportData;

@@ -4,7 +4,7 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 import MaterialTable from "material-table";
 import { Link, useHistory  } from "react-router-dom";
-import { getDaysDifference } from "../../util/utility";
+import { getDaysDifference, getSortOrder } from "../../util/utility";
 import moment from "moment";
 const leaveDetails = {
   "CL": "Casual Leave", // just for example, remove it if you don't need
@@ -23,7 +23,7 @@ export default function LeavesList() {
         item.daysDiff = getDaysDifference(item.startDate, item.endDate)['difference'];
         return item;
       })
-      setLeavesData(data);
+      setLeavesData(data.sort(getSortOrder('name')));
     });
   }, []);
 

@@ -9,16 +9,16 @@ class LocationChart extends Component {
     this.state = {
       series: [
         {
-          name: "Net Profit",
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+          name: "Casual Leave",
+          data: [4, 0, 7, 8, 1, 2, 5, 0, 6],
         },
         {
-          name: "Revenue",
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+          name: "Privilege Leave",
+          data: [7, 1, 8, 3, 6, 0, 1, 5, 0, 5],
         },
         {
-          name: "Free Cash Flow",
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+          name: "Sick Leave",
+          data: [3, 1, 0, 6, 2, 9, 4, 3, 0, 8],
         },
       ],
       options: {
@@ -44,6 +44,7 @@ class LocationChart extends Component {
         },
         xaxis: {
           categories: [
+            "Jan",
             "Feb",
             "Mar",
             "Apr",
@@ -53,11 +54,13 @@ class LocationChart extends Component {
             "Aug",
             "Sep",
             "Oct",
+            "Nov",
+            "Dec"
           ],
         },
         yaxis: {
           title: {
-            text: "$ (thousands)",
+            text: "Leaves",
           },
         },
         fill: {
