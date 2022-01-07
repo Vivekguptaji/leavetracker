@@ -28,7 +28,8 @@ export default function Topbar(props) {
           <div className="topbarIconContainer">
           <OverlayTrigger
                 placement="bottom"
-                trigger="click"
+              trigger="focus"
+              
                 overlay={
                     <Popover>
                         <Popover.Header as="h3">
@@ -43,21 +44,18 @@ export default function Topbar(props) {
                   <NotificationsNone />
                 </Button>
             </OverlayTrigger>
-            <span className="topIconBadge">2</span>
+            <span className="topIconBadge">8</span>
           </div>
           <div className="topbarIconContainer">
           <OverlayTrigger
                 placement="bottom"
-                trigger="click"
+                trigger="focus"
                 overlay={
                     <Popover>
                         <Popover.Header as="h3">
-                           Notifications
+                           Messages
                         </Popover.Header>
-                        <Popover.Body>
-                            Hey
-                            Hi
-                            Hello
+                        <Popover.Body> 
                         </Popover.Body>
                     </Popover>
                 }>

@@ -5,6 +5,7 @@ import { config } from "../../util/config";
 import MaterialTable from "material-table";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import moment from "moment";
 toast.configure();
 export default function Roles() {
   const url = `${config.apiURL}/getDeveloperRoles`;
@@ -49,6 +50,13 @@ export default function Roles() {
             field: "isActive",
             render: (rowData) => (rowData.isActive ? "Active" : "Disabled"),
           },
+          { title: "Created", field: "createdOn", render: rowData => {
+            return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
+          }
+          },
+          { title: "Updated", field: "updatedOn", render: rowData => {
+            return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
+          } },
         ]}
         data={rolesData}
         actions={[

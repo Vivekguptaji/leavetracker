@@ -4,6 +4,8 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 import MaterialTable from "material-table";
 import { Link, useHistory  } from "react-router-dom";
+import moment from "moment";
+import { toast } from "react-toastify";
 
 export default function Locations() {
   const url = `${config.apiURL}/getLocations`;
@@ -36,9 +38,34 @@ export default function Locations() {
       <MaterialTable
         title="Locations"
         columns={[
-          { title: 'Name', field: 'locationName' }
+          { title: 'Name', field: 'locationName' },
+          {
+            title: "Status",
+            field: "isActive",
+            render: (rowData) => (rowData.isActive ? "Active" : "Disabled"),
+          },
+          { title: "Created", field: "createdOn", render: rowData => {
+            return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
+          }
+          },
+          {
+            title: "Updated", field: "updatedOn", render: rowData => {
+              return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
+            }
+          } 
         ]}
-          data={locationsData}
+        data={locationsData}
+        actions={[
+          {
+            icon: "edit",
+            iconProps: { fontSize: "small", color: "primary" },
+            tooltip: "Edit Location",
+            onClick: (event, rowData) => {   toast.warn("Feature not implemented yet!", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
+            }); }
+          }
+        ]}
         options={{
           sorting: true,
           actionsColumnIndex: -1,

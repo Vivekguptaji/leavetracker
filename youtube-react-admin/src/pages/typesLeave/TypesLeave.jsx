@@ -4,6 +4,8 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 import MaterialTable from "material-table";
 import { Link, useHistory  } from "react-router-dom";
+import moment from "moment";
+import { toast } from "react-toastify";
 
 export default function TypesLeave() {
   const url = `${config.apiURL}/getLeaveTypes`;
@@ -37,8 +39,33 @@ export default function TypesLeave() {
         title="Leave Types"
         columns={[
           { title: 'Name', field: 'leaveTypeName' },
+          {
+            title: "Status",
+            field: "isActive",
+            render: (rowData) => (rowData.isActive ? "Active" : "Disabled"),
+          },
+          { title: "Created", field: "createdOn", render: rowData => {
+            return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
+          }
+          },
+          {
+            title: "Updated", field: "updatedOn", render: rowData => {
+              return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
+            }
+          } 
         ]}
         data={typesLeaveData}
+        actions={[
+          {
+            icon: "edit",
+            iconProps: { fontSize: "small", color: "primary" },
+            tooltip: "Edit Leave Type",
+            onClick: (event, rowData) => {   toast.warn("Feature not implemented yet!", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
+            }); }
+          }
+        ]}
         options={{
           sorting: true, 
           actionsColumnIndex: -1,

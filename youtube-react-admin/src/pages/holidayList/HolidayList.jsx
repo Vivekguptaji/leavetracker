@@ -4,6 +4,8 @@ import axios from "axios";
 import { config } from "../../util/config"; 
 import MaterialTable from "material-table";
 import { Link, useHistory  } from "react-router-dom";
+import moment from "moment";
+import { toast } from "react-toastify";
 
 export default function HolidayList() {
   const url = `${config.apiURL}/getHolidays`;
@@ -39,11 +41,21 @@ export default function HolidayList() {
           { title: 'Name', field: 'name' },
           { title: 'Location', field: 'location' },
           {
-            title: 'Date', field: 'startDate', type: 'date', dateSetting: {
-              format: 'dd/mm/yyyy'
+            title: 'Date', field: 'startDate', type: 'date', render: rowData => {
+              return moment(new Date(rowData.startDate)).format('DD MMM YYYY')
             }
           },
-          { title: 'Status', field: 'isActive', render: rowData => (rowData.isActive ? "Active" : "Disabled") }
+          { title: 'Status', field: 'isActive', render: rowData => (rowData.isActive ? "Active" : "Disabled") },
+          {
+            title: "Created", field: "createdOn", render: rowData => {
+              return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
+            }
+          },
+          {
+            title: "Updated", field: "updatedOn", render: rowData => {
+              return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
+            }
+          }
         ]}
         data={holidayData}
         actions={[
@@ -51,7 +63,12 @@ export default function HolidayList() {
             icon: "edit",
             iconProps: { fontSize: "small", color: "primary" },
             tooltip: "Edit Holiday",
-            onClick: (event, rowData) => { callholidayData(rowData) }
+            onClick: (event, rowData) => {
+              toast.warn("Feature not implemented yet!", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1000,
+              });
+            }
           }
         ]}
         options={{
@@ -61,7 +78,7 @@ export default function HolidayList() {
           headerStyle: {
             backgroundColor: 'rgb(39 37 37 / 95%)',
             color: '#fff',
-             whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap'
           },
         }}
       />
