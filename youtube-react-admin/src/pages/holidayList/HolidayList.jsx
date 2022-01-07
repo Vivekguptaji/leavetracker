@@ -45,7 +45,13 @@ export default function HolidayList() {
               return moment(new Date(rowData.startDate)).format('DD MMM YYYY')
             }
           },
-          { title: 'Status', field: 'isActive', render: rowData => (rowData.isActive ? "Active" : "Disabled") },
+          { title: 'Status', field: 'isActive', render: (rowData) => {
+            return (
+              <div class={rowData.isActive ? "isActive" : "isDisabled"}>
+                <span>{rowData.isActive ? "Active" : "Disabled"}</span>
+              </div>
+            );
+          }, },
           {
             title: "Created", field: "createdOn", render: rowData => {
               return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')

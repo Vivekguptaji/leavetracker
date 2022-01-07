@@ -48,7 +48,13 @@ export default function Roles() {
           {
             title: "Status",
             field: "isActive",
-            render: (rowData) => (rowData.isActive ? "Active" : "Disabled"),
+            render: (rowData) => {
+              return (
+                <div class={rowData.isActive ? "isActive" : "isDisabled"}>
+                  <span>{rowData.isActive ? "Active" : "Disabled"}</span>
+                </div>
+              );
+            }
           },
           { title: "Created", field: "createdOn", render: rowData => {
             return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
