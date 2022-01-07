@@ -11,12 +11,12 @@ class PieChart extends React.Component {
           width: 380,
           type: "pie",
         },
-        labels: [
-          "India",
-          "Canada",
-          "Egypt",
+        labels: [ 
           "UK",
-          "USA" ],
+          "USA",
+          "India", 
+          "Egypt",
+          "Canada" ],
         responsive: [
           {
             breakpoint: 100,

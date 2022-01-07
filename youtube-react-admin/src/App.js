@@ -51,7 +51,7 @@ function App() {
           <PrivateRoute restricted={true} exact path="/login">
             {!isLogged && <Login title="Dashboard" setLoginUser={setLoginUser} />}
             {isLogged && <Redirect to='/' />}
-         </PrivateRoute>
+          </PrivateRoute>
           <PrivateRoute restricted={true} exact path="/" component={Home} >  
           </PrivateRoute>
           <PrivateRoute restricted={true} path="/dashboard" title="Dashboard" component={Home}> 
