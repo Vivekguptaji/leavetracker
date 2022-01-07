@@ -16,9 +16,14 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import LockIcon from "@material-ui/icons/Lock";
 
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Sidebar(props) {
-  let drawerClasses = "sidebar side-drawer";
+  let drawerClasses = 'sidebar side-drawer';
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    setIsAdmin(sessionStorage.getItem('isAdmin') == 'true' ? true : false); 
+  } );
   if (props.show) {
     drawerClasses = "sidebar side-drawer open";
   }
@@ -65,7 +70,7 @@ export default function Sidebar(props) {
             </NavLink>
           </ul>
         </div>
-        <div className="sidebarMenu">
+        { isAdmin &&  <div className="sidebarMenu">
           <h3 className="sidebarTitle">Admin Configurations</h3>
           <ul className="sidebarList">
             <NavLink to="/roles" className="link">
@@ -99,8 +104,8 @@ export default function Sidebar(props) {
               </li>
             </NavLink>
           </ul>
-        </div>
-        <div className="sidebarMenu">
+        </div>}
+        {/* <div className="sidebarMenu">
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
             <NavLink to="/locationChart" className="link">
@@ -118,7 +123,7 @@ export default function Sidebar(props) {
               Reports
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

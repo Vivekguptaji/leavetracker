@@ -33,7 +33,8 @@ function Login(props) {
         .post(`${config.apiURL}/userlogin`, details)
         .then((result) => {
           if (result.status === 200) {
-            sessionStorage.setItem("isLoggedIn", true);
+              sessionStorage.setItem("isLoggedIn", true);
+              sessionStorage.setItem("isAdmin", result.data.data.isAdmin);
             props.setLoginUser(true);
             history.replace("/dashboard");
           }
