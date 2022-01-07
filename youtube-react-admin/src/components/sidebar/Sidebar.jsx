@@ -7,19 +7,20 @@ import {
   WorkOutline,
   Report,
 } from "@material-ui/icons";
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import DateRangeIcon from "@material-ui/icons/DateRange";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import LockIcon from "@material-ui/icons/Lock";
 
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar(props) {
-  let drawerClasses = 'sidebar side-drawer'
+  let drawerClasses = "sidebar side-drawer";
   if (props.show) {
-    drawerClasses = 'sidebar side-drawer open'
+    drawerClasses = "sidebar side-drawer open";
   }
   return (
     <div className={drawerClasses} onClick={props.showMenuHandler}>
@@ -33,7 +34,6 @@ export default function Sidebar(props) {
                 Home
               </li>
             </NavLink>
-
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -90,6 +90,12 @@ export default function Sidebar(props) {
               <li className="sidebarListItem">
                 <ListAltIcon className="sidebarIcon" />
                 Holiday List
+              </li>
+            </NavLink>
+            <NavLink to="/lockPeriod" className="link">
+              <li className="sidebarListItem">
+                <LockIcon className="sidebarIcon" />
+                Lock Period
               </li>
             </NavLink>
           </ul>
