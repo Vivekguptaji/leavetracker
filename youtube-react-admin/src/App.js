@@ -48,7 +48,7 @@ function App() {
         {backdrop}
         <Switch>
           <PrivateRoute restricted={true} exact path="/login">
-            {!isLogged && <Login setLoginUser={setLoginUser} />}
+            {!isLogged && <Login title="Dashboard" setLoginUser={setLoginUser} />}
             {isLogged && <Redirect to='/' />}
          </PrivateRoute>
           <PrivateRoute restricted={true} exact path="/" component={Home} >  
