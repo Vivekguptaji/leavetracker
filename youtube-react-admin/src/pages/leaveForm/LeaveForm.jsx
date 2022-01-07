@@ -24,6 +24,7 @@ export default function LeaveForm(props) {
   const [leaveType, setLeaveType] = useState();
 
   const [showForm, setShowForm] = useState(false);
+  const [reason, setReason] = useState();
 
   const params = useParams();
   const title = loadData && loadData.name ? "Edit Leave" : "New Leave";
@@ -60,6 +61,7 @@ export default function LeaveForm(props) {
           loadData.endDate &&
             moment(new Date(loadData.endDate)).format("YYYY-MM-DD")
         );
+        setReason(loadData.reason);
       }
       setShowForm(true);
     }
@@ -74,7 +76,9 @@ export default function LeaveForm(props) {
   const changeEndDate = (e) => {
     setEndDate(e.target.value);
   };
-
+  const changeReason = (e) => { 
+    setReason(e.target.value);
+  }
   const changeSetleaveType = (e) => {
     setLeaveType(e.target.value);
   };
@@ -92,6 +96,7 @@ export default function LeaveForm(props) {
       startDate: startDate,
       endDate: endDate,
       leaveType: leaveType,
+      reason:reason
     };
     const url =
       loadData && loadData._id ? `/updateLeave/${loadData._id}` : `/applyLeave`;
@@ -163,6 +168,14 @@ export default function LeaveForm(props) {
           <select onChange={changeSetleaveType} value={leaveType}>
             {leaveTypeOptions}
           </select>
+        </div>
+        <div className="newUserItem">
+          <label className="required">Reason</label>
+          <textarea
+            type="textarea"
+            value={reason}
+            onChange={changeReason}
+          />
         </div>
         <div className="footer">
           <button className="newUserButton" type="submit" disabled={btnDisable}>
