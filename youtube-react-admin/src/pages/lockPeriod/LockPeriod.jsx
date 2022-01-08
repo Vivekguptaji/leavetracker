@@ -163,8 +163,8 @@ export default function LockPeriod(props) {
             render: (rowData) => {
               return (
                 <div class={rowData.isActive ? "isActive" : "isDisabled"}>
-                  <span>{rowData.isActive ? "Active" : "Disabled"}</span>
-                </div>
+                  <span>{rowData.isActive ? "Unlocked" : "Locked"}</span> 
+                  </div>
               );
             },
           },
