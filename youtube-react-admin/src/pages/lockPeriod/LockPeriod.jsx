@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Collapse } from "react-bootstrap";
 import MaterialTable from "material-table";
 import { toast } from "react-toastify";
+import { config } from "../../util/config";
+import axios from "axios";
+import moment from "moment";
 
 export default function LockPeriod(props) {
   //   const useHistory = useHistory();
@@ -12,6 +15,7 @@ export default function LockPeriod(props) {
   const [month, setMonth] = useState();
   const [year, setYear] = useState();
   const [checked, setChecked] = useState();
+  const [locksData, setLocksData] = useState([]);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -22,19 +26,47 @@ export default function LockPeriod(props) {
   const changeYear = (e) => {
     setYear(e.target.value);
   };
-
+  useEffect(() => {
+    const url = `${config.apiURL}/getLocks`
+    axios.get(url).then((json) =>
+      setLocksData(json.data));
+  }, []);
   const submitHandler = (e) => {
     e.preventDefault();
-    let data = { month: month, year: year, checked: checked };
-    arrayData.push(data);
-    let myJsonString = JSON.stringify(arrayData);
-
-    console.log(myJsonString);
-    // history.push({
-    //   pathname: "/lockPeriod",
-    //   state: data,
-    // });
-
+    let url = `${config.apiURL}/createLock`;
+    let data = { monthName: month, year: year, isActive: checked ? true : false, resourceId: '61d429c11ac04bef63d7a093' }
+   
+    if (!data.monthName || data.monthName == '0') {
+      return toast.warn("Please select month.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
+    }
+    if (!data.year || data.year === '0') {
+      return toast.warn("Please select year.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
+    }
+    let fetchData = locksData.filter(item => item.monthName === data.monthName && item.year === data.year)
+    if (fetchData.length > 0) {
+      url = `${config.apiURL}/updateLock/${fetchData[0]['_id']}`;
+    }
+    axios
+      .post(`${url}`, data)
+      .then((result) => {
+        if (result.status === 202 || result.status === 200) {
+          const url = `${config.apiURL}/getLocks`
+          axios.get(url).then((json) =>
+            setLocksData(json.data));
+        }
+      })
+      .catch((err) => {
+        toast.warn("The locking month has already been created.", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 1000,
+        });
+      });
     const clearState = () => {
       setMonth("0");
       setYear("0");
@@ -75,9 +107,9 @@ export default function LockPeriod(props) {
 
               <select value={year} onChange={changeYear}>
                 <option value="0"></option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2023">2023</option>
+                <option value={new Date().getFullYear() - 1}>{new Date().getFullYear() - 1}</option>
+                <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
+                <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
               </select>
               {/* </div> */}
             </Col>
@@ -119,26 +151,35 @@ export default function LockPeriod(props) {
           {/* </div> */}
         </Container>
       </form>
+      <br></br>
       <MaterialTable
         title="Locked Month"
         columns={[
-          { title: "Month", field: "leaveTypeName" },
-          { title: "Year", field: "leaveTypeName" },
-        ]}
-        data={arrayData}
-        actions={[
+          { title: "Month", field: "monthName" },
+          { title: "Year", field: "year" },
           {
-            icon: "edit",
-            iconProps: { fontSize: "small", color: "primary" },
-            tooltip: "Edit Leave Type",
-            onClick: (event, rowData) => {
-              toast.warn("Feature not implemented yet!", {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 1000,
-              });
+            title: "Status",
+            field: "isActive",
+            render: (rowData) => {
+              return (
+                <div class={rowData.isActive ? "isActive" : "isDisabled"}>
+                  <span>{rowData.isActive ? "Active" : "Disabled"}</span>
+                </div>
+              );
             },
           },
+          {
+            title: "Created", field: "createdOn", render: rowData => {
+              return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
+            }
+          },
+          {
+            title: "Updated", field: "updatedOn", render: rowData => {
+              return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
+            }
+          }
         ]}
+        data={locksData}
         options={{
           sorting: true,
           actionsColumnIndex: -1,

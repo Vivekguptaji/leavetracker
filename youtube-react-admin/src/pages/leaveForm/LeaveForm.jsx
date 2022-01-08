@@ -12,7 +12,7 @@ const cryptr = new Cryptr("myTotalySecretKey");
 toast.configure();
 let leaveTypeOptions;
 let resourceOptions;
-let holidaysList = [];
+let LeaveLookup = [];
 export default function LeaveForm(props) {
   const history = useHistory();
   const historyLocation = useLocation();
@@ -33,45 +33,44 @@ export default function LeaveForm(props) {
   console.log("state", loadData);
 
   useEffect(() => {
-    const url = `${config.apiURL}/getHolidays`
-    axios.get(url).then((json) =>
-      holidaysList = json.data);
-  }, []);
-  useEffect(() => {
-    const sessionData = sessionStorage.getItem("user");
-    if (!sessionData) {
-      history.push("/");
-    } else {
-      let data = JSON.parse(sessionData);
-      data.leaveTypes.push({ leaveTypeName: "", leaveTypeValue: "0" });
-      data.leaveTypes.sort(getSortOrder("leaveTypeName"));
-      leaveTypeOptions = data.leaveTypes.map((item) => (
-        <option key={item.leaveTypeValue} value={item.leaveTypeValue}>
-          {item.leaveTypeName}
-        </option>
-      ));
-      data.resources.push({ _id: "0", name: "" });
-      data.resources.sort(getSortOrder("name"));
-      resourceOptions = data.resources.map((item) => (
-        <option key={item._id} value={item._id}>
-          {item.name}
-        </option>
-      ));
-      if (loadData) {
-        setLeaveType(loadData.leaveType);
-        setResourceId(loadData.resourceId);
-        setStartDate(
-          loadData.startDate &&
+    const url = `${config.apiURL}/getLevesLookup`
+    axios.get(url).then((json) => {
+      LeaveLookup = json.data
+      const sessionData = sessionStorage.getItem("user");
+      if (!sessionData) {
+        history.push("/");
+      } else {
+        LeaveLookup['leaveTypes'].push({ leaveTypeName: "", leaveTypeValue: "0" });
+        LeaveLookup['leaveTypes'].sort(getSortOrder("leaveTypeName"));
+        leaveTypeOptions = LeaveLookup['leaveTypes'].map((item) => (
+          <option key={item.leaveTypeValue} value={item.leaveTypeValue}>
+            {item.leaveTypeName}
+          </option>
+        ));
+        LeaveLookup['resources'].push({ _id: "0", name: "" });
+        LeaveLookup['resources'].sort(getSortOrder("name"));
+        resourceOptions = LeaveLookup['resources'].map((item) => (
+          <option key={item._id} value={item._id}>
+            {item.name}
+          </option>
+        ));
+        if (loadData) {
+          setLeaveType(loadData.leaveType);
+          setResourceId(loadData.resourceId);
+          setStartDate(
+            loadData.startDate &&
             moment(new Date(loadData.startDate)).format("YYYY-MM-DD")
-        );
-        setEndDate(
-          loadData.endDate &&
+          );
+          setEndDate(
+            loadData.endDate &&
             moment(new Date(loadData.endDate)).format("YYYY-MM-DD")
-        );
-        setReason(loadData.reason);
+          );
+          setReason(loadData.reason);
+        }
+        setShowForm(true);
       }
-      setShowForm(true);
     }
+    );
   }, []);
 
   const changeResource = (e) => {
@@ -83,7 +82,7 @@ export default function LeaveForm(props) {
   const changeEndDate = (e) => {
     setEndDate(e.target.value);
   };
-  const changeReason = (e) => { 
+  const changeReason = (e) => {
     setReason(e.target.value);
   }
   const changeSetleaveType = (e) => {
@@ -92,25 +91,44 @@ export default function LeaveForm(props) {
 
   const onSubmitRequest = (e) => {
     e.preventDefault();
-    const sessionData = sessionStorage.getItem("user");
-    let data = JSON.parse(sessionData);
-    let resourceData = data.resources.filter(
+     
+    let resourceData = LeaveLookup['resources'].filter(
       (item) => item._id === resourceId
-    )[0]; 
-    const havingHoliday = getHolidayCountValidation(holidaysList, resourceData, startDate, endDate); 
-    if (havingHoliday) { 
+    )[0];
+    const havingHoliday = getHolidayCountValidation(LeaveLookup['holidays'], resourceData, startDate, endDate);
+    if (havingHoliday) {
       toast.warn(`You have an holoday on ${havingHoliday['holidayDetails']}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
       return;
-    } 
-    if (!reason || reason.trim().lenght === 0) { 
+    }
+    if (!reason || reason.trim().lenght === 0) {
       toast.warn(`Please enter reason.`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
       return
+    }
+    let startMonthName = moment(startDate).format('MMMM').substring(0,3);
+    let endMonthName = moment(endDate).format('MMMM').substring(0,3);
+    let startYear = moment(startDate).format('YYYY');
+    let endYear = moment(endDate).format('YYYY');
+    
+  
+    let findStartMonthLocks = LeaveLookup['locksMonth'].filter(item =>
+      ((item.monthName === startMonthName && item.year == startYear) 
+     ) && item.isActive === true
+    );
+    let findEndMonthLocks = LeaveLookup['locksMonth'].filter(item =>
+      ((item.monthName === endMonthName && item.year == endYear) 
+     ) && item.isActive === true
+    );
+    if (findStartMonthLocks.length > 0 || findEndMonthLocks.length > 0) {
+      return toast.warn(`This period is closed, you cannot apply for leave, please connect with the manager.`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+      });
     }
     const reqData = {
       resourceId: resourceId,
@@ -126,7 +144,7 @@ export default function LeaveForm(props) {
     axios
       .post(`${config.apiURL}${url}`, reqData)
       .then((result) => {
-        if (result.status === 202 || result.status === 200) { 
+        if (result.status === 202 || result.status === 200) {
           clearState();
           history.push("/leaves");
         }
@@ -180,7 +198,7 @@ export default function LeaveForm(props) {
             onChange={changeStartDate}
             disabledDays={[
               new Date(2021, 1, 12),
-              new Date(2021, 1, 2) 
+              new Date(2021, 1, 2)
             ]}
           />
         </div>
