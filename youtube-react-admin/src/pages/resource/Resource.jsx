@@ -33,6 +33,7 @@ export default function Resource(props) {
   const title = loadData && loadData.name ? "Edit Resource" : "New Resource";
   //console.log("state", loadData);
   useEffect(() => {
+    props.setBackDrop(true);
     const sessionData = sessionStorage.getItem("user");
     if (!sessionData) {
       history.push("/");
@@ -68,6 +69,7 @@ export default function Resource(props) {
             new Date(loadData.endDate).toISOString().substr(0, 10)
         );
       }
+      props.setBackDrop(false);
       setShowForm(true);
     }
   }, []);

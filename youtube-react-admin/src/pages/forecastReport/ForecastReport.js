@@ -9,12 +9,14 @@ const columnsTitle = {
     endDate: 'End Date',
     location:'Location'
 }
-function ForecastReport() {
+function ForecastReport(props) {
     const [reportData, setReportData] = useState([]);
     const [columns, setColumns] = useState();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     useEffect(() => {
+        props.setBackDrop(true);
+
         getReportData(
             "01-01-2022",
             moment("31-03-2022", "DD-MM-YYYY").add(1, "days")
@@ -25,7 +27,10 @@ function ForecastReport() {
             });
             setColumns(comingColumns);
             setReportData(result.reportData.sort(getSortOrder('resourceName')));
-        }).catch(err => console.log);
+            props.setBackDrop(false);
+
+        }).catch(err => 
+                props.setBackDrop(false));
     }, []);
     return (
         <div class="userList"> 

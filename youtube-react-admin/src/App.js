@@ -60,13 +60,13 @@ function App() {
           </PrivateRoute>
           <PrivateRoute restricted={true} path="/dashboard" title="Dashboard" component={Home}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} setBackDrop={setShowShowBackDrop} path="/resourceList" title="Resources" component={ResourceList}> 
+          <PrivateRoute restricted={true} path="/resourceList" setBackDrop={setShowShowBackDrop} title="Resources" component={ResourceList}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} setBackDrop={setShowShowBackDrop} path="/resource/:_id" title="Resources" component={Resource}> 
+          <PrivateRoute restricted={true} path="/resource/:_id" setBackDrop={setShowShowBackDrop} title="Resources" component={Resource}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/resource" title="Resoures" component={Resource} > 
+          <PrivateRoute restricted={true} path="/resource" setBackDrop={setShowShowBackDrop} title="Resoures"  component={Resource} > 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/leaves" title="Leaves" component={Leaves}> 
+          <PrivateRoute restricted={true} path="/leaves" setBackDrop={setShowShowBackDrop} title="Leaves" component={Leaves}> 
          </PrivateRoute>
           <PrivateRoute restricted={true} path="/leaveForm" title="Leaves" component={LeaveForm}> 
          </PrivateRoute>
@@ -76,11 +76,11 @@ function App() {
          </PrivateRoute>
           <PrivateRoute restricted={true} path="/roles" title="Roles" component={Roles}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/forecastReport" title="Forecast Report" component={ForecastReport}> 
+          <PrivateRoute restricted={true} path="/forecastReport" setBackDrop={setShowShowBackDrop}  title="Forecast Report" component={ForecastReport}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/locations" title="Locations" component={Locations}> 
+          <PrivateRoute restricted={true} path="/locations"  title="Locations" component={Locations}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/typesLeave" title="Leave Types" component={TypesLeave}> 
+          <PrivateRoute restricted={true} path="/typesLeave"  title="Leave Types" component={TypesLeave}> 
          </PrivateRoute>
          <PrivateRoute restricted={true} path="/lockPeriod" title="Lock Period" component={LockPeriod}> 
          </PrivateRoute>
