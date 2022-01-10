@@ -16,12 +16,15 @@ let monthObj = {
   Dec: 12
 }
 class LocationChart extends Component {
-  getCLLeaveData = (data) => { 
-    let leaveData = data.filter(item => item.leaveType === 'CL');
-    for (let month in monthObj) { 
-      debugger;
+  getLeaveData = (data, type) => {  
+    let clArray = []; 
+    let leaveData = data.filter(item => item.leaveType === type);
+    for (let month in monthObj) {  
+      clArray.push(leaveData.filter(item =>
+        new Date(item.startDate).getMonth()+1 === monthObj[month]|| new Date(item.endDate).getMonth()+1 === monthObj[month]).length)
+
     }
-   
+    return clArray;
   }
   constructor(props) {
     super(props);
@@ -30,15 +33,15 @@ class LocationChart extends Component {
       series: [
         {
           name: "Casual Leave",
-          data: [4, 0, 7, 8, 1, 2, 5, 0, 6],
+          data: this.getLeaveData(this.props.dashbaordData,'CL'),
         },
         {
           name: "Privilege Leave",
-          data: [7, 1, 8, 3, 6, 0, 1, 5, 0, 5],
+          data: this.getLeaveData(this.props.dashbaordData,'PL')
         },
         {
           name: "Sick Leave",
-          data: [3, 1, 0, 6, 2, 9, 4, 3, 0, 8],
+          data: this.getLeaveData(this.props.dashbaordData,'Sick')
         },
       ],
       options: {
@@ -76,15 +79,14 @@ class LocationChart extends Component {
         tooltip: {
           y: {
             formatter: function (val) {
-              return "$ " + val + " thousands";
+              return "" + val + " Leave";
             },
           },
         },
       },
     };
   }
-  render() {
-    let clData = this.getCLLeaveData(this.props.dashbaordData);
+  render() { 
     return (
       <div className="chartL">
         <div className="currentWeek">Applied Leaves</div>
