@@ -60,9 +60,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute restricted={true} path="/dashboard" title="Dashboard" component={Home}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/resourceList" title="Resources" component={ResourceList}> 
+          <PrivateRoute restricted={true} setBackDrop={setShowShowBackDrop} path="/resourceList" title="Resources" component={ResourceList}> 
           </PrivateRoute>
-          <PrivateRoute restricted={true} path="/resource/:_id" title="Resources" component={Resource}> 
+          <PrivateRoute restricted={true} setBackDrop={setShowShowBackDrop} path="/resource/:_id" title="Resources" component={Resource}> 
           </PrivateRoute>
           <PrivateRoute restricted={true} path="/resource" title="Resoures" component={Resource} > 
          </PrivateRoute>

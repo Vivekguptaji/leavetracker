@@ -7,12 +7,16 @@ import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 import { getSortOrder } from "../../util/utility";
 
-export default function ResourceList() {
+export default function ResourceList(props) {
   const url = `${config.apiURL}/getResources`;
   const history = useHistory();
-  const [resourceData, setResourceData] = useState([]);
+  const [resourceData, setResourceData] = useState([]); 
   useEffect(() => {
-    axios.get(url).then((json) => setResourceData(json.data.sort(getSortOrder('name'))));
+    props.setBackDrop(true);
+    axios.get(url).then((json) => {
+      setResourceData(json.data.sort(getSortOrder('name')));
+      props.setBackDrop(false);
+    }).catch(err=> props.setBackDrop(false));
   }, []);
   const handleClickRow = (event, data) => {
     debugger;
