@@ -34,7 +34,7 @@ export default function LockPeriod(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     let url = `${config.apiURL}/createLock`;
-    let data = { monthName: month, year: year, isActive: checked ? true : false, resourceId: '61d429c11ac04bef63d7a093' }
+    let data = { monthName: month, year: year, isActive: !checked ? true : false, resourceId: '61d429c11ac04bef63d7a093' }
    
     if (!data.monthName || data.monthName == '0') {
       return toast.warn("Please select month.", {
@@ -82,10 +82,24 @@ export default function LockPeriod(props) {
           <Row>
             <Col>
               {/* <div className="newUserItem"> */}
-              <label className="required">Month</label>
+              <label className="required">Year</label>
 
-              <select value={month} onChange={changeMonth}>
+              <select value={year} onChange={changeYear}>
                 <option value="0"></option>
+                <option value={new Date().getFullYear() - 1}>{new Date().getFullYear() - 1}</option>
+                <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
+                <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
+              </select>
+              {/* </div> */}
+            </Col>
+
+            <Col>
+              {/* <div className="newUserItem"> */}
+              <label className="required">Month</label>
+              
+              <select value={month} onChange={changeMonth}>
+
+                <option value="0"></option>                 
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
@@ -101,22 +115,10 @@ export default function LockPeriod(props) {
               </select>
               {/* </div> */}
             </Col>
-            <Col>
-              {/* <div className="newUserItem"> */}
-              <label className="required">Year</label>
-
-              <select value={year} onChange={changeYear}>
-                <option value="0"></option>
-                <option value={new Date().getFullYear() - 1}>{new Date().getFullYear() - 1}</option>
-                <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
-                <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
-              </select>
-              {/* </div> */}
-            </Col>
 
             <Col>
               {/* <div className="newUserItem"> */}
-              <label>Status</label>
+              <label>Lock</label>
               {/* <select>
             <option value="0"></option>
             <option value="8">enabled</option>
