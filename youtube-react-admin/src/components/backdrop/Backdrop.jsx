@@ -7,7 +7,8 @@ export default class Backdrop extends React.Component {
       <div
         className="backdrop"
         onClick={this.props.showMenuHandler}
-      ><Spinner animation="grow" ></Spinner></div>
+      ><div><Spinner animation="grow" ></Spinner></div> 
+      </div>
     )
   }
 }

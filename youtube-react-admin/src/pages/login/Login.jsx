@@ -9,7 +9,7 @@ import {
     BarChart 
   } from "@material-ui/icons";
 toast.configure();
-function Login(props) {
+function Login(props) { 
   const history = useHistory();
   const [details, setDetails] = useState({ userId: "", password: "" });
   const isLoggin = props.setIsLogged;
