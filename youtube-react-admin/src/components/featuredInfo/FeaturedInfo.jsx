@@ -57,7 +57,7 @@ export default function FeaturedInfo(props) {
           <FontAwesomeIcon icon={"home"} />
         </div>
         <div>
-          <span className="featuredTitle-leave">Leave In Year {new Date().getFullYear() }</span>
+          <span className="featuredTitle">Leave In Year {new Date().getFullYear() }</span>
           <div className="featuredMoneyContainer">
             <span className="featuredMoney">{totaLeaveInYear}</span>
           </div>

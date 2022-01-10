@@ -16,13 +16,12 @@ let monthObj = {
   Dec: 12
 }
 class LocationChart extends Component {
-  getLeaveData = (data, type) => {  
-    let clArray = []; 
+  getLeaveData = (data, type) => {
+    let clArray = [];
     let leaveData = data.filter(item => item.leaveType === type);
-    for (let month in monthObj) {  
+    for (let month in monthObj) {
       clArray.push(leaveData.filter(item =>
-        new Date(item.startDate).getMonth()+1 === monthObj[month]|| new Date(item.endDate).getMonth()+1 === monthObj[month]).length)
-
+        new Date(item.startDate).getMonth() + 1 === monthObj[month] || new Date(item.endDate).getMonth() + 1 === monthObj[month]).length)
     }
     return clArray;
   }

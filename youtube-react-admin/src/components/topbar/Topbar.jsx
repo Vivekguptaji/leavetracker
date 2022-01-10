@@ -5,8 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover'
-import Button from 'react-bootstrap/Button';
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import Button from 'react-bootstrap/Button'; 
 
 export default function Topbar(props) {
   const [title, setTitle] = useState('');
@@ -102,11 +101,11 @@ export default function Topbar(props) {
                   </Popover.Header>
                   <Popover.Body>
                     <div class="media-body">
-                      <Button variant="danger" onClick={() => {  
+                      <button className="userAddButton" onClick={() => {  
                         sessionStorage.removeItem('isLoggedIn');
                         sessionStorage.removeItem('isAdmin');
                         window.location.reload();
-                      }}> Logout</Button>
+                      }}> Logout</button>
                     </div>
                   </Popover.Body>
                 </Popover>
