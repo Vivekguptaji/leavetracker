@@ -34,8 +34,9 @@ export default function LockPeriod(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     let url = `${config.apiURL}/createLock`;
-    let data = { monthName: month, year: year, isActive: !checked ? true : false, resourceId: '61d429c11ac04bef63d7a093' }
-   
+    
+    let data = { monthName: month, year: year, isActive: checked ? true : false, resourceId: '61d429c11ac04bef63d7a093' }
+     
     if (!data.monthName || data.monthName == '0') {
       return toast.warn("Please select month.", {
         position: toast.POSITION.TOP_CENTER,
@@ -98,17 +99,19 @@ export default function LockPeriod(props) {
               <label className="required">Month</label>
               
               <select value={month} onChange={changeMonth}>
-
-                <option value="0"></option>                 
-                <option value="Jan">January</option>
-                <option value="Feb">February</option>
-                <option value="Mar">March</option>
-                <option value="Apr">April</option>
-                <option value="May">May</option>
-                <option value="Jun">June</option>
-                <option value="Jul">July</option>
-                <option value="Aug">August</option>
-                <option value="Sep">September</option>
+                <option value="0"></option>
+                  
+                {!(new Date(year).getFullYear() === new Date().getFullYear() - 1) &&
+                  <>
+                    <option value="Jan">January</option>
+                    <option value="Feb">February</option>
+                    <option value="Mar">March</option>
+                    <option value="Apr">April</option>
+                    <option value="May">May</option>
+                    <option value="Jun">June</option>
+                    <option value="Jul">July</option>
+                    <option value="Aug">August</option>
+                    <option value="Sep">September</option></>}
                 <option value="Oct">October</option>
                 <option value="Nov">November</option>
                 <option value="Dec">December</option>
@@ -159,8 +162,8 @@ export default function LockPeriod(props) {
             render: (rowData) => {
               return (
                 <div class={rowData.isActive ? "isActive" : "isDisabled"}>
-                  <span>{rowData.isActive ? "Unlocked" : "Locked"}</span> 
-                  </div>
+                  <span>{rowData.isActive ? "Locked" : "Unlocked"}</span>
+                </div>
               );
             },
           },
