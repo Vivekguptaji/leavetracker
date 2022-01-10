@@ -29,9 +29,11 @@ function Login(props) {
       });
     } else {
       console.log("userData", details);
+      props.setBackDrop(true);
       axios
         .post(`${config.apiURL}/userlogin`, details)
         .then((result) => {
+          props.setBackDrop(false);
           if (result.status === 200) {
               sessionStorage.setItem("isLoggedIn", true);
               sessionStorage.setItem("isAdmin", result.data.data.isAdmin);
@@ -40,6 +42,7 @@ function Login(props) {
           }
         })
         .catch((err) => {
+          props.setBackDrop(false);
           toast.warn("Either the username or password is incorrect", {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2000,

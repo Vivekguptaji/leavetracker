@@ -26,6 +26,9 @@ class PieChart extends React.Component {
           width: 380,
           type: "pie",
         },
+        legend: {
+          position: "bottom",
+        },
         labels: locations,
         responsive: [
           {
@@ -34,9 +37,7 @@ class PieChart extends React.Component {
               chart: {
                 width: 300,
               },
-              legend: {
-                position: "bottom",
-              },
+             
             },
           },
         ],
@@ -46,13 +47,14 @@ class PieChart extends React.Component {
   render() {
     return (
       <div id="chartPie">
+        <div className="currentWeek">Global Presence of {this.props.dashbaordData.length } Resources</div>
         <Chart
           options={this.state.options}
           series={this.state.series}
           type="pie"
           width={450}
         />
-        <div className="currentWeek">Global Resources Presence</div>
+      
       </div>
     );
   }

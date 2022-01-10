@@ -48,7 +48,7 @@ export default function Home() {
         {reportData && <PieChart dashbaordData={reportData.resources} />}  
         </div>
         <div className="featuredItem">
-          <LocationChart />
+        {reportData && <LocationChart dashbaordData={reportData.leaves} />}  
         </div>
       </div>
       {/* <div className="featured">
@@ -72,8 +72,9 @@ export default function Home() {
         </div>
       </div> */}
       <div className="homeWidgets">
+      {reportData && <WidgetLg data={reportData} />}
         {reportData && <WidgetSm locksData={reportData.locksMonth} />}
-        {reportData && <WidgetLg data={reportData} />}
+     
       </div>
     </div>
   );

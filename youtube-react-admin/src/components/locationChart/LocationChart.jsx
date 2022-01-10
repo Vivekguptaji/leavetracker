@@ -1,11 +1,31 @@
 // import "./locationChart.css";
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-
+let monthObj = {
+  Jan: 1,
+  Feb: 2,
+  Mar: 3,
+  Apr: 4,
+  May: 5,
+  Jun: 6,
+  Jul: 7,
+  Aug: 8,
+  Sep: 9,
+  Oct: 10,
+  Nov: 11,
+  Dec: 12
+}
 class LocationChart extends Component {
+  getCLLeaveData = (data) => { 
+    let leaveData = data.filter(item => item.leaveType === 'CL');
+    for (let month in monthObj) { 
+      debugger;
+    }
+   
+  }
   constructor(props) {
     super(props);
-
+    
     this.state = {
       series: [
         {
@@ -43,20 +63,7 @@ class LocationChart extends Component {
           colors: ["transparent"],
         },
         xaxis: {
-          categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-          ],
+          categories: Object.keys(monthObj),
         },
         yaxis: {
           title: {
@@ -77,8 +84,10 @@ class LocationChart extends Component {
     };
   }
   render() {
+    let clData = this.getCLLeaveData(this.props.dashbaordData);
     return (
       <div className="chartL">
+        <div className="currentWeek">Applied Leaves</div>
         <Chart
           options={this.state.options}
           series={this.state.series}

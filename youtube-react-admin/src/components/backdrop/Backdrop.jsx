@@ -1,4 +1,5 @@
 import React from 'react'
+import { Spinner } from 'react-bootstrap'
 import './Backdrop.css'
 export default class Backdrop extends React.Component {
     render() { 
@@ -6,7 +7,7 @@ export default class Backdrop extends React.Component {
       <div
         className="backdrop"
         onClick={this.props.showMenuHandler}
-      />
+      ><Spinner animation="grow" ></Spinner></div>
     )
   }
 }

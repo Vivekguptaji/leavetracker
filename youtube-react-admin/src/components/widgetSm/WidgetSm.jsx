@@ -8,7 +8,7 @@ export default function WidgetSm(props) {
   return (
     <div className="widgetSm">
         <div className="newUsers">
-        <h3 className="widgetLgTitle">Leave Transactions</h3>
+        <h3 className="widgetLgTitle">Locked Months</h3>
       <MaterialTable
         title="Locked Month"
         columns={[

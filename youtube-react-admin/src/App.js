@@ -26,6 +26,7 @@ import PublicRoute from "./util/Route/PublicRoute";
 import LockPeriod from "./pages/lockPeriod/LockPeriod";
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+  const [showBackdrop, setShowShowBackDrop] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const menuClickHandler = () => {
     setShowMenu(!showMenu);
@@ -41,6 +42,9 @@ function App() {
   if (showMenu) {
     backdrop = <Backdrop showMenuHandler={menuClickHandler} />;
   }
+  if (showBackdrop) { 
+    backdrop = <Backdrop showMenuHandler={menuClickHandler} />;
+  }
   return (
     <Router>
       {isLogged &&<Topbar showMenuHandler={menuClickHandler} />}
@@ -49,7 +53,7 @@ function App() {
         {backdrop}
         <Switch>
           <PrivateRoute restricted={true} exact path="/login">
-            {!isLogged && <Login title="Dashboard" setLoginUser={setLoginUser} />}
+            {!isLogged && <Login setBackDrop={setShowShowBackDrop} title="Dashboard"  setLoginUser={setLoginUser} />}
             {isLogged && <Redirect to='/' />}
           </PrivateRoute>
           <PrivateRoute restricted={true} exact path="/" component={Home} >  
