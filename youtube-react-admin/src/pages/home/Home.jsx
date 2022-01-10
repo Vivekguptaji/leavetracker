@@ -51,7 +51,7 @@ export default function Home() {
           <LocationChart />
         </div>
       </div>
-      <div className="featured">
+      {/* <div className="featured">
         <div className="featuredItem">
           <span className="featuredTitle">Today Present</span>
           <div className="featuredMoneyContainer">
@@ -70,9 +70,9 @@ export default function Home() {
             <span className="featuredIcons">3</span>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="homeWidgets">
-        {reportData && <WidgetSm data={reportData} />}
+        {reportData && <WidgetSm locksData={reportData.locksMonth} />}
         {reportData && <WidgetLg data={reportData} />}
       </div>
     </div>

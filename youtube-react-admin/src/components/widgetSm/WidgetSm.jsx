@@ -1,45 +1,44 @@
-import "./widgetSm.css";
-import { Visibility } from "@material-ui/icons";
-import "reactjs-popup/dist/index.css";
-import Popup from "reactjs-popup";
+import "./widgetSm.css"; 
+import "reactjs-popup/dist/index.css"; 
+import MaterialTable from "material-table";
+import { Container, Row, Col, Collapse } from "react-bootstrap";
+import moment from "moment";
 
-export default function WidgetSm(props) {
-  // console.log(props.data.resources[0].name);
-  // const listItems = props.data.resources.map((link) => <li>{link.name}</li>);
-
+export default function WidgetSm(props) { 
   return (
     <div className="widgetSm">
-      <span className="widgetSmTitle">Members</span>
-      <ul className="widgetSmList">
-        {props.data.resources.map((link) => (
-          <li className="widgetSmListItem">
-            <div className="widgetSmUser">
-              <span className="widgetSmUsername">{link.name}</span>
-              <span className="widgetSmUserTitle">{link.role}</span>
-            </div>
-            <Popup
-              trigger={
-                <button className="widgetSmButton">
-                  <Visibility className="widgetSmIcon" />
-                  Display
-                </button>
-              }
-              position="right center"
-            >
-              <div className="card">
-                <ul className="cardul">
-                  <li> Name: {link.name} </li>
-                  <li> Role: {link.role}</li>
-                  <li> Location:{link.location}</li>
-                  <li> Start Date: {link.startDate}</li>
-                  <li> End Date: {link.endDate}</li>
-                  <li> Claim Hrs:{link.claimHrs}</li>
-                </ul>
-              </div>
-            </Popup>
-          </li>
-        ))}
-      </ul>
+        <div className="newUsers">
+        <h3 className="widgetLgTitle">Leave Transactions</h3>
+      <MaterialTable
+        title="Locked Month"
+        columns={[
+          { title: "Month", field: "monthName" },
+          { title: "Year", field: "year" },
+          {
+            title: "Status",
+            field: "isActive",
+            render: (rowData) => {
+              return (
+                <div class={rowData.isActive ? "isActive" : "isDisabled"}>
+                  <span>{rowData.isActive ? "Unlocked" : "Locked"}</span> 
+                  </div>
+              );
+            },
+          } 
+        ]}
+        data={props.locksData}
+        options={{
+          sorting: true,
+          actionsColumnIndex: -1,
+          grouping: true,
+          headerStyle: {
+            backgroundColor: "rgb(39 37 37 / 95%)",
+            color: "#fff",
+            whiteSpace: "nowrap",
+          },
+        }}
+      />
+    </div>
     </div>
   );
 }
