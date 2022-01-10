@@ -141,12 +141,6 @@ export default function LockPeriod(props) {
                 Submit
               </button>
             </Col>
-
-            <Col>
-              <button className="cancelButton" type="cancel">
-                Cancel
-              </button>
-            </Col>
           </Row>
           {/* </div> */}
         </Container>

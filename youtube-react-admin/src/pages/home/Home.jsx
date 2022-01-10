@@ -34,7 +34,7 @@ export default function Home() {
   }, []);
   return (
     <div className="home"> 
-      <FeaturedInfo />
+     {reportData && <FeaturedInfo dashbaordData={reportData} />} 
       <div className="homeWidgets">
         {/* <Chart
           data={userData}
@@ -45,7 +45,7 @@ export default function Home() {
       </div>
       <div className="featured">
         <div className="featuredItem">
-          <PieChart />
+        {reportData && <PieChart dashbaordData={reportData.resources} />}  
         </div>
         <div className="featuredItem">
           <LocationChart />
