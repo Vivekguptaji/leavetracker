@@ -70,19 +70,19 @@ function App() {
          </PrivateRoute>
           <PrivateRoute restricted={true} path="/leaveForm" title="Leaves" component={LeaveForm}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/Calendar"  title="Calendar" component={EventCalendar}> 
+          <PrivateRoute restricted={true} path="/Calendar" setBackDrop={setShowShowBackDrop}  title="Calendar" component={EventCalendar}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/holidayList"  title="Holidays" component={HolidayList}> 
+          <PrivateRoute restricted={true} path="/holidayList" setBackDrop={setShowShowBackDrop} title="Holidays" component={HolidayList}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/roles" title="Roles" component={Roles}> 
+          <PrivateRoute restricted={true} path="/roles" setBackDrop={setShowShowBackDrop} title="Roles" component={Roles}> 
          </PrivateRoute>
           <PrivateRoute restricted={true} path="/forecastReport" setBackDrop={setShowShowBackDrop}  title="Forecast Report" component={ForecastReport}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/locations"  title="Locations" component={Locations}> 
+          <PrivateRoute restricted={true} path="/locations" setBackDrop={setShowShowBackDrop} title="Locations" component={Locations}> 
          </PrivateRoute>
-          <PrivateRoute restricted={true} path="/typesLeave"  title="Leave Types" component={TypesLeave}> 
+          <PrivateRoute restricted={true} path="/typesLeave"  setBackDrop={setShowShowBackDrop} title="Leave Types" component={TypesLeave}> 
          </PrivateRoute>
-         <PrivateRoute restricted={true} path="/lockPeriod" title="Lock Period" component={LockPeriod}> 
+         <PrivateRoute restricted={true} path="/lockPeriod"  setBackDrop={setShowShowBackDrop} title="Lock Period" component={LockPeriod}> 
          </PrivateRoute>
         <PrivateRoute restricted={true} path="/locationChart" title="Location Chart" component={LocationChart}> 
           </PrivateRoute>

@@ -7,14 +7,18 @@ import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
 toast.configure();
-export default function Roles() {
+export default function Roles(props) {
   const url = `${config.apiURL}/getDeveloperRoles`;
   const history = useHistory();
 
   const [rolesData, setrolesData] = useState([]);
 
   useEffect(() => {
-    axios.get(url).then((json) => setrolesData(json.data));
+    props.setBackDrop(true);
+    axios.get(url).then((json) => {
+      setrolesData(json.data);
+      props.setBackDrop(false);
+    });
   }, []);
   const handleClickRow = (event, data) => {
     debugger;
@@ -54,15 +58,22 @@ export default function Roles() {
                   <span>{rowData.isActive ? "Active" : "Disabled"}</span>
                 </div>
               );
-            }
+            },
           },
-          { title: "Created", field: "createdOn", render: rowData => {
-            return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
-          }
+          {
+            title: "Created",
+            field: "createdOn",
+            render: (rowData) => {
+              return moment(new Date(rowData.createdOn)).format("DD MMM YYYY");
+            },
           },
-          { title: "Updated", field: "updatedOn", render: rowData => {
-            return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
-          } },
+          {
+            title: "Updated",
+            field: "updatedOn",
+            render: (rowData) => {
+              return moment(new Date(rowData.updatedOn)).format("DD MMM YYYY");
+            },
+          },
         ]}
         data={rolesData}
         actions={[
@@ -80,9 +91,9 @@ export default function Roles() {
           actionsColumnIndex: -1,
           grouping: true,
           headerStyle: {
-            backgroundColor: 'rgb(39 37 37 / 95%)',
-            color: '#fff',
-             whiteSpace: 'nowrap'
+            backgroundColor: "rgb(39 37 37 / 95%)",
+            color: "#fff",
+            whiteSpace: "nowrap",
           },
         }}
       />

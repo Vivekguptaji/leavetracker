@@ -27,39 +27,48 @@ export default function LockPeriod(props) {
     setYear(e.target.value);
   };
   useEffect(() => {
-    const url = `${config.apiURL}/getLocks`
-    axios.get(url).then((json) =>
-      setLocksData(json.data));
+    props.setBackDrop(true);
+    const url = `${config.apiURL}/getLocks`;
+    axios.get(url).then((json) => {
+      setLocksData(json.data);
+      props.setBackDrop(false);
+    });
   }, []);
   const submitHandler = (e) => {
     e.preventDefault();
     let url = `${config.apiURL}/createLock`;
-    
-    let data = { monthName: month, year: year, isActive: checked ? true : false, resourceId: '61d429c11ac04bef63d7a093' }
-     
-    if (!data.monthName || data.monthName == '0') {
+
+    let data = {
+      monthName: month,
+      year: year,
+      isActive: checked ? true : false,
+      resourceId: "61d429c11ac04bef63d7a093",
+    };
+
+    if (!data.monthName || data.monthName == "0") {
       return toast.warn("Please select month.", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1000,
       });
     }
-    if (!data.year || data.year === '0') {
+    if (!data.year || data.year === "0") {
       return toast.warn("Please select year.", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1000,
       });
     }
-    let fetchData = locksData.filter(item => item.monthName === data.monthName && item.year === data.year)
+    let fetchData = locksData.filter(
+      (item) => item.monthName === data.monthName && item.year === data.year
+    );
     if (fetchData.length > 0) {
-      url = `${config.apiURL}/updateLock/${fetchData[0]['_id']}`;
+      url = `${config.apiURL}/updateLock/${fetchData[0]["_id"]}`;
     }
     axios
       .post(`${url}`, data)
       .then((result) => {
         if (result.status === 202 || result.status === 200) {
-          const url = `${config.apiURL}/getLocks`
-          axios.get(url).then((json) =>
-            setLocksData(json.data));
+          const url = `${config.apiURL}/getLocks`;
+          axios.get(url).then((json) => setLocksData(json.data));
         }
       })
       .catch((err) => {
@@ -87,9 +96,15 @@ export default function LockPeriod(props) {
 
               <select value={year} onChange={changeYear}>
                 <option value="0"></option>
-                <option value={new Date().getFullYear() - 1}>{new Date().getFullYear() - 1}</option>
-                <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
-                <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
+                <option value={new Date().getFullYear() - 1}>
+                  {new Date().getFullYear() - 1}
+                </option>
+                <option value={new Date().getFullYear()}>
+                  {new Date().getFullYear()}
+                </option>
+                <option value={new Date().getFullYear() + 1}>
+                  {new Date().getFullYear() + 1}
+                </option>
               </select>
               {/* </div> */}
             </Col>
@@ -97,11 +112,14 @@ export default function LockPeriod(props) {
             <Col>
               {/* <div className="newUserItem"> */}
               <label className="required">Month</label>
-              
+
               <select value={month} onChange={changeMonth}>
                 <option value="0"></option>
-                  
-                {!(new Date(year).getFullYear() === new Date().getFullYear() - 1) &&
+
+                {!(
+                  new Date(year).getFullYear() ===
+                  new Date().getFullYear() - 1
+                ) && (
                   <>
                     <option value="Jan">January</option>
                     <option value="Feb">February</option>
@@ -111,7 +129,9 @@ export default function LockPeriod(props) {
                     <option value="Jun">June</option>
                     <option value="Jul">July</option>
                     <option value="Aug">August</option>
-                    <option value="Sep">September</option></>}
+                    <option value="Sep">September</option>
+                  </>
+                )}
                 <option value="Oct">October</option>
                 <option value="Nov">November</option>
                 <option value="Dec">December</option>
@@ -168,15 +188,19 @@ export default function LockPeriod(props) {
             },
           },
           {
-            title: "Created", field: "createdOn", render: rowData => {
-              return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
-            }
+            title: "Created",
+            field: "createdOn",
+            render: (rowData) => {
+              return moment(new Date(rowData.createdOn)).format("DD MMM YYYY");
+            },
           },
           {
-            title: "Updated", field: "updatedOn", render: rowData => {
-              return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
-            }
-          }
+            title: "Updated",
+            field: "updatedOn",
+            render: (rowData) => {
+              return moment(new Date(rowData.updatedOn)).format("DD MMM YYYY");
+            },
+          },
         ]}
         data={locksData}
         options={{

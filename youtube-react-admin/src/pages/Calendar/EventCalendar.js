@@ -5,9 +5,10 @@ import axios from 'axios';
 import "./EventCalendar.css";
 // import './EventCalendar.css';
 
-function EventCalendar() {
+function EventCalendar(props) {
   const [eventData, setEventData] = useState([]);
   useEffect(() => {
+    props.setBackDrop(true);
     axios.get('https://anftracker.herokuapp.com/getLeaves')
       .then(res => {
         let leaveData = res.data.map(item => {
@@ -20,9 +21,11 @@ function EventCalendar() {
           return item;
         })
         setEventData(leaveData);
+        props.setBackDrop(false);
+
       })
       .catch(err => {
-        console.log(err);
+        props.setBackDrop(false);
       })
   }, []);
 

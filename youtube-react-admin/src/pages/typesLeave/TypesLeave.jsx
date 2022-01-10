@@ -1,28 +1,32 @@
-import "./typesLeave.css"; 
+import "./typesLeave.css";
 import React, { useState, useEffect } from "react";
-import axios from "axios"; 
-import { config } from "../../util/config"; 
+import axios from "axios";
+import { config } from "../../util/config";
 import MaterialTable from "material-table";
-import { Link, useHistory  } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 import { toast } from "react-toastify";
 
-export default function TypesLeave() {
+export default function TypesLeave(props) {
   const url = `${config.apiURL}/getLeaveTypes`;
   const history = useHistory();
 
   const [typesLeaveData, settypesLeaveData] = useState([]);
-  
+
   useEffect(() => {
-    axios.get(url).then((json) => settypesLeaveData(json.data));
+    props.setBackDrop(true);
+    axios.get(url).then((json) => {
+      settypesLeaveData(json.data);
+      props.setBackDrop(false);
+    });
   }, []);
   const handleClickRow = (event, data) => {
     debugger;
-  }
+  };
   const calltypesLeaveData = (data) => {
     history.push({
       pathname: `/typesLeave/${data._id}`,
-      state: data
+      state: data,
     });
   };
   return (
@@ -38,7 +42,7 @@ export default function TypesLeave() {
       <MaterialTable
         title="Leave Types"
         columns={[
-          { title: 'Name', field: 'leaveTypeName' },
+          { title: "Name", field: "leaveTypeName" },
           {
             title: "Status",
             field: "isActive",
@@ -50,15 +54,20 @@ export default function TypesLeave() {
               );
             },
           },
-          { title: "Created", field: "createdOn", render: rowData => {
-            return moment(new Date(rowData.createdOn)).format('DD MMM YYYY')
-          }
+          {
+            title: "Created",
+            field: "createdOn",
+            render: (rowData) => {
+              return moment(new Date(rowData.createdOn)).format("DD MMM YYYY");
+            },
           },
           {
-            title: "Updated", field: "updatedOn", render: rowData => {
-              return moment(new Date(rowData.updatedOn)).format('DD MMM YYYY')
-            }
-          } 
+            title: "Updated",
+            field: "updatedOn",
+            render: (rowData) => {
+              return moment(new Date(rowData.updatedOn)).format("DD MMM YYYY");
+            },
+          },
         ]}
         data={typesLeaveData}
         actions={[
@@ -66,20 +75,22 @@ export default function TypesLeave() {
             icon: "edit",
             iconProps: { fontSize: "small", color: "primary" },
             tooltip: "Edit Leave Type",
-            onClick: (event, rowData) => {   toast.warn("Feature not implemented yet!", {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1000,
-            }); }
-          }
+            onClick: (event, rowData) => {
+              toast.warn("Feature not implemented yet!", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1000,
+              });
+            },
+          },
         ]}
         options={{
-          sorting: true, 
+          sorting: true,
           actionsColumnIndex: -1,
           grouping: true,
           headerStyle: {
-            backgroundColor: 'rgb(39 37 37 / 95%)',
-            color: '#fff',
-             whiteSpace: 'nowrap'
+            backgroundColor: "rgb(39 37 37 / 95%)",
+            color: "#fff",
+            whiteSpace: "nowrap",
           },
         }}
       />
