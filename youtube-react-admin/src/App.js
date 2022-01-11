@@ -24,7 +24,11 @@ import Login from "./pages/login/Login";
 import PrivateRoute from "./util/Route/PrivateRoute";
 import PublicRoute from "./util/Route/PublicRoute"; 
 import LockPeriod from "./pages/lockPeriod/LockPeriod";
+<<<<<<< HEAD
 import NotificationPage from "./pages/notification/notification";
+=======
+import Accounts from "./pages/accounts/Accounts";
+>>>>>>> 5f552512db4c0791e35ef58062d9a0eb3a888f82
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [showBackdrop, setShowShowBackDrop] = useState(false);
@@ -87,8 +91,13 @@ function App() {
          </PrivateRoute>
         <PrivateRoute restricted={true} path="/locationChart" title="Location Chart" component={LocationChart}> 
           </PrivateRoute>
+<<<<<<< HEAD
           <PrivateRoute restricted={true} path="/notification"  title="Notifications" component={NotificationPage}> 
          </PrivateRoute>
+=======
+        <PrivateRoute restricted={true} path="/accounts" setBackDrop={setShowShowBackDrop} title="Accounts" component={Accounts}> 
+          </PrivateRoute>
+>>>>>>> 5f552512db4c0791e35ef58062d9a0eb3a888f82
           <PrivateRoute restricted={true} path="*"><Redirect to='/'></Redirect> 
          </PrivateRoute>
         </Switch>
