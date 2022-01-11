@@ -68,9 +68,12 @@ export default function Sidebar(props) {
                 Forecast Report
               </li>
             </NavLink>
-<<<<<<< HEAD
             <NavLink to="/notification" className="link">
-=======
+              <li className="sidebarListItem">
+                <NotificationsIcon className="sidebarIcon" />
+                Notifications
+              </li>
+            </NavLink>
             <NavLink to="/accounts" className="link">
               <li className="sidebarListItem">
                 <BarChart className="sidebarIcon" />
@@ -79,18 +82,7 @@ export default function Sidebar(props) {
             </NavLink>
           </ul>
         </div>
-        { isAdmin &&  <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Admin Configurations</h3>
-          <ul className="sidebarList">
-            <NavLink to="/roles" className="link">
->>>>>>> 5f552512db4c0791e35ef58062d9a0eb3a888f82
-              <li className="sidebarListItem">
-                <NotificationsIcon className="sidebarIcon" />
-                Notification
-              </li>
-            </NavLink>
-          </ul>
-        </div>
+
         {isAdmin && (
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Admin Configurations</h3>
