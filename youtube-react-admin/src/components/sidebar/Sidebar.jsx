@@ -68,6 +68,12 @@ export default function Sidebar(props) {
                 Forecast Report
               </li>
             </NavLink>
+            <NavLink to="/accounts" className="link">
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                Accounts
+              </li>
+            </NavLink>
           </ul>
         </div>
         { isAdmin &&  <div className="sidebarMenu">
