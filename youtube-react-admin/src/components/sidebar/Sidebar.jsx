@@ -14,16 +14,16 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import LockIcon from "@material-ui/icons/Lock";
-
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Sidebar(props) {
-  let drawerClasses = 'sidebar side-drawer';
+  let drawerClasses = "sidebar side-drawer";
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    setIsAdmin(sessionStorage.getItem('isAdmin') == 'true' ? true : false); 
-  } );
+    setIsAdmin(sessionStorage.getItem("isAdmin") == "true" ? true : false);
+  });
   if (props.show) {
     drawerClasses = "sidebar side-drawer open";
   }
@@ -68,43 +68,51 @@ export default function Sidebar(props) {
                 Forecast Report
               </li>
             </NavLink>
+            <NavLink to="/notification" className="link">
+              <li className="sidebarListItem">
+                <NotificationsIcon className="sidebarIcon" />
+                Notification
+              </li>
+            </NavLink>
           </ul>
         </div>
-        { isAdmin &&  <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Admin Configurations</h3>
-          <ul className="sidebarList">
-            <NavLink to="/roles" className="link">
-              <li className="sidebarListItem">
-                <AssignmentIndIcon className="sidebarIcon" />
-                Roles
-              </li>
-            </NavLink>
-            <NavLink to="/typesLeave" className="link">
-              <li className="sidebarListItem">
-                <DynamicFeed className="sidebarIcon" />
-                Leave Types
-              </li>
-            </NavLink>
-            <NavLink to="/locations" className="link">
-              <li className="sidebarListItem">
-                <PersonPinCircleIcon className="sidebarIcon" />
-                Locations
-              </li>
-            </NavLink>
-            <NavLink to="/holidayList" className="link">
-              <li className="sidebarListItem">
-                <ListAltIcon className="sidebarIcon" />
-                Holiday List
-              </li>
-            </NavLink>
-            <NavLink to="/lockPeriod" className="link">
-              <li className="sidebarListItem">
-                <LockIcon className="sidebarIcon" />
-                Lock Period
-              </li>
-            </NavLink>
-          </ul>
-        </div>}
+        {isAdmin && (
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Admin Configurations</h3>
+            <ul className="sidebarList">
+              <NavLink to="/roles" className="link">
+                <li className="sidebarListItem">
+                  <AssignmentIndIcon className="sidebarIcon" />
+                  Roles
+                </li>
+              </NavLink>
+              <NavLink to="/typesLeave" className="link">
+                <li className="sidebarListItem">
+                  <DynamicFeed className="sidebarIcon" />
+                  Leave Types
+                </li>
+              </NavLink>
+              <NavLink to="/locations" className="link">
+                <li className="sidebarListItem">
+                  <PersonPinCircleIcon className="sidebarIcon" />
+                  Locations
+                </li>
+              </NavLink>
+              <NavLink to="/holidayList" className="link">
+                <li className="sidebarListItem">
+                  <ListAltIcon className="sidebarIcon" />
+                  Holiday List
+                </li>
+              </NavLink>
+              <NavLink to="/lockPeriod" className="link">
+                <li className="sidebarListItem">
+                  <LockIcon className="sidebarIcon" />
+                  Lock Period
+                </li>
+              </NavLink>
+            </ul>
+          </div>
+        )}
         {/* <div className="sidebarMenu">
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
