@@ -7,59 +7,66 @@ import SendIcon from "@material-ui/icons/Send";
 function NotificationPage() {
   return (
     <div className="newUser">
-      <button className="UserTitle">
-        <SendIcon /> send
-      </button>
       <form>
-        <div class="UserItem">
-          <label class="label">From</label>
-          <input
-            type="email"
-            placeholder=""
-            // value={name}
-            // onChange={changeName}
-            required
-          />
-        </div>
-        <div class="UserItem">
-          <label class="label">To</label>
-          <input
-            type="email"
-            placeholder=""
-            // value={name}
-            // onChange={changeName}
-            required
-          />
-        </div>{" "}
-        <div class="UserItem">
-          <label class="label">Cc</label>
-          <input
-            type="email"
-            placeholder=""
-            // value={name}
-            // onChange={changeName}
-            required
-          />
-        </div>
-        <div class="UserItem">
-          <label class="label">Bcc</label>
-          <input
-            type="email"
-            placeholder=""
-            // value={name}
-            // onChange={changeName}
-            required
-          />
-        </div>
-        <div class="UserItem">
-          <label class="labelSubject">Subject</label>
-          <input
-            type="email"
-            placeholder=""
-            // value={name}
-            // onChange={changeName}
-            required
-          />
+        <div class="alignbutton">
+          <div>
+            <button className="UserTitle">
+              <SendIcon />
+              <div>send</div>
+            </button>
+          </div>
+          <div>
+            <div class="UserItem">
+              <label class="label">From</label>
+              <input
+                type="email"
+                placeholder=""
+                // value={name}
+                // onChange={changeName}
+                required
+              />
+            </div>
+            <div class="UserItem">
+              <label class="label">To</label>
+              <input
+                type="email"
+                placeholder=""
+                // value={name}
+                // onChange={changeName}
+                required
+              />
+            </div>{" "}
+            <div class="UserItem">
+              <label class="label">Cc</label>
+              <input
+                type="email"
+                placeholder=""
+                // value={name}
+                // onChange={changeName}
+                required
+              />
+            </div>
+            <div class="UserItem">
+              <label class="label">Bcc</label>
+              <input
+                type="email"
+                placeholder=""
+                // value={name}
+                // onChange={changeName}
+                required
+              />
+            </div>
+            <div class="UserItem">
+              <label class="labelSubject">Subject</label>
+              <input
+                type="email"
+                placeholder=""
+                // value={name}
+                // onChange={changeName}
+                required
+              />
+            </div>
+          </div>
         </div>
         <Editor
         //   editorState={editorState}
