@@ -3,10 +3,13 @@ import "../notification/notification.css";
 import { Notifications } from "@material-ui/icons/Lock";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import SendIcon from "@material-ui/icons/Send";
 function NotificationPage() {
   return (
     <div className="newUser">
-      <h1 className="newUserTitle">Notify</h1>
+      <button className="UserTitle">
+        <SendIcon /> send
+      </button>
       <form>
         <div class="UserItem">
           <label class="label">From</label>

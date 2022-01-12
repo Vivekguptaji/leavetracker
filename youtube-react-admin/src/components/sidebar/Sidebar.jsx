@@ -15,6 +15,7 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import LockIcon from "@material-ui/icons/Lock";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import Person from "@material-ui/icons/Person";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -76,7 +77,7 @@ export default function Sidebar(props) {
             </NavLink>
             <NavLink to="/accounts" className="link">
               <li className="sidebarListItem">
-                <BarChart className="sidebarIcon" />
+                <Person className="sidebarIcon" />
                 Accounts
               </li>
             </NavLink>

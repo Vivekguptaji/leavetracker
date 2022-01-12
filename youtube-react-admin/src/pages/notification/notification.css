@@ -1,17 +1,25 @@
+
+
 .label {
   border: 1px solid rgb(209, 206, 206);
 width: 100px;
 text-align: center;
   padding: 4px 0px;  
 }
+.UserTitle{
+  color:rgb(160, 160, 160);
+  width: 100px;
+  border: 1px solid rgb(209, 206, 206) ;
+  margin: 5px;
+}
 .labelSubject {
   width: 100px;
   text-align: center;
-    padding: 4px 0px;  
+    padding: 2px 0px;  
   }
 .UserItem{
     display: flex;
-    padding: 5px;
+    padding: 3px;
     margin-right: 10px;
 }
 input{
