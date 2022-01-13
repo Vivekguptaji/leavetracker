@@ -25,7 +25,10 @@ import PrivateRoute from "./util/Route/PrivateRoute";
 import PublicRoute from "./util/Route/PublicRoute"; 
 import LockPeriod from "./pages/lockPeriod/LockPeriod";
 import NotificationPage from "./pages/notification/notification";
+
+import AccountsForm from "./pages/accountsForm/AccountsForm";
 import Accounts from "./pages/accounts/Accounts";
+
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [showBackdrop, setShowShowBackDrop] = useState(false);
@@ -91,6 +94,8 @@ function App() {
           <PrivateRoute restricted={true} path="/notification"  title="Notifications" component={NotificationPage}> 
          </PrivateRoute>
         <PrivateRoute restricted={true} path="/accounts" setBackDrop={setShowShowBackDrop} title="Accounts" component={Accounts}> 
+        </PrivateRoute>
+          <PrivateRoute restricted={true} path="/accountsForm" setBackDrop={setShowShowBackDrop} title="Accounts Form" component={AccountsForm}> 
           </PrivateRoute>
           <PrivateRoute restricted={true} path="*"><Redirect to='/'></Redirect> 
          </PrivateRoute>
