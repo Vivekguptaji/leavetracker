@@ -1,5 +1,5 @@
 .loginContainer {
-  margin: 0;
+  
    width: 100%;
    margin-top: 10%;
    display: flex;
@@ -7,13 +7,13 @@
    justify-content: center;
  }
  .loginForm {
-   border: 1px solid #BDBDBD;
-     box-shadow: 1px 2px 7px 4px #BDBDBD;
-     border-radius: 20px;
-     width: 350px;
+   border: 1px solid #ffffff00;
+     box-shadow: 1px 2px 7px 4px #d8d5d575;
+     border-radius: 10px;
+     width: 400px;
  }
  .form-inner {
-   padding: 20px;
+   padding: 30px;
    background-color: rgb(255, 255, 255);
    text-align: center;
    border-radius: 20px;
@@ -27,7 +27,7 @@
  label {
    display: block;
    color: #212529;
-   font-size: 16px;
+   font-size: 14px;
    margin-bottom: 5px;
    transition: 0.4s;
    text-align: left;
