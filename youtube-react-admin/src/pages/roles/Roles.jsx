@@ -1,6 +1,8 @@
 import "./roles.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Switch from "@material-ui/core/Switch";
+import { Container, Row, Col, Collapse } from "react-bootstrap";
 import { config } from "../../util/config";
 import MaterialTable from "material-table";
 import { Link, useHistory } from "react-router-dom";
@@ -12,6 +14,7 @@ export default function Roles(props) {
   const history = useHistory();
 
   const [rolesData, setrolesData] = useState([]);
+  const [checked, setChecked] = useState();
 
   useEffect(() => {
     props.setBackDrop(true);
@@ -22,6 +25,12 @@ export default function Roles(props) {
   }, []);
   const handleClickRow = (event, data) => {
     debugger;
+  };
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+  const changeRole = (e) => {
+    setrolesData(e.target.value);
   };
   const callrolesData = (data) => {
     // history.push({
@@ -36,13 +45,44 @@ export default function Roles(props) {
   return (
     <div class="userList">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Roles List</h1>
-        <Link to="/roles">
+        {/* <h1 className="userTitle">Roles List</h1> */}
+        {/* <Link to="/roles">
           <button className="userAddButton" onClick={callrolesData}>
             Create Role
           </button>
-        </Link>
+        </Link> */}
       </div>
+      <br></br>
+      <form className="newUserForm" /*onSubmit={submitHandler}*/>
+        <Container>
+          <Row>
+            <Col>
+          <label className="required">Role</label>
+          <input
+            type="text"
+            onChange={changeRole}
+          />
+            </Col>
+            <Col>
+              <label>Status</label>
+              <Switch
+                color="primary"
+                checked={checked}
+                onChange={handleChange}
+                name="checked"
+                value={checked}
+              />
+            </Col>
+            </Row>
+            <Row>
+            <Col>
+              <button className="newUserButton" type="submit">
+                Submit
+              </button>
+            </Col>
+          </Row>
+        </Container>
+      </form>
       <br />
 
       <MaterialTable
