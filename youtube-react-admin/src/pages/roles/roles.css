@@ -1,12 +1,17 @@
 .newUserForm {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
+  
 }
 .userList {
   flex: 4;
   margin-left: 10px;
 }
 
+button.newUserButton{
+margin-top: 20px;
+}
 .userTitleContainer {
   display: flex;
   align-items: center;

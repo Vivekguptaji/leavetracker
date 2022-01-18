@@ -52,16 +52,12 @@ export default function Roles(props) {
           </button>
         </Link> */}
       </div>
-      <br></br>
       <form className="newUserForm" /*onSubmit={submitHandler}*/>
         <Container>
           <Row>
             <Col>
-          <label className="required">Role</label>
-          <input
-            type="text"
-            onChange={changeRole}
-          />
+              <label className="required">Role</label>
+              <input type="text" onChange={changeRole} />
             </Col>
             <Col>
               <label>Status</label>
@@ -73,8 +69,8 @@ export default function Roles(props) {
                 value={checked}
               />
             </Col>
-            </Row>
-            <Row>
+          </Row>
+          <Row>
             <Col>
               <button className="newUserButton" type="submit">
                 Submit
