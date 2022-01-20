@@ -84,17 +84,21 @@ const getAppliedLeave = (resource, endDate, appliedLeaves) => {
   endDate.setHours(0, 0, 0, 0);
   let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0);
  
-  // days
-  var dateList = getDaysBetweenDates(appliedLeaves['startDate'], appliedLeaves['endDate']); 
-  for (let i = 0; i < dateList.length; i++) {
-    let leaveDate = dateList[i];
-    leaveDate = new Date(leaveDate).setHours(0, 0, 0, 0);
-    const isHoliday = checkforHoliday(leaveDate);
-    if (!isHoliday && leaveDate >= startDate && leaveDate <= endDate) {
-      console.log('leaveDay', new Date(leaveDate))
-      count++;
+  // days 
+  let currentMonthLeaves = appliedLeaves.filter(item => new Date(item.startDate) === new Date(endDate).getMonth() || new Date(item.endDate).getMonth() === new Date(endDate).getMonth());
+  currentMonthLeaves.forEach(item => { 
+    var dateList = getDaysBetweenDates(item['startDate'], item['endDate']); 
+    for (let i = 0; i < dateList.length; i++) {
+      let leaveDate = dateList[i];
+      leaveDate = new Date(leaveDate).setHours(0, 0, 0, 0);
+      const isHoliday = checkforHoliday(leaveDate);
+      if (!isHoliday && leaveDate >= startDate && leaveDate <= endDate) {
+        console.log('leaveDay', new Date(leaveDate))
+        count++;
+      }
     }
-  }
+  })
+ 
   return count;
 }
 const getHolidayCount = (resource, endDate) => {
@@ -176,8 +180,9 @@ const prepareReport = (resourceList, columnList, leaves) => {
           currentMonthHrs = 0;
         }
         else {
-          let appliedLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId)[0];
-          let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedLeaves);
+          let appliedResourcesLeaves = leaves.filter(item => item.resourceId === reportObj.resourceId);
+           
+          let leaveCount = resource['claimHrs'] * getAppliedLeave(resource, column, appliedResourcesLeaves);
           //console.log(`Applied ${leaveCount} b/w ${column}`)
           let holidayCount = resource['claimHrs'] * getHolidayCount(resource, column);
           let workingHrs = getWorkingDays(column, reportObj) * resource['claimHrs'];
@@ -194,6 +199,7 @@ const prepareReport = (resourceList, columnList, leaves) => {
 const generateReport = (startDate, endDate, responseData) => { 
   data = responseData;
   let leaves = data.leaves;
+  leaves.sort(getSortOrder('startDate'));
   let reportWeekends = getWeekendArray(startDate, endDate);
   let updatedColumns = getColumns(reportWeekends);
    updatedColumns = updateMonthName(updatedColumns); 
