@@ -1,6 +1,6 @@
 import "./resource.css";
 import axios from "axios";
-import { config } from "../../util/config";
+import { config, subloc} from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
@@ -13,6 +13,7 @@ import { getSortOrder } from "../../util/utility";
 // const Cryptr = require("cryptr");
 // const cryptr = new Cryptr("myTotalySecretKey");
 let locationOptions;
+let subLocationOptions;
 let roleOptions;
 
 toast.configure();
@@ -25,6 +26,7 @@ export default function Resource(props) {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [location, setLocation] = useState();
+  const [sublocation, setSubLocation] = useState();
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
   const [showForm, setShowForm] = useState(false);
@@ -51,6 +53,11 @@ export default function Resource(props) {
           {item.locationName}
         </option>
       ));
+      subLocationOptions = subloc.stateList.map((item) => (
+        <option key={item.key} value={item.name}>
+          {item.name}
+        </option>
+      ));
       roleOptions = data.developerRoles.map((item) => (
         <option key={item.developerRolesValue} value={item.developerRolesValue}>
           {item.developerRoleName}
@@ -58,6 +65,7 @@ export default function Resource(props) {
       ));
       if (loadData) {
         setLocation(loadData.location);
+        setSubLocation(loadData.sublocation);
         setRole(loadData.role);
         setStatus(loadData.isActive);
         setStartDate(
@@ -85,6 +93,9 @@ export default function Resource(props) {
   const changeSetLocation = (e) => {
     setLocation(e.target.value);
   };
+  const changeSetSubLocation = (e) => {
+    setSubLocation(e.target.value);
+  };
   const changeSetRole = (e) => {
     setRole(e.target.value);
   };
@@ -99,6 +110,7 @@ export default function Resource(props) {
       startDate: startDate,
       endDate: endDate,
       location: location,
+      sublocation:sublocation,
       claimHrs: claimHrs,
       role: role,
     };
@@ -146,6 +158,8 @@ export default function Resource(props) {
     claimHrs &&
     claimHrs != 0;
   btnDisable = !btnDisable ? true : false;
+
+  
   return (
     <div className="newUser">
       <h1 className="newUserTitle">{title}</h1>
@@ -186,6 +200,17 @@ export default function Resource(props) {
             {locationOptions}
           </select>
         </div>
+        {location === 'India' ?
+        
+        <div className="newUserItem">
+          <label className="required">Sub-Location</label>
+          <select onChange={changeSetSubLocation} value={sublocation}>
+            {subLocationOptions}
+          </select>
+        </div> : <div></div>}
+          
+        
+        
         <div className="newUserItem">
           <label className="required">Role</label>
           <select onChange={changeSetRole} value={role}>
