@@ -6,7 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover'
 import Button from 'react-bootstrap/Button'; 
-
+const onLogout = () => {
+  sessionStorage.removeItem('isLoggedIn');
+  sessionStorage.removeItem('isAdmin');
+  window.location.reload();
+  }
 export default function Topbar(props) {
   const [title, setTitle] = useState('');
   const history = useHistory();
@@ -14,6 +18,8 @@ export default function Topbar(props) {
     let pageTitle = sessionStorage.getItem('title');
     setTitle(pageTitle ? pageTitle : 'Welcome');
   })
+  
+  
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -101,11 +107,7 @@ export default function Topbar(props) {
                   </Popover.Header>
                   <Popover.Body>
                     <div class="media-body">
-                      <button className="userAddButton" onClick={() => {  
-                        sessionStorage.removeItem('isLoggedIn');
-                        sessionStorage.removeItem('isAdmin');
-                        window.location.reload();
-                      }}> Logout</button>
+                      <button className="userAddButton" onClick={onLogout}> Logout</button>
                     </div>
                   </Popover.Body>
                 </Popover>
