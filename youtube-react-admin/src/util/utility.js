@@ -80,12 +80,15 @@ const getAppliedLeave = (resource, endDate, appliedLeaves) => {
   if (!appliedLeaves) { 
     return count;
   }
+  if (appliedLeaves && appliedLeaves.length ===0) { 
+    return count;
+  }
   endDate = new Date(endDate);
   endDate.setHours(0, 0, 0, 0);
   let startDate = new Date(new Date(endDate).setDate(new Date(endDate).getDate() - 4)).setHours(0, 0, 0, 0);
  
   // days 
-  let currentMonthLeaves = appliedLeaves.filter(item => new Date(item.startDate) === new Date(endDate).getMonth() || new Date(item.endDate).getMonth() === new Date(endDate).getMonth());
+  let currentMonthLeaves = appliedLeaves.filter(item => new Date(item.startDate).getMonth() === new Date(endDate).getMonth() || new Date(item.endDate).getMonth() === new Date(endDate).getMonth());
   currentMonthLeaves.forEach(item => { 
     var dateList = getDaysBetweenDates(item['startDate'], item['endDate']); 
     for (let i = 0; i < dateList.length; i++) {
