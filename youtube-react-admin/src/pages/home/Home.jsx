@@ -9,6 +9,7 @@ import axios from "axios";
 import { config } from "../../util/config";
 import LocationChart from "../../components/locationChart/LocationChart";
 import PieChart from "../../components/pieChart/PieChart";
+import Donut from "../../components/donut/Donut";
 // const Cryptr = require('cryptr');
 // const cryptr = new Cryptr('myTotalySecretKey');
 
@@ -33,8 +34,8 @@ export default function Home() {
       });
   }, []);
   return (
-    <div className="home"> 
-     {reportData && <FeaturedInfo dashbaordData={reportData} />} 
+    <div className="home">
+      {reportData && <FeaturedInfo dashbaordData={reportData} />}
       <div className="homeWidgets">
         {/* <Chart
           data={userData}
@@ -45,10 +46,10 @@ export default function Home() {
       </div>
       <div className="featured">
         <div className="featuredItem">
-        {reportData && <PieChart dashbaordData={reportData.resources} />}  
+          {reportData && <PieChart dashbaordData={reportData.resources} />}
         </div>
         <div className="featuredItem">
-        {reportData && <LocationChart dashbaordData={reportData.leaves} />}  
+          {reportData && <LocationChart dashbaordData={reportData.leaves} />}
         </div>
       </div>
       {/* <div className="featured">
@@ -72,9 +73,11 @@ export default function Home() {
         </div>
       </div> */}
       <div className="homeWidgets">
-      {reportData && <WidgetLg data={reportData} />}
+        {reportData && <WidgetLg data={reportData} />}
+        {/* <div className="featuredItem">
+          {reportData && <Donut dashbaordData={reportData.resources} />}
+        </div> */}
         {reportData && <WidgetSm locksData={reportData.locksMonth} />}
-     
       </div>
     </div>
   );
