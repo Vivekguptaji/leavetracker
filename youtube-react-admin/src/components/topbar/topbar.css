@@ -89,6 +89,7 @@
 .media-body {
   -ms-flex: 1;
   flex: 1;
+  
 }
 .noti-details {
   color: #989c9e;
@@ -104,4 +105,13 @@
   font-size: 12px;
   line-height: 1.35;
   color: #bdbdbd;
+}
+.userButton{
+  background-color:rgb(53, 52, 52);
+  border-radius: 15px;
+  padding: 5px 20px;
+  margin: 10px;
+  color:white;
+  border: 2px solid white;
+  font-weight: 500;
 }
