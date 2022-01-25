@@ -72,7 +72,7 @@ export default function Roles(props) {
           </Row>
           <Row>
             <Col>
-              <button className="newUserButton" type="submit">
+              <button className="newButton" type="submit">
                 Submit
               </button>
             </Col>
