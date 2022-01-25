@@ -4,6 +4,7 @@ import {
   ChatBubbleOutline,
   NotificationsNone,
   Settings,
+  PowerSettingsNew,
 } from "@material-ui/icons";
 import { Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
@@ -139,7 +140,7 @@ export default function Topbar(props) {
           <div class="media-body">
             <button className="userButton" onClick={onLogout}>
               {" "}
-              Logout
+              <PowerSettingsNew fontSize="large" />
             </button>
           </div>
         </div>
