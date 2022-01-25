@@ -107,6 +107,7 @@
   color: #bdbdbd;
 }
 .userButton{
+  position: relative;
   background-color:rgb(53, 52, 52);
   border-radius: 15px;
   padding: 5px 20px;
@@ -114,4 +115,11 @@
   color:white;
   border: 2px solid white;
   font-weight: 500;
+}
+
+.userButton:active{
+  transform: translateY(3px);
+}
+.userButton:active:before{
+  transform: translateY(0);
 }
