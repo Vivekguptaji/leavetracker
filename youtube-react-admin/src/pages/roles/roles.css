@@ -9,8 +9,14 @@
   margin-left: 10px;
 }
 
-button.newUserButton{
+button.newButton{
 margin-top: 20px;
+background-color: green;
+color:white;
+border-radius: 10px;
+border: 1px solid ;
+padding: 5px 15px;
+
 }
 .userTitleContainer {
   display: flex;
