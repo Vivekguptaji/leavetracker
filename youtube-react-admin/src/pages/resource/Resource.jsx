@@ -1,6 +1,6 @@
 import "./resource.css";
 import axios from "axios";
-import { config, subloc} from "../../util/config";
+import { config, subloc,bnd} from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
@@ -15,6 +15,7 @@ import { getSortOrder } from "../../util/utility";
 let locationOptions;
 let subLocationOptions;
 let roleOptions;
+let bandOptions;
 
 toast.configure();
 export default function Resource(props) {
@@ -29,6 +30,7 @@ export default function Resource(props) {
   const [sublocation, setSubLocation] = useState();
   const [claimHrs, setClaimHrs] = useState(loadData && loadData.claimHrs);
   const [role, setRole] = useState();
+  const [bandType, setBand] = useState();
   const [showForm, setShowForm] = useState(false);
   const [status, setStatus] = useState();
   const params = useParams();
@@ -41,13 +43,15 @@ export default function Resource(props) {
       history.push("/");
     } else {
       let data = JSON.parse(sessionData);
+      
       data.locations.push({ locationNameValue: "0", locationName: "" });
-      data.developerRoles.push({
-        developerRolesValue: "0",
-        developerRoleName: "",
-      });
+      data.developerRoles.push({ developerRolesValue: "0", developerRoleName: ""});
+      //data.bands.push({ bandNameValue: "0", bandName: "" });
+
       data.locations.sort(getSortOrder("locationName"));
       data.developerRoles.sort(getSortOrder("developerRoleName"));
+      //data.bands.sort(getSortOrder("bandName"));
+
       locationOptions = data.locations.map((item) => (
         <option key={item.locationValue} value={item.locationValue}>
           {item.locationName}
@@ -63,10 +67,16 @@ export default function Resource(props) {
           {item.developerRoleName}
         </option>
       ));
+      bandOptions = bnd.bndList.map((item) => (
+        <option key={item.key} value={item.name}>
+          {item.name}
+        </option>
+      ));
       if (loadData) {
         setLocation(loadData.location);
         setSubLocation(loadData.sublocation);
         setRole(loadData.role);
+        setBand(loadData.bandType);
         setStatus(loadData.isActive);
         setStartDate(
           loadData.startDate &&
@@ -102,6 +112,9 @@ export default function Resource(props) {
   const changeClaimHrs = (e) => {
     setClaimHrs(e.target.value);
   };
+  const changeSetBand = (e) => {
+    setBand(e.target.value);
+  };
 
   const onSubmitRequest = (e) => {
     e.preventDefault();
@@ -113,6 +126,7 @@ export default function Resource(props) {
       sublocation:sublocation,
       claimHrs: claimHrs,
       role: role,
+      bandType: bandType,
     };
     const url =
       loadData && loadData._id
@@ -208,9 +222,7 @@ export default function Resource(props) {
             {subLocationOptions}
           </select>
         </div> : <div></div>}
-          
-        
-        
+              
         <div className="newUserItem">
           <label className="required">Role</label>
           <select onChange={changeSetRole} value={role}>
@@ -223,6 +235,12 @@ export default function Resource(props) {
             <option value="0"></option>
             <option value="8">8</option>
             <option value="9">9</option>
+          </select>
+        </div>
+        <div className="newUserItem">
+          <label className="required">Band</label>
+          <select onChange={changeSetBand} value={bandType}>
+            {bandOptions}
           </select>
         </div>
         <div className="newUserItem">

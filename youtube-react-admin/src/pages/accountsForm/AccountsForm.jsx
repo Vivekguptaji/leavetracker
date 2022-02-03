@@ -37,6 +37,15 @@ export default function AccountsForm() {
           <input type="text" required/>
         </div>
         <button className="newUserButton">Create</button>
+        <button
+            className="cancelButton"
+            type="cancel"
+            onClick={() => {
+              return "/accounts";
+            }}
+          >
+            Cancel
+          </button>
       </form>
     </div>
   );

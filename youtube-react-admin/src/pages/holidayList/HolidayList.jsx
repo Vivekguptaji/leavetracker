@@ -33,9 +33,8 @@ export default function HolidayList(props) {
     <div class="userList">
       <div className="userTitleContainer">
         <h1 className="userTitle">Holiday List</h1>
-        <Link to="/holidayList">
-          <button className="userAddButton" disabled>
-            {" "}
+        <Link to="/holidayForm">
+          <button className="userAddButton">
             Create New
           </button>
         </Link>
