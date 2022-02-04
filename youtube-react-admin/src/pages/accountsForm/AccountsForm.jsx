@@ -79,6 +79,7 @@ export default function AccountsForm() {
         <div>
           <button className="newUserButton">Add</button>
         </div>
+<<<<<<< HEAD
       </div>
       <MaterialTable
         title="Accounts List"
@@ -160,6 +161,19 @@ export default function AccountsForm() {
       >
         Cancel
       </button>
+=======
+        <button className="newUserButton">Create</button>
+        <button
+            className="cancelButton"
+            type="cancel"
+            onClick={() => {
+              return "/accounts";
+            }}
+          >
+            Cancel
+          </button>
+      </form>
+>>>>>>> a8f59a952001a6454c197b2cac3dd6da4616105d
     </div>
   );
 }

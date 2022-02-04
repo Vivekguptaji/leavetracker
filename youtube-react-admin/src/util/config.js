@@ -173,4 +173,8 @@ export const bnd = {
             }
         ]
     }
+<<<<<<< HEAD
             
+=======
+            
+>>>>>>> a8f59a952001a6454c197b2cac3dd6da4616105d
