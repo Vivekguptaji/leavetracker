@@ -150,3 +150,27 @@ export const subloc =
         }
         ]
 }
+export const bnd = {
+    bndList: [
+        {
+            "key": "6G",
+            "name": "6G"
+        },
+        {
+            "key": "6A",
+            "name": "6A"
+        },
+        {
+            "key": "6B",
+            "name": "6B"
+        },
+        {
+            "key": "7A",
+            "name": "7A"
+        },
+        {
+            "key": "7B",
+            "name": "7B"
+        }
+    ]
+}
