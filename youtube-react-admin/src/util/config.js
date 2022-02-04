@@ -1,176 +1,176 @@
 export const config = {
-    apiURL:'https://anftracker.herokuapp.com'
+    apiURL: 'https://anftracker.herokuapp.com'
 }
-export const subloc = 
-{
-    stateList : [
-        {
-        "key": "AN",
-        "name": "Andaman and Nicobar Islands"
+export const subloc = {
+    stateList: [{
+            "key": "AN",
+            "name": "Andaman and Nicobar Islands"
         },
         {
-        "key": "AP",
-        "name": "Andhra Pradesh"
+            "key": "AP",
+            "name": "Andhra Pradesh"
         },
         {
-        "key": "AR",
-        "name": "Arunachal Pradesh"
+            "key": "AR",
+            "name": "Arunachal Pradesh"
         },
         {
-        "key": "AS",
-        "name": "Assam"
+            "key": "AS",
+            "name": "Assam"
         },
         {
-        "key": "BR",
-        "name": "Bihar"
+            "key": "BR",
+            "name": "Bihar"
         },
         {
-        "key": "CG",
-        "name": "Chandigarh"
+            "key": "CG",
+            "name": "Chandigarh"
         },
         {
-        "key": "CH",
-        "name": "Chhattisgarh"
+            "key": "CH",
+            "name": "Chhattisgarh"
         },
         {
-        "key": "DH",
-        "name": "Dadra and Nagar Haveli"
+            "key": "DH",
+            "name": "Dadra and Nagar Haveli"
         },
         {
-        "key": "DD",
-        "name": "Daman and Diu"
+            "key": "DD",
+            "name": "Daman and Diu"
         },
         {
-        "key": "DL",
-        "name": "Delhi"
+            "key": "DL",
+            "name": "Delhi"
         },
         {
-        "key": "GA",
-        "name": "Goa"
+            "key": "GA",
+            "name": "Goa"
         },
         {
-        "key": "GJ",
-        "name": "Gujarat"
+            "key": "GJ",
+            "name": "Gujarat"
         },
         {
-        "key": "HR",
-        "name": "Haryana"
+            "key": "HR",
+            "name": "Haryana"
         },
         {
-        "key": "HP",
-        "name": "Himachal Pradesh"
+            "key": "HP",
+            "name": "Himachal Pradesh"
         },
         {
-        "key": "JK",
-        "name": "Jammu and Kashmir"
+            "key": "JK",
+            "name": "Jammu and Kashmir"
         },
         {
-        "key": "JH",
-        "name": "Jharkhand"
+            "key": "JH",
+            "name": "Jharkhand"
         },
         {
-        "key": "KA",
-        "name": "Karnataka"
+            "key": "KA",
+            "name": "Karnataka"
         },
         {
-        "key": "KL",
-        "name": "Kerala"
+            "key": "KL",
+            "name": "Kerala"
         },
         {
-        "key": "LD",
-        "name": "Lakshadweep"
+            "key": "LD",
+            "name": "Lakshadweep"
         },
         {
-        "key": "MP",
-        "name": "Madhya Pradesh"
+            "key": "MP",
+            "name": "Madhya Pradesh"
         },
         {
-        "key": "MH",
-        "name": "Maharashtra"
+            "key": "MH",
+            "name": "Maharashtra"
         },
         {
-        "key": "MN",
-        "name": "Manipur"
+            "key": "MN",
+            "name": "Manipur"
         },
         {
-        "key": "ML",
-        "name": "Meghalaya"
+            "key": "ML",
+            "name": "Meghalaya"
         },
         {
-        "key": "MZ",
-        "name": "Mizoram"
+            "key": "MZ",
+            "name": "Mizoram"
         },
         {
-        "key": "NL",
-        "name": "Nagaland"
+            "key": "NL",
+            "name": "Nagaland"
         },
         {
-        "key": "OR",
-        "name": "Odisha"
+            "key": "OR",
+            "name": "Odisha"
         },
         {
-        "key": "PY",
-        "name": "Puducherry"
+            "key": "PY",
+            "name": "Puducherry"
         },
         {
-        "key": "PB",
-        "name": "Punjab"
+            "key": "PB",
+            "name": "Punjab"
         },
         {
-        "key": "RJ",
-        "name": "Rajasthan"
+            "key": "RJ",
+            "name": "Rajasthan"
         },
         {
-        "key": "SK",
-        "name": "Sikkim"
+            "key": "SK",
+            "name": "Sikkim"
         },
         {
-        "key": "TN",
-        "name": "Tamil Nadu"
+            "key": "TN",
+            "name": "Tamil Nadu"
         },
         {
-        "key": "TS",
-        "name": "Telangana"
+            "key": "TS",
+            "name": "Telangana"
         },
         {
-        "key": "TR",
-        "name": "Tripura"
+            "key": "TR",
+            "name": "Tripura"
         },
         {
-        "key": "UK",
-        "name": "Uttar Pradesh"
+            "key": "UK",
+            "name": "Uttar Pradesh"
         },
         {
-        "key": "UP",
-        "name": "Uttarakhand"
+            "key": "UP",
+            "name": "Uttarakhand"
         },
         {
-        "key": "WB",
-        "name": "West Bengal"
-        }
-        ]
-}
-export const bnd = {
-    bndList: [
-        {
-            "key": "6G",
-            "name": "6G"
-        },
-        {
-            "key": "6A",
-            "name": "6A"
-        },
-        {
-            "key": "6B",
-            "name": "6B"
-        },
-        {
-            "key": "7A",
-            "name": "7A"
-        },
-        {
-            "key": "7B",
-            "name": "7B"
+            "key": "WB",
+            "name": "West Bengal"
         }
     ]
 }
+
+export const bnd = {
+        bndList: [
+            {
+                "key": "6G",
+                "name": "6G"
+            },
+            {
+                "key": "6A",
+                "name": "6A"
+            },
+            {
+                "key": "6B",
+                "name": "6B"
+            },
+            {
+                "key": "7A",
+                "name": "7A"
+            },
+            {
+                "key": "7B",
+                "name": "7B"
+            }
+        ]
+    }
+            

@@ -1,22 +1,26 @@
-import "./leaveForm.css";
+import "./holidayForm.css";
 import axios from "axios";
-import { config } from "../../util/config";
+import { config, subloc } from "../../util/config";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { getSortOrder, getHolidayCountValidation } from "../../util/utility";
 import { toast } from "react-toastify";
 import moment from "moment";
-//import DayPickerInput from 'react-day-picker/DayPickerInput';
-//import 'react-day-picker/lib/style.css';
 
-const Cryptr = require("cryptr");
-const cryptr = new Cryptr("myTotalySecretKey");
+
+//const Cryptr = require("cryptr");
+//const cryptr = new Cryptr("myTotalySecretKey");
+
 toast.configure();
 let leaveTypeOptions;
 let resourceOptions;
+let locationOptions;
+let subLocationOptions;
 let LeaveLookup = [];
-export default function LeaveForm(props) {
+
+export default function HolidayForm(props) {
+
   const history = useHistory();
   const historyLocation = useLocation();
   const loadData = historyLocation.state;
@@ -26,15 +30,14 @@ export default function LeaveForm(props) {
     new Date().toISOString().substr(0, 10)
   );
   const [endDate, setEndDate] = useState();
-  const [leaveType, setLeaveType] = useState();
-
+  const [location, setLocation] = useState();
+  const [sublocation, setSubLocation] = useState();
+  const [createdOn, setCreatedOn] = useState();
   const [showForm, setShowForm] = useState(false);
   const [reason, setReason] = useState();
 
-
-
   const params = useParams();
-  const title = loadData && loadData.name ? "Edit Leave" : "New Leave";
+  const title = loadData && loadData.name ? "Edit Holiday" : "New Holiday";
   console.log("state", loadData);
 
   useEffect(() => {
@@ -45,22 +48,22 @@ export default function LeaveForm(props) {
       if (!sessionData) {
         history.push("/");
       } else {
-        LeaveLookup['leaveTypes'].push({ leaveTypeName: "", leaveTypeValue: "0" });
-        LeaveLookup['leaveTypes'].sort(getSortOrder("leaveTypeName"));
-        leaveTypeOptions = LeaveLookup['leaveTypes'].map((item) => (
-          <option key={item.leaveTypeValue} value={item.leaveTypeValue}>
-            {item.leaveTypeName}
+        let data = JSON.parse(sessionData);
+        data.locations.push({ locationNameValue: "0", locationName: "" });
+        data.locations.sort(getSortOrder("locationName"));
+        locationOptions = data.locations.map((item) => (
+          <option key={item.locationValue} value={item.locationValue}>
+            {item.locationName}
           </option>
         ));
-        LeaveLookup['resources'].push({ _id: "0", name: "" });
-        LeaveLookup['resources'].sort(getSortOrder("name"));
-        resourceOptions = LeaveLookup['resources'].map((item) => (
-          <option key={item._id} value={item._id}>
+        subLocationOptions = subloc.stateList.map((item) => (
+          <option key={item.key} value={item.name}>
             {item.name}
           </option>
         ));
         if (loadData) {
-          setLeaveType(loadData.leaveType);
+          setLocation(loadData.location);
+          setSubLocation(loadData.sublocation);
           setResourceId(loadData.resourceId);
           setStartDate(
             loadData.startDate &&
@@ -84,15 +87,13 @@ export default function LeaveForm(props) {
   const changeStartDate = (e) => {
     setStartDate(e.target.value);
   };
-  const changeEndDate = (e) => {
-    setEndDate(e.target.value);
+  const changeSetLocation = (e) => {
+    setLocation(e.target.value);
   };
-  const changeReason = (e) => {
-    setReason(e.target.value);
-  }
-  const changeSetleaveType = (e) => {
-    setLeaveType(e.target.value);
+  const changeSetSubLocation = (e) => {
+    setSubLocation(e.target.value);
   };
+
 
   const onSubmitRequest = (e) => {
     e.preventDefault();
@@ -140,7 +141,7 @@ export default function LeaveForm(props) {
       name: resourceData["name"],
       startDate: startDate,
       endDate: endDate,
-      leaveType: leaveType,
+
       reason: reason
     };
     const url =
@@ -167,16 +168,8 @@ export default function LeaveForm(props) {
     setResourceId("");
     setStartDate("");
     setEndDate("");
-    setLeaveType("");
+
   };
-  let btnDisable =
-    resourceId &&
-    resourceId !== "0" &&
-    startDate &&
-    endDate &&
-    leaveType &&
-    leaveType !== "0";
-  btnDisable = !btnDisable ? true : false;
   if (!showForm) {
     return (
       <div className="newUser loaderClass">
@@ -184,80 +177,63 @@ export default function LeaveForm(props) {
       </div>
     );
   }
-  console.log(startDate)
-  const disableWeekends = current => {
-    return current.day() !== 0 && current.day() !== 6;
-  }
   return (
     <div className="newUser">
       <h1 className="newUserTitle">{title}</h1>
-      <form className="newUserForm" onSubmit={onSubmitRequest}>
-        <div className="newUserItem">
-          <label className="required">Full Name</label>
-          <select onChange={changeResource} value={resourceId}>
-            {resourceOptions}
+        <form className="newUserForm" onSubmit={onSubmitRequest}>
+          <div className="newUserItem">
+            <label className="required">Holiday Name</label>
+            <input type="text" />
+          </div>
+          <div className="newUserItem">
+            <label className="required">Date</label>
+            <input
+              type="date"
+              value={startDate}
+              min={moment(new Date()).format("YYYY-MM-DD")}
+              onChange={changeStartDate}
+              disabledDays={[
+                new Date(2021, 1, 12),
+                new Date(2021, 1, 2)
+              ]}
+            />
+          </div>
+          <div className="newUserItem">
+          <label className="required">Location</label>
+          <select onChange={changeSetLocation} value={location}>
+            {locationOptions}
           </select>
         </div>
+        {location === 'India' ?
+        
         <div className="newUserItem">
-          <label className="required">Start Date</label>
-          <input
-            type="date"
-            value={startDate}
-            min={moment(new Date()).format("YYYY-MM-DD")}
-            onChange={changeStartDate}
-            disabledDays={disableWeekends}
-          />
-          {/*<DayPickerInput
-            value={startDate}
-            onChange={changeStartDate}
-            
-            dayPickerProps={{
-              selectedDays: startDate,
-              disabledDays: {
-                daysOfWeek: [0, 6],
-              }
-            }}
-          />*/}
-        </div>
-        <div className="newUserItem">
-          <label className="required">End Date</label>
-          <input
-            type="date"
-            value={endDate}
-            min={moment(startDate).format("YYYY-MM-DD")}
-            onChange={changeEndDate}
-            disabledDays={[{ daysOfWeek: [0, 6] }]}
-          />
-        </div>
-        <div className="newUserItem">
-          <label className="required">Leave Type</label>
-          <select onChange={changeSetleaveType} value={leaveType}>
-            {leaveTypeOptions}
+          <label className="required">Sub-Location</label>
+          <select onChange={changeSetSubLocation} value={sublocation}>
+            {subLocationOptions}
           </select>
-        </div>
-        <div className="newUserItem">
-          <label className="required">Reason</label>
-          <textarea
-            type="textarea"
-            value={reason}
-            onChange={changeReason}
-          />
-        </div>
-        <div className="footer">
-          <button className="newUserButton" type="submit" disabled={btnDisable}>
-            Submit
-          </button>
-          <button
-            className="cancelButton"
-            type="cancel"
-            onClick={() => {
-              history.push("/leaves");
-            }}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+        </div> : <div></div>}
+          <div className="newUserItem">
+            <label>Status</label>
+            <select>
+              <option value="true">Active</option>
+              <option value="false">Disabled</option>
+            </select>
+          </div>
+          <div className="footer">
+            <button className="newUserButton" type="submit" >
+              Submit
+            </button>
+            <button
+              className="cancelButton"
+              type="cancel"
+              onClick={() => {
+                history.push("/holidayList");
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
     </div>
   );
 }

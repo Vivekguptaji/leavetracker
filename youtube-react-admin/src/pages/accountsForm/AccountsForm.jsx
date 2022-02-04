@@ -150,6 +150,16 @@ export default function AccountsForm() {
           },
         }}
       />
+      <button className="newUserButton">Create</button>
+      <button
+        className="cancelButton"
+        type="cancel"
+        onClick={() => {
+          return "/accounts";
+        }}
+      >
+        Cancel
+      </button>
     </div>
   );
 }
