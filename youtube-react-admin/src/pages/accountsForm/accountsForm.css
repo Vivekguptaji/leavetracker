@@ -1,4 +1,14 @@
-newUserTitle{
-    text-align: center;
+.AccountForm{
+padding-bottom: 10px;
+box-shadow:0px 0px 10px rgb(126, 124, 124);
+border-radius: 5px;
 }
-
+.newBand {
+display: flex;
+margin: 50px 5px;
+box-shadow:0px 0px 10px rgb(126, 124, 124);
+border-radius: 5px;
+}
+.newBand div{
+    padding: 20px;
+}

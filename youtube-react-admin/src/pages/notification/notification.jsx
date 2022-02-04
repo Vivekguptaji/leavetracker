@@ -19,6 +19,7 @@ function NotificationPage() {
             <div class="UserItem">
               <label class="label">From</label>
               <input
+                className="notifyInput"
                 type="email"
                 placeholder=""
                 // value={name}
@@ -29,6 +30,7 @@ function NotificationPage() {
             <div class="UserItem">
               <label class="label">To</label>
               <input
+                className="notifyInput"
                 type="email"
                 placeholder=""
                 // value={name}
@@ -39,6 +41,7 @@ function NotificationPage() {
             <div class="UserItem">
               <label class="label">Cc</label>
               <input
+                className="notifyInput"
                 type="email"
                 placeholder=""
                 // value={name}
@@ -49,6 +52,7 @@ function NotificationPage() {
             <div class="UserItem">
               <label class="label">Bcc</label>
               <input
+                className="notifyInput"
                 type="email"
                 placeholder=""
                 // value={name}
@@ -59,6 +63,7 @@ function NotificationPage() {
             <div class="UserItem">
               <label class="labelSubject">Subject</label>
               <input
+                className="notifyInput"
                 type="email"
                 placeholder=""
                 // value={name}
